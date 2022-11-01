@@ -65,18 +65,18 @@ public class JdbcItineraryDao implements ItineraryDao{
         //create itinerary
         String insertItinerary = "INSERT INTO itinerary" +
                 "(itinerary_name, starting_point, itinerary_date VALUES (?, ?, ?)";
-        String itinerary_column = "user_id";
+        String itinerary_id_column = "itinerary_id";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         itineraryCreated = jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(
-                    insertItinerary, new String[]{itinerary_column});
+                    insertItinerary, new String[]{itinerary_id_column});
             ps.setString(1, itineraryName);
             ps.setString(2, startingPoint);
             ps.setString(3, itineraryDate);
             return ps;
         }, keyHolder) == 1;
-        int newItineraryId = (int) keyHolder.getKeys().get(itinerary_column);
+        int newItineraryId = (int) keyHolder.getKeys().get(itinerary_id_column);
 
         return itineraryCreated;
     }
