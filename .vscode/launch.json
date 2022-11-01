@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<final-capstone-starter>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.techelevator.Application",
+            "projectName": "final-capstone-starter",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
