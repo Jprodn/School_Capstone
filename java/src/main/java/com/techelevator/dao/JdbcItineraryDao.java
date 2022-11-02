@@ -11,14 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcItineraryDao implements ItineraryDao{
-
     private JdbcTemplate jdbcTemplate;
 
     public JdbcItineraryDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-
 
     @Override
     public List<Itinerary> findAll() {
@@ -30,7 +27,6 @@ public class JdbcItineraryDao implements ItineraryDao{
             Itinerary itinerary = mapRowToUser(results);
             itineraries.add(itinerary);
         }
-
         return itineraries;
     }
 
@@ -89,5 +85,4 @@ public class JdbcItineraryDao implements ItineraryDao{
         itinerary.setItineraryDate(rs.getString("itinerary_date"));
         return itinerary;
     }
-
 }

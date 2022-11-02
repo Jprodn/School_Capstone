@@ -5,9 +5,8 @@ CREATE TABLE landmark (
 	description text NOT NULL
 )
 
-ALTER TABLE itinerary (
+ALTER TABLE itinerary
     ADD landmark_id serial NOT NULL,
     ADD CONSTRAINT fk_landmark_id
-        FOREIGN KEY (landmark_id)
-        REFERENCES landmark(landmark_id)
-)
+    FOREIGN KEY (landmark_id)
+    REFERENCES landmark(landmark_id)
