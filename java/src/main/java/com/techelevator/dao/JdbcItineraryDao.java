@@ -2,23 +2,25 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Component
 public class JdbcItineraryDao implements ItineraryDao{
-
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public JdbcItineraryDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-
 
     @Override
     public List<Itinerary> findAll() {
@@ -30,7 +32,6 @@ public class JdbcItineraryDao implements ItineraryDao{
             Itinerary itinerary = mapRowToUser(results);
             itineraries.add(itinerary);
         }
-
         return itineraries;
     }
 
@@ -59,21 +60,22 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     @Override
-    public boolean create(String itineraryName, String startingPoint, String itineraryDate) {
+    public boolean createItinerary(int itineraryId, String itineraryName, String startingPoint, Date itineraryDate) {
         boolean itineraryCreated = false;
 
         //create itinerary
         String insertItinerary = "INSERT INTO itinerary" +
-                "(itinerary_name, starting_point, itinerary_date VALUES (?, ?, ?)";
+                "(itinerary_id, itinerary_name, starting_point, itinerary_date VALUES (?, ?, ?, ?)";
         String itinerary_id_column = "itinerary_id";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         itineraryCreated = jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(
                     insertItinerary, new String[]{itinerary_id_column});
-            ps.setString(1, itineraryName);
-            ps.setString(2, startingPoint);
-            ps.setString(3, itineraryDate);
+            ps.setInt(1, itineraryId);
+            ps.setString(2, itineraryName);
+            ps.setString(3, startingPoint);
+            ps.setDate(4, (java.sql.Date) itineraryDate);
             return ps;
         }, keyHolder) == 1;
         int newItineraryId = (int) keyHolder.getKeys().get(itinerary_id_column);
@@ -86,8 +88,7 @@ public class JdbcItineraryDao implements ItineraryDao{
         itinerary.setItineraryId(rs.getInt("itinerary_id"));
         itinerary.setItineraryName(rs.getString("itinerary_name"));
         itinerary.setStartingPoint(rs.getString("starting_point"));
-        itinerary.setItineraryDate(rs.getString("itinerary_date"));
+        itinerary.setItineraryDate(rs.getDate("itinerary_date"));
         return itinerary;
     }
-
 }
