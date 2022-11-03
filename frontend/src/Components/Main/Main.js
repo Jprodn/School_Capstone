@@ -7,6 +7,7 @@ import {addToken, deleteUser} from '../../Redux/actionCreators'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
+
 const mapStateToProps = state => {
     return {
         token: state.token,

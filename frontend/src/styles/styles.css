@@ -1,0 +1,172 @@
+
+/* .container{
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control{
+	border: 0;
+	z-index: 1;
+	background-color: transparent;
+	border-bottom: 2px solid #eee; 
+	font: inherit;
+	font-size: 1.125rem;
+	padding: 10px;
+    margin: 10px 20px;
+    width: 30%;
+    height: 50%;
+
+    	
+} */
+
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "DM Sans", sans-serif;
+	line-height: 1.5;
+	background-color: #f1f3fb;
+	padding: 0 2rem;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+
+
+.card {
+	margin: 2rem auto;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 425px;
+	background-color: #FFF;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px 0 rgba(#999, .25);
+	padding: .75rem;
+}
+
+.card-image {
+	border-radius: 8px;
+	overflow: hidden;
+	padding-bottom: 65%;
+	background-image: url('https://images.hdqwalls.com/wallpapers/san-francisco-california-cityscape-4k-qv.jpg');
+	background-repeat: no-repeat;
+	background-size: 150%;
+	background-position: 0 5%;
+	position: relative;
+}
+
+.register-card-image{
+
+ text-align: center;
+}
+
+.register-card-body{
+
+    margin: 10px 30px;
+   
+}
+
+.register-form{
+    padding:5px 0;
+
+}
+
+.card-heading {
+	position: absolute;
+	left: 40%;
+	top: 7%;
+	right: 30%;
+	font-size: 2rem;
+	font-weight: 900;
+	color:lightgray;
+	/* line-height: 1.222; */
+	
+}
+
+
+
+
+.input-label {
+	color: #8597a3;
+    margin-top: 10px;
+	
+}
+
+/* .form-control {
+	border: 0;
+	z-index: 1;
+	background-color: transparent;
+	border-bottom: 2px solid #eee; 
+	font: inherit;
+	font-size: 1.125rem;
+	padding: 10px 10px;
+	
+} */
+
+.action {
+	margin-top: 2rem;
+} 
+
+ .action-button {
+	font: inherit;
+	font-size: 1.25rem;
+	padding: 1em;
+	width: 100%;
+	font-weight: 500;
+	background-color: #6658d3;
+	border-radius: 6px;
+	color: #FFF;
+	border: 0;
+	
+}
+
+.register-action-button{
+
+    font: inherit;
+	font-size: 1.25rem;
+	padding: 1em;
+	width: 100%;
+	font-weight: 500;
+	background-color: #6658d3;
+	border-radius: 6px;
+	color: #FFF;
+	border: 0;
+}
+/* .action-button:hover{
+    background-color:lightskyblue;
+
+} */
+
+.card-info {
+	padding: 1rem 1rem;
+	text-align: center;
+	font-size: .875rem;
+	color: #8597a3;
+	
+}
+.card-info a {
+    display: block;
+    color: #6658d3;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
