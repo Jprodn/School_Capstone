@@ -1,11 +1,13 @@
 package com.techelevator.model;
 
+import java.util.Date;
+
 public class Itinerary {
 
     private int itineraryId;
     private String itineraryName;
     private String startingPoint;
-    private String itineraryDate;
+    private Date itineraryDate;
 
     public Itinerary(){};
 
@@ -33,11 +35,11 @@ public class Itinerary {
         this.startingPoint = startingPoint;
     }
 
-    public String getItineraryDate() {
+    public Date getItineraryDate() {
         return itineraryDate;
     }
 
-    public void setItineraryDate(String itineraryDate) {
+    public void setItineraryDate(Date itineraryDate) {
         this.itineraryDate = itineraryDate;
     }
 
