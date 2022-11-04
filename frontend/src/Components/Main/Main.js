@@ -20,8 +20,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
     addToken: () => { dispatch(addToken()) },
-    deleteUser: () => { dispatch(deleteUser())}
+    deleteUser: () => { dispatch(deleteUser()) }
 });
+
 
 class Main extends Component {
     constructor(props){
@@ -43,16 +44,15 @@ class Main extends Component {
                             <Link to='/itinerary/create'>Create | </Link>
                             <Link to='/login' onClick={this.handleLogout}>logout</Link> 
                             <Redirect to='/home'/>
-
                         </div>  
                     : 
-                        <Link to='/login'>Home | </Link>
+                        <Link to='/login'>Home</Link>
                 }
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
-                    <Route exact path='/itinerary' component={() => <Itinerary land={this.props.data} />}/>
+                    <Route exact path='/itinerary' component={() => <Itinerary land={this.props.data}/>}/>
                     <Route exact path='/itinerary/create' component={() => <Create/>}/>
                     <Redirect to='/login'/>
                 </Switch>

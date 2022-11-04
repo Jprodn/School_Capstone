@@ -6,7 +6,7 @@ const useFetch = (url) => {
     const [error, setError] = useState(null)
     
     useEffect(() => {
-        setTimeout(() => {
+        setTimeout(() => { // setTimeout to simulate app loading (using only during development)
           fetch(url)
           .then(response => {
             if (!response.ok) {
