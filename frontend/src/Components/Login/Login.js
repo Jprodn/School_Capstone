@@ -44,12 +44,14 @@ class Login extends Component {
         })
     }
 
+    handleLoginOnEnter = (event) => {
+        if (event.keyCode === 13) {
+            this.handleLogin();
+        }
+    }
+
     render() {
         return (
-
-
-            
-
             <div className="container">
 
                 <div className="card">
@@ -77,6 +79,7 @@ class Login extends Component {
                         className="form-control"
                         v-model="user.password"
                         onChange={this.handleInputChange}
+                        onKeyUp={this.handleLoginOnEnter}
                         required
                     />
 
