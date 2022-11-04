@@ -7,15 +7,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component
+@Repository
 public class JdbcItineraryDao implements ItineraryDao{
-    @Autowired
+
     private JdbcTemplate jdbcTemplate;
 
     public JdbcItineraryDao(JdbcTemplate jdbcTemplate) {
@@ -65,7 +66,7 @@ public class JdbcItineraryDao implements ItineraryDao{
 
         //create itinerary
         String insertItinerary = "INSERT INTO itinerary" +
-                "(itinerary_id, itinerary_name, starting_point, itinerary_date VALUES (?, ?, ?, ?)";
+                "(itinerary_id, itinerary_name, starting_point, itinerary_date) VALUES (?, ?, ?, ?)";
         String itinerary_id_column = "itinerary_id";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();

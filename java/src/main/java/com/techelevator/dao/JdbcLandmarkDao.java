@@ -30,19 +30,32 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
-//    @Override
-//    public Landmark getLandmarkById(int landmarkId) {
-//        return null;
-//    }
-//
+    @Override
+    public Landmark getLandmarkById(int landmarkId) {
+        Landmark landmark = new Landmark();
+        String sql = "SELECT landmark_id, landmark_name, category, description FROM landmark WHERE landmark_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, landmarkId);
+
+        if (rowSet.next())
+        {
+            return mapRowToLandmark(rowSet);
+        }
+
+        return landmark;
+    }
+
 //    @Override
 //    public Landmark findByLandmarkName(String landmarkName) {
-//        return null;
-//    }
+//        Landmark landmark = new Landmark();
+//        String sql = "SELECT landmark_id, landmark_name, category, description FROM landmark WHERE landmark_name ILIKE ?;";
+//        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, landmarkName);
 //
-//    @Override
-//    public int findLandmarkIdByName(String landmarkName) {
-//        return 0;
+//        if (rowSet.next())
+//        {
+//            return mapRowToLandmark(rowSet);
+//        }
+//
+//        return landmark;
 //    }
 
     private Landmark mapRowToLandmark(SqlRowSet rs) {
