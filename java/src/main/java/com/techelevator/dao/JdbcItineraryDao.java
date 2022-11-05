@@ -18,7 +18,8 @@ import java.util.List;
 @Repository
 public class JdbcItineraryDao implements ItineraryDao{
 
-    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private final JdbcTemplate jdbcTemplate;
 
     public JdbcItineraryDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -62,27 +63,23 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     @Override
-    public void createItinerary(Itinerary itinerary, User user, Landmark landmark) {
+    public void createItinerary(Itinerary itinerary) {
 
         String sql = "INSERT INTO itinerary" +
-                     "(itinerary_id, itinerary_name, starting_point, itinerary_date, user_id, landmark_id) " +
-                     "VALUES (?, ?, ?, ?, ?, ?)";
+                     "(itinerary_id, itinerary_name, starting_point, itinerary_date) " +
+                     "VALUES (?, ?, ?, ?)";
 
-        int newRow = jdbcTemplate.update(sql, itinerary.getItineraryId(),
-                     itinerary.getItineraryName(), itinerary.getStartingPoint(), itinerary.getItineraryDate(),
-                     user.getId(), landmark.getLandmarkId());
+        jdbcTemplate.update(sql, itinerary.getItineraryId(),
+                            itinerary.getItineraryName(), itinerary.getStartingPoint(), itinerary.getItineraryDate()
+                            );
     }
 
     private Itinerary mapRowToUser(SqlRowSet rs) {
         Itinerary itinerary = new Itinerary();
-        User user = new User();
-        Landmark landmark = new Landmark();
         itinerary.setItineraryId(rs.getInt("itinerary_id"));
         itinerary.setItineraryName(rs.getString("itinerary_name"));
         itinerary.setStartingPoint(rs.getString("starting_point"));
         itinerary.setItineraryDate(rs.getDate("itinerary_date"));
-        user.setId(rs.getLong("user_id"));
-        landmark.setLandmarkId(rs.getInt("landmark_id"));
         return itinerary;
     }
 }

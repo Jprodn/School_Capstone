@@ -88,7 +88,7 @@ class Register extends Component {
                     </div>
 
                     <div className="action">
-                        <button type="submit" className="register-action-button" onClick={this.handleSubmit}>Sign in</button>
+                        <button type="submit" className="register-action-button" onClick={this.handleSubmit}>Register</button>
                     </div>
                     <div className="card-info">
                         <Link to="/login">Have an account?</Link>

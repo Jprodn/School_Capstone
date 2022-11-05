@@ -18,6 +18,6 @@ public interface ItineraryDao {
 
     int findItineraryIdByItineraryName(String itineraryName);
 
-    void createItinerary(Itinerary itinerary, User user, Landmark landmark);
+    void createItinerary(Itinerary itinerary);
 
 }
