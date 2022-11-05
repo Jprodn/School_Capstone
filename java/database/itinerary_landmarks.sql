@@ -8,3 +8,12 @@ CREATE TABLE itinerary_landmarks (
     constraint fk_landmark_id FOREIGN KEY (landmark_id) REFERENCES landmark(landmark_id)
 )
 
+insert into landmark
+values(DEFAULT, 'Port City Park', 'Park', 'Park gathering for the public')
+
+insert into itinerary
+values(DEFAULT, 'My iti', 'Start', '2022-11-05', 1)
+
+insert into itinerary_landmarks
+values(1, 1)
+
