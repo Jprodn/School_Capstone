@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.Landmark;
 import com.techelevator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -61,35 +62,27 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     @Override
-    public boolean createItinerary(int itineraryId, String itineraryName, String startingPoint, Date itineraryDate) {
-        boolean itineraryCreated = false;
+    public void createItinerary(Itinerary itinerary, User user, Landmark landmark) {
 
-        //create itinerary
-        String insertItinerary = "INSERT INTO itinerary" +
-                "(itinerary_id, itinerary_name, starting_point, itinerary_date) VALUES (?, ?, ?, ?)";
-        String itinerary_id_column = "itinerary_id";
+        String sql = "INSERT INTO itinerary" +
+                     "(itinerary_id, itinerary_name, starting_point, itinerary_date, user_id, landmark_id) " +
+                     "VALUES (?, ?, ?, ?, ?, ?)";
 
-        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        itineraryCreated = jdbcTemplate.update(con -> {
-            PreparedStatement ps = con.prepareStatement(
-                    insertItinerary, new String[]{itinerary_id_column});
-            ps.setInt(1, itineraryId);
-            ps.setString(2, itineraryName);
-            ps.setString(3, startingPoint);
-            ps.setDate(4, (java.sql.Date) itineraryDate);
-            return ps;
-        }, keyHolder) == 1;
-        int newItineraryId = (int) keyHolder.getKeys().get(itinerary_id_column);
-
-        return itineraryCreated;
+        int newRow = jdbcTemplate.update(sql, itinerary.getItineraryId(),
+                     itinerary.getItineraryName(), itinerary.getStartingPoint(), itinerary.getItineraryDate(),
+                     user.getId(), landmark.getLandmarkId());
     }
 
     private Itinerary mapRowToUser(SqlRowSet rs) {
         Itinerary itinerary = new Itinerary();
+        User user = new User();
+        Landmark landmark = new Landmark();
         itinerary.setItineraryId(rs.getInt("itinerary_id"));
         itinerary.setItineraryName(rs.getString("itinerary_name"));
         itinerary.setStartingPoint(rs.getString("starting_point"));
         itinerary.setItineraryDate(rs.getDate("itinerary_date"));
+        user.setId(rs.getLong("user_id"));
+        landmark.setLandmarkId(rs.getInt("landmark_id"));
         return itinerary;
     }
 }
