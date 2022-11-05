@@ -1,6 +1,9 @@
-import {Link} from 'react-router-dom'
+import React from 'react'
+// import useFetch from '../../useFetch'
 
-function Home(props) {
+function Home() {
+    // const { data: landmarks } = useFetch('http://localhost:8001/landmarks')
+
     return(
         <div>
             You must be authorized to see this page.

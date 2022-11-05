@@ -24,16 +24,17 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-class Main extends Component {
-    constructor(props){
-        super(props);
-    }
 
+class Main extends Component {
+    // constructor(props){
+    //     super(props);
+    // }
+    
     handleLogout = () => {
         this.props.addToken("")
         this.props.deleteUser()
     }
-
+    
     render(){
         return(
             <div>
@@ -52,7 +53,7 @@ class Main extends Component {
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
-                    <Route exact path='/itinerary' component={() => <Itinerary land={this.props.data}/>}/>
+                    <Route exact path='/itinerary' component={this.props.token.token !== undefined ? () => <Itinerary/> : null}/>
                     <Route exact path='/itinerary/create' component={() => <Create/>}/>
                     <Redirect to='/login'/>
                 </Switch>

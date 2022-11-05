@@ -1,31 +1,51 @@
 {
     "landmarks": [
         {
-            "name": "San Jose Marriott",
-            "address": "301 S Market St, San Jose, CA 95113",
-            "description": "",
-            "lat": 37.33055803180528, 
-            "long": -121.88825731508356,
-            "venueType": "3-star hotel",
-            "images": [],
-            "daysHours": []
+            "itineraryName": "Trip to San Jose!",
+            "places": [
+                {
+                    "name": "San Jose Marriott",
+                    "address": "301 S Market St, San Jose, CA 95113",
+                    "description": "",
+                    "lat": 37.33055803180528, 
+                    "long": -121.88825731508356,
+                    "venueType": "3-star hotel",
+                    "images": [],
+                    "daysHours": []
+                },
+                {
+                    "name": "The Tech Interactive",
+                    "address": "201 S Market St, San Jose, CA 95113",
+                    "description": "Accessible, hands-on exhibits for all ages in a spacious facility, plus an attached IMAX theater.",
+                    "lat": 37.33784449204521,
+                    "long": -121.88791591940175,
+                    "venueType": "Museum",
+                    "images": [],
+                    "daysHours": [
+                        "Wednesday 10AM–3PM",
+                        "Thursday 10AM–3PM",
+                        "Friday 10AM–3PM",
+                        "Saturday 10AM–5PM",
+                        "Sunday 11AM–5PM",
+                        "Monday Closed",
+                        "Tuesday 10AM–3PM"
+                    ]
+                }
+            ]
         },
         {
-            "name": "The Tech Interactive",
-            "address": "201 S Market St, San Jose, CA 95113",
-            "description": "Accessible, hands-on exhibits for all ages in a spacious facility, plus an attached IMAX theater.",
-            "lat": 37.33784449204521,
-            "long": -121.88791591940175,
-            "venueType": "Museum",
-            "images": [],
-            "daysHours": [
-                "Wednesday 10AM–3PM",
-                "Thursday 10AM–3PM",
-                "Friday 10AM–3PM",
-                "Saturday 10AM–5PM",
-                "Sunday 11AM–5PM",
-                "Monday Closed",
-                "Tuesday 10AM–3PM"
+            "itineraryName": "Hawaii",
+            "places": [
+                {
+                    "name": "somewhere",
+                    "address": "301 S Market St, San Jose, CA 95113",
+                    "description": "",
+                    "lat": 37.33055803180528, 
+                    "long": -121.88825731508356,
+                    "venueType": "3-star hotel",
+                    "images": [],
+                    "daysHours": []
+                }
             ]
         }
     ]
