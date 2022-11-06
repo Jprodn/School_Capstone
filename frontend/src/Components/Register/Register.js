@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { baseUrl } from '../../Shared/baseUrl'
 
 
@@ -11,7 +11,8 @@ class Register extends Component {
         this.state = {
             username: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            success : false
         }
 
     }
@@ -26,7 +27,9 @@ class Register extends Component {
     handleSubmit = () => {
         const data = { username: this.state.username, password: this.state.password, confirmPassword: this.state.confirmPassword, role: 'USER' }
         if (this.state.password === this.state.confirmPassword) {
+            console.log("password match")
             axios.post(baseUrl + "/register", data)
+            this.setState({success : true});            
         } else {
             alert("Password and Confirm Password must match!!!")
         }
@@ -89,6 +92,8 @@ class Register extends Component {
 
                     <div className="action">
                         <button type="submit" className="register-action-button" onClick={this.handleSubmit}>Register</button>
+                        console.log("log current state" + this.state.success)
+                        {this.state.success ? <Redirect to="/login" /> : null}
                     </div>
                     <div className="card-info">
                         <Link to="/login">Have an account?</Link>
