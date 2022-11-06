@@ -5,8 +5,8 @@ function Home() {
     // const { data: landmarks } = useFetch('http://localhost:8001/landmarks')
 
     return(
-        <div>
-            You must be authorized to see this page.
+        <div className='home-map'>
+            <img src="../../Map.png" alt=""></img>
         </div>
     )
 }

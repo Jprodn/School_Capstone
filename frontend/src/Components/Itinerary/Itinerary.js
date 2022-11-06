@@ -1,9 +1,16 @@
 import React from "react";
+import axios from 'axios'
+import { baseUrl } from '../../Shared/baseUrl'
 
 export default function Itinerary(props) {
+
     const data = props;
     console.log("stringify-props:\n\n" + JSON.stringify(data))
     // const getItineraryTitle = data.map(name => <>{name}</>)
+
+    function handleSubmit() {
+        axios.post(baseUrl + "/itinerary", data)
+    }
 
     return (
         <div>
@@ -17,7 +24,7 @@ export default function Itinerary(props) {
                 <li>landmark3</li>
             </ul>
             <div className="save">
-                <button type="submit" className="save-button" >Save</button>
+                <button type="submit" className="save-button" onClick={handleSubmit}>Save</button>
             </div>
             <div className="Delete Itinerary">
                 <button className="delete-button" >Delete Itinerary</button>
