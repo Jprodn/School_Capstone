@@ -65,12 +65,11 @@ public class JdbcItineraryDao implements ItineraryDao{
     @Override
     public void createItinerary(Itinerary itinerary) {
 
-        String sql = "INSERT INTO itinerary" +
-                     "(itinerary_id, itinerary_name, starting_point, itinerary_date) " +
+        String sql = "INSERT INTO itinerary " +
+                     "(itinerary_name, starting_point, itinerary_date, user_id) " +
                      "VALUES (?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, itinerary.getItineraryId(),
-                            itinerary.getItineraryName(), itinerary.getStartingPoint(), itinerary.getItineraryDate()
+        jdbcTemplate.update(sql, itinerary.getItineraryName(), itinerary.getStartingPoint(), itinerary.getItineraryDate(), itinerary.getUserId()
                             );
     }
 
@@ -79,7 +78,7 @@ public class JdbcItineraryDao implements ItineraryDao{
         itinerary.setItineraryId(rs.getInt("itinerary_id"));
         itinerary.setItineraryName(rs.getString("itinerary_name"));
         itinerary.setStartingPoint(rs.getString("starting_point"));
-        itinerary.setItineraryDate(rs.getDate("itinerary_date"));
+        itinerary.setItineraryDate(rs.getDate("itinerary_date").toLocalDate());
         return itinerary;
     }
 }
