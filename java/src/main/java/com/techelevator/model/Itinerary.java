@@ -12,14 +12,6 @@ public class Itinerary {
 
     private Long userId;
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Itinerary(){};
 
     public int getItineraryId() {
@@ -49,10 +41,17 @@ public class Itinerary {
     public LocalDate getItineraryDate() {
         return itineraryDate;
     }
-//userId
 
     public void setItineraryDate(LocalDate itineraryDate) {
         this.itineraryDate = itineraryDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

@@ -69,9 +69,28 @@ public class JdbcItineraryDao implements ItineraryDao{
                      "(itinerary_name, starting_point, itinerary_date, user_id) " +
                      "VALUES (?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, itinerary.getItineraryName(), itinerary.getStartingPoint(), itinerary.getItineraryDate(), itinerary.getUserId()
+        jdbcTemplate.update(sql, itinerary.getItineraryName(), itinerary.getStartingPoint(),
+                            itinerary.getItineraryDate(), itinerary.getUserId()
                             );
     }
+
+    public void addLandmark(Landmark landmark, Itinerary itinerary) {
+
+        String sql =  "INSERT INTO itinerary_landmarks " +
+                      "(itinerary_id, landmark_id) " +
+                      "VALUES (?, ?)";
+
+        jdbcTemplate.update(sql, itinerary.getItineraryId(), landmark.getLandmarkId());
+    }
+
+
+
+//    @Override
+//    public boolean updateItinerary(Itinerary itinerary) {
+//        String sql = "UPDATE itinerary " +
+//                     "SET "
+//
+//    }
 
     private Itinerary mapRowToUser(SqlRowSet rs) {
         Itinerary itinerary = new Itinerary();

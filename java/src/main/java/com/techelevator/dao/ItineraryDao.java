@@ -20,4 +20,7 @@ public interface ItineraryDao {
 
     void createItinerary(Itinerary itinerary);
 
+    //boolean updateItinerary(Itinerary itinerary);
+
+    void addLandmark(Landmark landmark, Itinerary itinerary);
 }
