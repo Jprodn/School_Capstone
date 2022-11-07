@@ -2,14 +2,15 @@ import React from 'react'
 import axios from 'axios'
 import { baseUrl } from '../../Shared/baseUrl'
 
+
 export default function Create(props) {
- 
-    const [itineraryData, setItineraryData] = React.useState({
+    const [itineraryData, setItineraryData] = React.useState(() => ({
         itineraryName: "",
         startingPoint: "",
         date: ""
-    });
+    }));
     
+
     function handleChange(e) {
         setItineraryData(prevData => ({
             ...prevData,
@@ -17,10 +18,12 @@ export default function Create(props) {
         }))
     }
 
-    function handleSubmit() {
-        const data = itineraryData;
-        axios.post(baseUrl + "/itinerary/create", data)
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const response = await axios.post(baseUrl + "/itinerary/create", itineraryData);
+        return response;
     }
+
 
     return (
         <div>
