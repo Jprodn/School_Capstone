@@ -44,18 +44,19 @@ class Main extends Component {
                             <Link to='/itinerary'>Itinerary | </Link>
                             <Link to='/itinerary/create'>Create | </Link>
                             <Link to='/login' onClick={this.handleLogout}>logout</Link> 
-                            <Redirect to='/home'/>
+                            {/* <Redirect to='/home'/> */}
                         </div>  
                     : 
                         <Link to='/login'>Home</Link>
                 }
                 <Switch>
+                    <Route exact path='/' component={() => <Login/>}/>
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
                     <Route exact path='/itinerary' component={this.props.token.token !== undefined ? () => <Itinerary/> : null}/>
-                    <Route exact path='/itinerary/create' component={() => <Create/>}/>
-                    <Redirect to='/login'/>
+                    <Route exact path='/itinerary/create' component={() => <Create/>} user={mapStateToProps} />
+                    {/* <Redirect to='/login'/> */}
                 </Switch>
             </div>
         )
