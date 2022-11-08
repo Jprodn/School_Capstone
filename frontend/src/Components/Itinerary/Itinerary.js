@@ -9,6 +9,7 @@ export default function Itinerary(props) {
     // const getItineraryTitle = data.map(name => <>{name}</>)
 
     function handleSubmit() {
+        console.log("handle submit")
         axios.post(baseUrl + "/itinerary", data)
     }
 

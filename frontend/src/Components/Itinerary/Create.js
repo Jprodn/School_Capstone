@@ -7,7 +7,7 @@ export default function Create(props) {
     const [itineraryData, setItineraryData] = React.useState({
         itineraryName: "",
         startingPoint: "",
-        date: ""
+        itineraryDate: ""
     });
     
     function handleChange(e) {
@@ -18,8 +18,18 @@ export default function Create(props) {
     }
 
     function handleSubmit() {
+        console.log(baseUrl)
+        console.log("handle submit")
         const data = itineraryData;
+        console.log(data)
+
         axios.post(baseUrl + "/itinerary/create", data)
+        .then(function(){
+            console.log("axios")
+        })
+        .catch(function(error) {
+            console.log(error)
+        })
     }
 
     return (
@@ -29,7 +39,7 @@ export default function Create(props) {
             <form>
                 <input type="text" onChange={handleChange} name="itineraryName" placeholder="Itinerary Name" />
                 <input type="text" onChange={handleChange} name="startingPoint" placeholder="Starting Point" />
-                <input type="Date" onChange={handleChange} name="date" placeholder="Date" />
+                <input type="Date" onChange={handleChange} name="itineraryDate" placeholder="Date" />
                 <button type="Reset">Cancel</button>
                 <button type="Submit" onClick={handleSubmit}>OK</button>
             </form>

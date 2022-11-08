@@ -73,7 +73,7 @@ class Login extends Component {
                     />
                     <label className="input-label">Password</label>
                     <input
-                        type="password"
+                        type="password"y
                         id="password"
                         name="password"
                         className="form-control"
