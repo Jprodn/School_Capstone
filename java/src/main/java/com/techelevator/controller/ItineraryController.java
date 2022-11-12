@@ -44,7 +44,7 @@ public class ItineraryController {
         itineraryDao.addLandmark(landmark, itinerary);
     }
 
-//    @RequestMapping(value = "", method = RequestMethod.PUT)
+//    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
 //    public void editItinerary(@Valid @RequestBody Itinerary itinerary, Principal principal) {
 //
 //    }
