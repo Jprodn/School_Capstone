@@ -44,26 +44,31 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmark;
     }
 
-//    @Override
-//    public Landmark findByLandmarkName(String landmarkName) {
-//        Landmark landmark = new Landmark();
-//        String sql = "SELECT landmark_id, landmark_name, category, description FROM landmark WHERE landmark_name ILIKE ?;";
-//        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, landmarkName);
-//
-//        if (rowSet.next())
-//        {
-//            return mapRowToLandmark(rowSet);
-//        }
-//
-//        return landmark;
-//    }
+    @Override
+    public List<Landmark> getLandmarkByStateCity(String landmarkState, String landmarkCity) {
+        List<Landmark> landmarks = new ArrayList<>();
+        String sql = "SELECT * FROM landmark WHERE state ILIKE ? AND city ILIKE ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, landmarkState, landmarkCity);
+
+        while (rowSet.next())
+        {
+            landmarks.add(mapRowToLandmark(rowSet));
+        }
+        return landmarks;
+    }
 
     private Landmark mapRowToLandmark(SqlRowSet rs) {
         Landmark landmark = new Landmark();
         landmark.setLandmarkId(rs.getInt("landmark_id"));
         landmark.setLandmarkName(rs.getString("landmark_name"));
+        landmark.setAddress(rs.getString("address"));
+        landmark.setCity(rs.getString("city"));
+        landmark.setState(rs.getString("state"));
+        landmark.setPostalCode(rs.getString("postal_code"));
         landmark.setCategory(rs.getString("category"));
         landmark.setDescription(rs.getString("description"));
+        landmark.setImgUrl(rs.getString("image_url"));
+        landmark.setMapUrl(rs.getString("map_url"));
         return landmark;
     }
 }

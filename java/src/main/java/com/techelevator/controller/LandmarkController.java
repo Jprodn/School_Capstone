@@ -31,9 +31,8 @@ public class LandmarkController {
         return landmarkDao.getLandmarkById(landmarkId);
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping(path = "/landmark/{landmarkName}")
-//    public Landmark findByLandmarkName(@PathVariable String landmarkName){
-//        return landmarkDao.findByLandmarkName(landmarkName);
-//    }
+    @GetMapping(path = "/landmark/{landmarkState}/{landmarkCity}")
+    public List<Landmark> getLandmarkByStateCity(@PathVariable String landmarkState, @PathVariable String landmarkCity){
+        return landmarkDao.getLandmarkByStateCity(landmarkState, landmarkCity);
+    }
 }

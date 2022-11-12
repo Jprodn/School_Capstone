@@ -10,6 +10,6 @@ public interface LandmarkDao {
 
     Landmark getLandmarkById(int landmarkId);
 
-//    Landmark findByLandmarkName(String landmarkName);
+    List<Landmark> getLandmarkByStateCity(String landmarkState, String landmarkCity);
 
 }
