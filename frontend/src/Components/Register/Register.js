@@ -92,7 +92,6 @@ class Register extends Component {
 
                     <div className="action">
                         <button type="submit" className="register-action-button" onClick={this.handleSubmit}>Register</button>
-                        console.log("log current state" + this.state.success)
                         {this.state.success ? <Redirect to="/login" /> : null}
                     </div>
                     <div className="card-info">

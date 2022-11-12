@@ -44,7 +44,7 @@ class Main extends Component {
                             <Link to='/itinerary'>Itinerary | </Link>
                             <Link to='/itinerary/create'>Create | </Link>
                             <Link to='/login' onClick={this.handleLogout}>logout</Link> 
-                            {/* <Redirect to='/home'/> */}
+                            <Redirect to='/home'/>
                         </div>  
                     : 
                         <Link to='/login'>Home</Link>
@@ -56,7 +56,7 @@ class Main extends Component {
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
                     <Route exact path='/itinerary' component={this.props.token.token !== undefined ? () => <Itinerary/> : null}/>
                     <Route exact path='/itinerary/create' component={() => <Create/>} user={mapStateToProps} />
-                    {/* <Redirect to='/login'/> */}
+                    <Redirect to='/login'/>
                 </Switch>
             </div>
         )
