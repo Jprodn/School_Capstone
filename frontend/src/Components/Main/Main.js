@@ -37,13 +37,13 @@ class Main extends Component {
     
     render(){
         return(
-            <div>
+            <div >
                 {this.props.token.token !== undefined ?
-                        <div>
-                            <Link to='/home'>Home | </Link>
-                            <Link to='/itinerary'>Itinerary | </Link>
-                            <Link to='/itinerary/create'>Create | </Link>
-                            <Link to='/login' onClick={this.handleLogout}>logout</Link> 
+                        <div className="navbar">
+                            <Link className="main-list" to='/home'>Home  </Link>
+                            <Link className="main-list" to='/itinerary'>Itinerary  </Link>
+                            <Link className="main-list" to='/itinerary/create'>Create  </Link>
+                            <Link className="main-list" to='/login' onClick={this.handleLogout}>logout</Link> 
                             <Redirect to='/home'/>
                         </div>  
                     : 
