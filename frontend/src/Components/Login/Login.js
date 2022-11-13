@@ -7,8 +7,6 @@ import { baseUrl } from '../../Shared/baseUrl'
 import axios from 'axios'
 
 
-
-
 const mapDispatchToProps = (dispatch) => ({
     addToken: () => dispatch(addToken()),
     addUser: () => dispatch(addUser())
@@ -29,9 +27,7 @@ class Login extends Component {
     handleLogin = async () => {
         const data = { username: this.state.username, password: this.state.password };
 
-
         const userWithToken = await axios.post(baseUrl + '/login', data)
-
 
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));

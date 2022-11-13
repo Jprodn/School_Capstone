@@ -6,7 +6,7 @@ export const Token = (state = {
     switch (action.type) {
         case ActionTypes.ADD_TOKEN:
             return { ...state, token: action.payload }
-        
+
         default:
             return state;
     }

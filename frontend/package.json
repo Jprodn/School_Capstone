@@ -23,9 +23,9 @@
     "react-scripts": "4.0.3",
     "react-transition-group": "4.4.2",
     "reactstrap": "8.10.1",
-    "redux": "4.1.2",
+    "redux": "^4.1.2",
     "redux-logger": "3.0.6",
-    "redux-thunk": "2.4.1",
+    "redux-thunk": "^2.4.1",
     "web-vitals": "1.0.1"
   },
   "scripts": {
@@ -51,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.9"
   }
 }

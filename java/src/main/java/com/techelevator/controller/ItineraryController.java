@@ -44,8 +44,20 @@ public class ItineraryController {
         itineraryDao.addLandmark(landmark, itinerary);
     }
 
-//    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
-//    public void editItinerary(@Valid @RequestBody Itinerary itinerary, Principal principal) {
-//
-//    }
+    @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+    public void removeLandmark(@Valid @RequestBody Landmark landmark) {
+        itineraryDao.removeLandmark(landmark);
+    }
+
+    @RequestMapping(value = "/updateStart", method = RequestMethod.PUT)
+    public void updateStartLocation(@Valid @RequestBody Itinerary itinerary) {
+        itineraryDao.updateStartLocation(itinerary);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void deleteItinerary(@Valid @RequestBody Itinerary itinerary) {
+        itineraryDao.deleteItinerary(itinerary);
+    }
+
+
 }

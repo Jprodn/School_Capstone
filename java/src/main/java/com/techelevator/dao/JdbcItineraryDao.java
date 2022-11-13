@@ -84,13 +84,29 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
 
+    public void removeLandmark(Landmark landmark) {
 
-//    @Override
-//    public boolean updateItinerary(Itinerary itinerary) {
-//        String sql = "UPDATE itinerary " +
-//                     "SET "
-//
-//    }
+        String sql = "DELETE from itinerary_landmarks " +
+                     "WHERE landmark_id = ?";
+
+        jdbcTemplate.update(sql, landmark.getLandmarkId());
+    }
+
+    public void updateStartLocation(Itinerary itinerary) {
+
+        String sql = "UPDATE itinerary SET starting_point = ? WHERE itinerary_id = ?";
+
+        jdbcTemplate.update(sql, itinerary.getStartingPoint(), itinerary.getItineraryId());
+    }
+
+    public void deleteItinerary(Itinerary itinerary) {
+
+        String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
+
+        jdbcTemplate.update(sql, itinerary.getItineraryId());
+    }
+
+
 
     private Itinerary mapRowToUser(SqlRowSet rs) {
         Itinerary itinerary = new Itinerary();
