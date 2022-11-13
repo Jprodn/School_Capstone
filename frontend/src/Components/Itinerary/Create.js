@@ -24,7 +24,7 @@ export default function Create(props) {
         const data = itineraryData;
         console.log(data)
 
-        const token = localStorage.getItem('jwtToken');
+        const token = JSON.parse(localStorage.getItem('jwtToken'));
         console.log("this is token"  + token)
         const config = { headers: 
             {
