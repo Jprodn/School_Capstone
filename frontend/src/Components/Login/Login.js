@@ -28,9 +28,11 @@ class Login extends Component {
         const data = { username: this.state.username, password: this.state.password };
 
         const userWithToken = await axios.post(baseUrl + '/login', data)
-
+        console.log(userWithToken)
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
+        window.localStorage.setItem('jwtToken', JSON.stringify(userWithToken.data.token));
+      
     }
 
     handleInputChange = (event) => {

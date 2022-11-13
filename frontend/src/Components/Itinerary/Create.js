@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { baseUrl } from '../../Shared/baseUrl'
-import { Token } from '../../Redux/token';
 
 
 export default function Create(props) {
@@ -10,9 +9,6 @@ export default function Create(props) {
         startingPoint: "",
         itineraryDate: ""
     }));
-
-    // const state = Token.getState();
-    // const authToken = state.currentUser.token;
 
     function handleChange(e) {
         setItineraryData(prevData => ({
@@ -29,14 +25,16 @@ export default function Create(props) {
         console.log(data)
 
         const token = localStorage.getItem('jwtToken');
-        const headers = {
-          Authorization: `Bearer ${token}`
+        console.log("this is token"  + token)
+        const config = { headers: 
+            {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": 'application/json'
+            }
         }
 
-        // console.log("this is Token " + Token);
-        console.log("this is Token.Token " + Token.Token)
 
-        axios.post(baseUrl + "/itinerary/create", data, headers)
+        axios.post(baseUrl + "/itinerary/create", data, config)
         .then(function(){
             console.log("axios")
         })
