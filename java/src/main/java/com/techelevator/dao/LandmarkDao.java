@@ -12,4 +12,10 @@ public interface LandmarkDao {
 
     List<Landmark> getLandmarkByStateCity(String landmarkState, String landmarkCity);
 
+    List<String> getStates();
+
+    List<String> getCities();
+
+    List<String> getCityInState(String state);
+
 }

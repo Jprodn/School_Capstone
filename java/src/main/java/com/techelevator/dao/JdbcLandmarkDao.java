@@ -20,7 +20,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public List<Landmark> allLandmarks() {
         List<Landmark> landmarks = new ArrayList<>();
-        String sql = "SELECT landmark_id, landmark_name, category, description FROM landmark";
+        String sql = "SELECT * FROM landmark ORDER BY landmark_id ASC";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
 
         while (rowSet.next())
@@ -33,7 +33,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public Landmark getLandmarkById(int landmarkId) {
         Landmark landmark = new Landmark();
-        String sql = "SELECT landmark_id, landmark_name, category, description FROM landmark WHERE landmark_id = ?;";
+        String sql = "SELECT * FROM landmark WHERE landmark_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, landmarkId);
 
         if (rowSet.next())
@@ -57,6 +57,67 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
+    @Override
+    public List<String> getStates() {
+        List<Landmark> landmarks = new ArrayList<>();
+        List<String> states = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT state from landmark";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
+
+        while (rowSet.next())
+        {
+            landmarks.add(mapRowToState(rowSet));
+        }
+
+        for (Landmark lm: landmarks) {
+            states.add(lm.getState());
+        }
+
+        return states;
+    }
+
+    @Override
+    public List<String> getCities() {
+        List<Landmark> landmarks = new ArrayList<>();
+        List<String> cities = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT city from landmark";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
+
+        while (rowSet.next())
+        {
+            landmarks.add(mapRowToCities(rowSet));
+        }
+
+        for (Landmark lm: landmarks) {
+            cities.add(lm.getCity());
+        }
+
+        return cities;
+    }
+
+    @Override
+    public List<String> getCityInState(String state) {
+        List<Landmark> landmarks = new ArrayList<>();
+        List<String> cities = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT city from landmark WHERE state ILIKE ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, state);
+
+        while (rowSet.next())
+        {
+            landmarks.add(mapRowToCities(rowSet));
+        }
+
+        for (Landmark lm: landmarks) {
+            cities.add(lm.getCity());
+        }
+
+        return cities;
+    }
+
+
     private Landmark mapRowToLandmark(SqlRowSet rs) {
         Landmark landmark = new Landmark();
         landmark.setLandmarkId(rs.getInt("landmark_id"));
@@ -71,4 +132,17 @@ public class JdbcLandmarkDao implements LandmarkDao {
         landmark.setMapUrl(rs.getString("map_url"));
         return landmark;
     }
+
+    private Landmark mapRowToState(SqlRowSet rs) {
+        Landmark landmark = new Landmark();
+        landmark.setState(rs.getString("state"));
+        return landmark;
+    }
+
+    private Landmark mapRowToCities(SqlRowSet rs) {
+        Landmark landmark = new Landmark();
+        landmark.setCity(rs.getString("city"));
+        return landmark;
+    }
+
 }

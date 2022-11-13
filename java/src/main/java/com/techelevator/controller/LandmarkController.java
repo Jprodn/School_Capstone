@@ -4,13 +4,11 @@ import com.techelevator.dao.LandmarkDao;
 import com.techelevator.model.Landmark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class LandmarkController {
     @Autowired
@@ -35,4 +33,22 @@ public class LandmarkController {
     public List<Landmark> getLandmarkByStateCity(@PathVariable String landmarkState, @PathVariable String landmarkCity){
         return landmarkDao.getLandmarkByStateCity(landmarkState, landmarkCity);
     }
+
+    @GetMapping(path = "/landmark/states")
+    public List<String> getStates(){
+        return landmarkDao.getStates();
+    }
+
+    @GetMapping(path = "/landmark/cities")
+    public List<String> getCities(){
+        return landmarkDao.getCities();
+    }
+
+    @GetMapping(path = "/landmark/city/{state}")
+    public List<String> getCityInState(@PathVariable String state){
+        return landmarkDao.getCityInState(state);
+    }
+
+
+
 }
