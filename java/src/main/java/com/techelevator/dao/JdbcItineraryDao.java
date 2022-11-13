@@ -74,13 +74,14 @@ public class JdbcItineraryDao implements ItineraryDao{
                             );
     }
 
-    public void addLandmark(Landmark landmark, Itinerary itinerary) {
+    @Override
+    public void addLandmark(Itinerary itinerary) {
 
         String sql =  "INSERT INTO itinerary_landmarks " +
                       "(itinerary_id, landmark_id) " +
                       "VALUES (?, ?)";
 
-        jdbcTemplate.update(sql, itinerary.getItineraryId(), landmark.getLandmarkId());
+        jdbcTemplate.update(sql, itinerary.getItineraryId(), itinerary.getLandmarkId());
     }
 
 

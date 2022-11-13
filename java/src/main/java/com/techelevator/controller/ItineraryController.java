@@ -39,9 +39,9 @@ public class ItineraryController {
         itineraryDao.createItinerary(itinerary);
     }
 
-    @RequestMapping(value = "/add-landmark", method = RequestMethod.POST)
-    public void addLandmark(@RequestBody Landmark landmark, Itinerary itinerary) {
-        itineraryDao.addLandmark(landmark, itinerary);
+    @RequestMapping(value = "/addLandmark", method = RequestMethod.POST)
+    public void addLandmark(@RequestBody Itinerary itinerary) {
+        itineraryDao.addLandmark(itinerary);
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)

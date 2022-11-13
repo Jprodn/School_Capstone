@@ -11,8 +11,18 @@ public class Itinerary {
     private LocalDate itineraryDate;
 
     private Long userId;
+    private int landmarkId;
+
 
     public Itinerary(){};
+
+    public int getLandmarkId() {
+        return landmarkId;
+    }
+
+    public void setLandmarkId(int landmarkId) {
+        this.landmarkId = landmarkId;
+    }
 
     public int getItineraryId() {
         return itineraryId;
