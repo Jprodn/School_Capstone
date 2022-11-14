@@ -15,10 +15,10 @@ export default function Itinerary(props) {
 
     return (
         <div>
-            Itinerary Component Test
-            <h1 className="itinerary-name">Edit Itinerary 1</h1>
+            {/* Itinerary Component Test
+            <h1 className="itinerary-name">Edit Itinerary 1</h1> */}
             {/* map */}
-            <ul className="landmark-list">
+            {/* <ul className="landmark-list">
                 <li>Starting Point</li>
                 <li>landmark1</li>
                 <li>landmark2</li>
@@ -29,7 +29,50 @@ export default function Itinerary(props) {
             </div>
             <div className="Delete Itinerary">
                 <button className="delete-button" >Delete Itinerary</button>
+            </div> */}
+
+
+            <div className="itinerary-card">
+                <h1 className="itinerary-card-title">Edit Itinerary</h1>
+                <div className="itinerary-card-image">
+                    <img className="itinerary-image" src="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png" />
+                </div>
+
+
+
+                <div className="itinerary-card-body">
+
+
+                    <ul className="landmark-list">
+                        <li className="landmark-list-items">
+                            <button className="startPoint-button">Starting Point</button></li>
+                        <li className="landmark-list-items"><button className="landmark-list-buttons">landmark1</button></li>
+                        <li className="landmark-list-items"><button className="landmark-list-buttons">landmark2</button></li>
+                            <li className="landmark-list-items"><button className="landmark-list-buttons">landmark3</button></li>
+                    </ul>
+
+                    <div className="landmark-action-buttons">
+                        <div className="save">
+                            <button className="save-button" type="submit">Save</button>
+                        </div>
+
+                        <div className="Delete Itinerary">
+                            <button className="delete-button" >Delete Itinerary</button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
             </div>
+
+
+
         </div>
     )
 }
