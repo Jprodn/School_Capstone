@@ -53,7 +53,7 @@ export default function Itinerary(props) {
 
                     <div className="landmark-action-buttons">
                         <div className="save">
-                            <button className="save-button" type="submit">Save</button>
+                            <button className="save-button" type="submit" onClick={handleSubmit}>Save</button>
                         </div>
 
                         <div className="Delete Itinerary">
