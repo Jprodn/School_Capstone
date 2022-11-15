@@ -11,12 +11,12 @@ function Search() {
   const [listCity, setListCity] = React.useState([]);
 
   const [selectedState, setselectedState] = React.useState({
-    value: "",
-    label: "",
+    value: "select",
+    label: "-Select-",
   });
   const [selectedCity, setselectedCity] = React.useState({
-    value: "",
-    label: "",
+    value: "select",
+    label: "-Select-",
   });
 
   const dataElements = data
@@ -82,7 +82,7 @@ function Search() {
     control: (styles) => ({ ...styles, marginBottom: "50px" }),
   };
   return (
-    <div className="app">
+    <div className="search-div">
       <Select
         styles={styles}
         value={selectedState}

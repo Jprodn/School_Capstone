@@ -4,7 +4,11 @@ function Landmark(props) {
   return (
     <div className="landmark">
       <div className="landmark-image-div">
-        <img className="landmark-image" src={props.item.imgUrl} alt="img" />
+        <img
+          className="landmark-image"
+          src={require(`../../Images/${props.item.imgUrl}`).default}
+          alt="img"
+        />
       </div>
       <div className="landmark-info">
         <p className="landmark-location">
