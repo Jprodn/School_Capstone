@@ -47,21 +47,11 @@ export default function Create(props) {
 
     return (
         <div>
-            {/* Create Component Test
-            <h1 className="title">Create Itinerary</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" onChange={handleChange} name="itineraryName" placeholder="Itinerary Name" />
-                <input type="text" onChange={handleChange} name="startingPoint" placeholder="Starting Point" />
-                <input type="Date" onChange={handleChange} name="itineraryDate" placeholder="Date" />
-                <button type="Reset">Cancel</button>
-                <button type="submit">OK</button>
-            </form> */}
-
-
+            
             <div className="create-card">
 
-                <div >
-                    <img src="https://cdn.pixabay.com/photo/2018/08/01/21/26/map-3578213__480.jpg" />
+                <div  >
+                    <img className="create-card-image" src="https://cdn.pixabay.com/photo/2018/08/01/21/26/map-3578213__480.jpg" />
                 </div>
                 <h1 className="create-card-title">Create Itinerary</h1>
 

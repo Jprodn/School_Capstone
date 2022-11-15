@@ -1,29 +1,4 @@
 
-/* .container{
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-control{
-	border: 0;
-	z-index: 1;
-	background-color: transparent;
-	border-bottom: 2px solid #eee; 
-	font: inherit;
-	font-size: 1.125rem;
-	padding: 10px;
-    margin: 10px 20px;
-    width: 30%;
-    height: 50%;
-
-    	
-} */
-
-
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 *, *:after, *:before {
@@ -67,6 +42,18 @@ img {
 	box-shadow: 0 10px 20px 0 rgba(#999, .25);
 
 }
+.itinerary-card{
+	margin: 1rem auto;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 600px;
+	background-color: #FFF;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px 0 rgba(#999, .25);
+
+}
+
 .create-card-title{
 	text-align: center;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -74,6 +61,127 @@ img {
 	color:#393E46;
 
 }
+.itinerary-card-title{
+
+	text-align: center;
+	font-family:Georgia, 'Times New Roman', Times, serif;
+	font-size: 2rem;
+	color:#29323d;
+
+}
+.itinerary-card-image{
+
+	padding: 0px 30px;
+	
+}
+.landmark-list{
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 30px;
+	
+
+}
+.landmark-list-items{
+	list-style-type: none;
+	padding: 5px;
+	
+}
+.startPoint-button{
+	width: 300px;
+	font-weight: 500;
+	margin-bottom: 5px;
+	background-color:#eef1f5;
+	border-radius: 6px;
+	color: #2d4b5a;
+	border: 0;
+	border-radius: 10px;
+	height: 40px;
+	width: 220px;
+	transition: all 0.5s;
+	text-align: left;
+
+}
+.startPoint-button:hover{
+
+background-color:darkgray;
+
+}
+.landmark-list-buttons{
+
+	width: 300px;
+	font-weight: 500;
+	background-color:#eef1f5;
+	border-radius: 6px;
+	color: #2d4b5a;
+	border: 0;
+	border-radius: 10px;
+	height: 35px;
+	width: 220px;
+	transition: all 0.5s;
+	text-align: left;
+}
+.landmark-list-buttons:hover{
+
+	background-color:darkgray;
+}
+
+.save-button{
+	width: 300px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	background-color:#876df5;
+	border-radius: 6px;
+	color:white;
+	border: 0;
+	border-radius: 10px;
+	height: 40px;
+	width: 220px;
+	transition: all 0.5s;
+	text-align: center;
+	margin-right: 10px;
+
+}
+.save-button:hover{
+
+	background-color:lightskyblue;
+	
+}
+.delete-button{
+
+	width: 300px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	background-color:#876df5;
+	border-radius: 6px;
+	color:white;
+	border: 0;
+	border-radius: 10px;
+	height: 40px;
+	width: 220px;
+	transition: all 0.5s;
+	text-align: center;
+	
+}
+
+.delete-button:hover{
+
+	background-color:lightskyblue;
+	
+}
+.landmark-action-buttons{
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+
+
+
 .create-card-body{
 	margin: 10px 30px;
 	/* height: 50vh; */
@@ -88,6 +196,9 @@ img {
 .create-input-form{
 
 	margin: 10px 0;
+	/* border-style:solid;
+	border-radius: 15px; */
+	
 }
 
 .create-form-action{
@@ -170,6 +281,7 @@ img {
 
  text-align: center;
 }
+
 
 .register-card-body{
 
