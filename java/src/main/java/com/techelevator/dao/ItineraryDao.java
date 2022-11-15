@@ -2,9 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
-import com.techelevator.model.User;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -13,6 +11,7 @@ public interface ItineraryDao {
     List<Itinerary> findAll();
 
     Itinerary getItineraryByItineraryId(int itineraryId);
+    List<Itinerary> getItineraryByUserId(Long userId);
 
     Itinerary findByItineraryName(String itineraryName);
 

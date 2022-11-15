@@ -2,17 +2,12 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
-import com.techelevator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -31,6 +26,18 @@ public class JdbcItineraryDao implements ItineraryDao{
         String sql = "select * from itinerary";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Itinerary itinerary = mapRowToUser(results);
+            itineraries.add(itinerary);
+        }
+        return itineraries;
+    }
+
+    @Override
+    public List<Itinerary> getItineraryByUserId(Long userId) {
+        List<Itinerary> itineraries = new ArrayList<>();
+        String sql = "SELECT * FROM itinerary WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while(results.next()) {
             Itinerary itinerary = mapRowToUser(results);
             itineraries.add(itinerary);

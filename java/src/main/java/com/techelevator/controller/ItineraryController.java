@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import javax.validation.Valid;
 
 @RestController
@@ -37,6 +38,11 @@ public class ItineraryController {
         User user = userDao.findByUsername(principal.getName());
         itinerary.setUserId(user.getId());
         itineraryDao.createItinerary(itinerary);
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public List<Itinerary> getItinerary(@Valid @PathVariable Long userId, @RequestBody Principal principal) {
+        return itineraryDao.getItineraryByUserId(userId);
     }
 
     @RequestMapping(value = "/addLandmark", method = RequestMethod.POST)
