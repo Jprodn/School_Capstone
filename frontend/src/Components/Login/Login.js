@@ -30,10 +30,14 @@ class Login extends Component {
     handleLogin = async () => {
         const data = { username: this.state.username, password: this.state.password };
         const userWithToken = await axios.post(baseUrl + '/login', data)
+        console.log("userToken: ")
         console.log(userWithToken)
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
+        window.localStorage.setItem('jwtBlob', userWithToken);
+        console.log(window.localStorage.getItem('jwtBlob'));
         window.localStorage.setItem('jwtToken', JSON.stringify(userWithToken.data.token));
+        window.location.replace('/home');
     }
 
     handleInputChange = (event) => {

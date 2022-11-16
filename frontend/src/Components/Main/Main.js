@@ -32,8 +32,15 @@ class Main extends Component {
     return (
       <div>
         {this.props.token.token !== undefined ?
-          (<div className="navbar"><NavLinkBar /></div>) : 
-          (<Link to="/login" />)
+          (
+            <div className="navbar">
+              <NavLinkBar />
+            </div>
+          ) 
+          : 
+          (
+            <Link to="/login" />
+          )
         }
         <Router user={mapStateToProps} />
       </div>

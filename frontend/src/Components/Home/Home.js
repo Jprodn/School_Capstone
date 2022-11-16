@@ -6,7 +6,7 @@ function Home() {
 
     return(
         <div className='home-map'>
-            
+            <p>This message came from Home.js {'>'} return {'>'} div</p>
             <img src="../../public/Map.png" alt=""></img>
         </div>
     )
