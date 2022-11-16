@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import axios from 'axios'
 
-// import { baseUrl } from '../../Shared/baseUrl'
+import { baseUrl } from '../../Shared/baseUrl'
 
 
 export default function Itinerary(props) {
@@ -25,22 +25,22 @@ export default function Itinerary(props) {
         }
     }
     
-    const loadItinerary = async () => {
-        const result = await axios.get(`http://localhost:8081/itinerary/` + itinerary.id, config)
+    // const loadItinerary = async () => {
+    //     const result = await axios.get(`http://localhost:8081/itinerary/` + itinerary.id, config)
 
-        setItinerary(prev => ({
-            ...prev,
-            data: result.data
-        }));
-    };
+    //     setItinerary(prev => ({
+    //         ...prev,
+    //         data: result.data
+    //     }));
+    // };
 
-    axios.get(baseUrl + "/itinerary/" + itinerary.id, data, config)
-        .then(function () {
-            console.log("axios")
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+    // axios.get(baseUrl + "/itinerary/" + itinerary.id, data, config)
+    //     .then(function () {
+    //         console.log("axios")
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error)
+    //     })
 
     //   const onInputChange = (e) => {
     //     setItinerary({ ...itinerary, [e.target.name]: e.target.value });
