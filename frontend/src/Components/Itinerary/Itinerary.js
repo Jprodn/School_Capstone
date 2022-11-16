@@ -56,7 +56,7 @@ export default function Itinerary(props) {
     //     axios.post(baseUrl + "/itinerary", data)
     // }
 
-    const setItineraryIdObj = () => setItinerary(prev => ({...prev, id: window.localStorage.getItem('jwtBlob').data.user.id}))
+    const setItineraryIdObj = () => setItinerary(prev => ({...prev, id: window.localStorage.getItem('jwtBlob')}))
     const getItineraryId = () => itinerary.id;
 
 
