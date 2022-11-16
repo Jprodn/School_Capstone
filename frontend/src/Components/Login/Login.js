@@ -34,7 +34,6 @@ class Login extends Component {
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
         window.localStorage.setItem('jwtToken', JSON.stringify(userWithToken.data.token));
-      
     }
 
     handleInputChange = (event) => {
@@ -70,7 +69,9 @@ class Login extends Component {
                         className="form-control"
                         v-model="user.username"
                         onChange={this.handleInputChange}
+                        onKeyUp={this.handleLoginOnEnter}
                         required
+                        autoFocus
                     />
                     <label className="input-label">Password</label>
                     <input

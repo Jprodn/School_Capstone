@@ -6,7 +6,8 @@ function Home() {
 
     return(
         <div className='home-map'>
-            <img src="../../../public/Map.png" alt=""></img>
+            
+            <img src="../../public/Map.png" alt=""></img>
         </div>
     )
 }
