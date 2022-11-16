@@ -1,10 +1,12 @@
 import { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
+import axios from 'axios'
+
 import { addToken, addUser } from '../../Redux/actionCreators'
 import { baseUrl } from '../../Shared/baseUrl'
-import axios from 'axios'
+
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -12,8 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
     addUser: () => dispatch(addUser())
 });
 
-class Login extends Component {
 
+
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +29,6 @@ class Login extends Component {
 
     handleLogin = async () => {
         const data = { username: this.state.username, password: this.state.password };
-
         const userWithToken = await axios.post(baseUrl + '/login', data)
         console.log(userWithToken)
         await this.props.dispatch(addToken(userWithToken.data.token))
@@ -47,6 +49,7 @@ class Login extends Component {
             this.handleLogin();
         }
     }
+
 
     render() {
         return (
@@ -71,7 +74,7 @@ class Login extends Component {
                     />
                     <label className="input-label">Password</label>
                     <input
-                        type="password"y
+                        type="password"
                         id="password"
                         name="password"
                         className="form-control"
@@ -126,4 +129,3 @@ class Login extends Component {
 }
 
 export default withRouter(connect(mapDispatchToProps)(Login));
-

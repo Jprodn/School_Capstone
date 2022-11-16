@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react"
+
 import axios from 'axios'
+
 import { baseUrl } from '../../Shared/baseUrl'
 
-export default function Itinerary(props) {
 
+
+export default function Itinerary(props) {
     const data = props;
     console.log("stringify-props:\n\n" + JSON.stringify(data))
     // const getItineraryTitle = data.map(name => <>{name}</>)
+
 
     function handleSubmit() {
         console.log("handle submit")
         axios.post(baseUrl + "/itinerary", data)
     }
+
+
+    useEffect(() => {
+        axios.get(baseUrl + "/")
+    }, [])
+
 
     return (
         <div>
@@ -35,14 +45,9 @@ export default function Itinerary(props) {
             <div className="itinerary-card">
                 <h1 className="itinerary-card-title">Edit Itinerary</h1>
                 <div className="itinerary-card-image">
-                    <img className="itinerary-image" src="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png" />
+                    <img className="itinerary-image" alt="mymaps" src="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png" />
                 </div>
-
-
-
                 <div className="itinerary-card-body">
-
-
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
                             <button className="startPoint-button">Starting Point</button></li>
@@ -50,29 +55,16 @@ export default function Itinerary(props) {
                         <li className="landmark-list-items"><button className="landmark-list-buttons">landmark2</button></li>
                             <li className="landmark-list-items"><button className="landmark-list-buttons">landmark3</button></li>
                     </ul>
-
                     <div className="landmark-action-buttons">
                         <div className="save">
                             <button className="save-button" type="submit" onClick={handleSubmit}>Save</button>
                         </div>
-
                         <div className="Delete Itinerary">
                             <button className="delete-button" >Delete Itinerary</button>
                         </div>
                     </div>
-
-
-
-
-
-
                 </div>
-
-
             </div>
-
-
-
         </div>
     )
 }

@@ -1,5 +1,7 @@
 import React from 'react'
+
 import axios from 'axios'
+
 import { baseUrl } from '../../Shared/baseUrl'
 
 
@@ -51,7 +53,7 @@ export default function Create(props) {
             <div className="create-card">
 
                 <div  >
-                    <img className="create-card-image" src="https://cdn.pixabay.com/photo/2018/08/01/21/26/map-3578213__480.jpg" />
+                    <img className="create-card-image" alt="map" src="https://cdn.pixabay.com/photo/2018/08/01/21/26/map-3578213__480.jpg" />
                 </div>
                 <h1 className="create-card-title">Create Itinerary</h1>
 
