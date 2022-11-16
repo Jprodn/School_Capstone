@@ -27,7 +27,7 @@ class Login extends Component {
     }
 
 
-    handleLogin = async () => {
+    handleLogin = async (event) => {
         const data = { username: this.state.username, password: this.state.password };
         const userWithToken = await axios.post(baseUrl + '/login', data)
         console.log("userToken: ")

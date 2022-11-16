@@ -6,18 +6,41 @@ import axios from 'axios'
 
 
 export default function Itinerary(props) {
-    // const [itinerary, setItinerary] = useState({
-    //     id: "",
-    //     name: "",
-    //     start: "",
-    //     landmark: ""
-    // })
+    const [itinerary, setItinerary] = useState({
+        id: "",
+        name: "",
+        start: "",
+        landmark: [],
+        data: ""
+    })
 
-    // const loadItinerary = async () => {
-    //     const result = await axios.get(`http://localhost:8081/itinerary/` + itinerary.id)
+    
+    const token = JSON.parse(localStorage.getItem('jwtToken'));
+    console.log("this is token" + token)
+    const config = {
+        headers:
+        {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": 'application/json'
+        }
+    }
+    
+    const loadItinerary = async () => {
+        const result = await axios.get(`http://localhost:8081/itinerary/` + itinerary.id, config)
 
-    //     setItinerary(result.data);
-    //   };
+        setItinerary(prev => ({
+            ...prev,
+            data: result.data
+        }));
+    };
+
+    axios.get(baseUrl + "/itinerary/" + itinerary.id, data, config)
+        .then(function () {
+            console.log("axios")
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
 
     //   const onInputChange = (e) => {
     //     setItinerary({ ...itinerary, [e.target.name]: e.target.value });
@@ -33,16 +56,16 @@ export default function Itinerary(props) {
     //     axios.post(baseUrl + "/itinerary", data)
     // }
 
-    // const setItineraryIdObj = () => setItinerary(prev => ({...prev, id: window.localStorage.getItem('jwtBlob').data.user.id}))
-    // const getItineraryId = () => itinerary.id;
+    const setItineraryIdObj = () => setItinerary(prev => ({...prev, id: window.localStorage.getItem('jwtBlob').data.user.id}))
+    const getItineraryId = () => itinerary.id;
 
 
-    // useEffect(() => {
-    //     setItineraryIdObj();
-    //     console.log("get IID:")
-    //     console.log(getItineraryId);
-    //     // axios.get(baseUrl + "/")
-    // }, [])
+    useEffect(() => {
+        setItineraryIdObj();
+        console.log("get IID:")
+        console.log(getItineraryId);
+        // axios.get(baseUrl + "/")
+    }, [])
 
 
     return (

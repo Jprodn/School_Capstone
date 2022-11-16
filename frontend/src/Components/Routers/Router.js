@@ -17,15 +17,18 @@ export default function Router(props) {
     const userToken = () => window.localStorage.getItem('jwtBlob');
     
     return (
+        <>
+        <NavLinkBar />
         <Switch>
             <Route exact path="/" component={() => <Login />} />
             <Route exact path="/login" component={() => <Login />} />
             <Route exact path="/register" component={() => <Register />} />
             <Route exact path="/home" component={() => <Home />} />
             <Route exact path="/itinerary" component={() => <Itinerary />} />
-            <Route exact path="/itinerary/create" component={() => <Create />} user={props.user} />
+            <Route exact path="/itinerary/create" component={() => <Create />} />
             <Route exact path="/landmark" component={() => <Search />} user={props.user} />
             <Route path="*" component={() => <Error404 />} />
         </Switch>
+        </>
     )
 }
