@@ -20,8 +20,10 @@ function Search() {
   });
 
   const dataElements = data
-    .filter((landmark) =>
-      landmark.landmarkName.toLowerCase().includes(searchString)
+    .filter(
+      (landmark) =>
+        landmark.landmarkName.toLowerCase().includes(searchString) ||
+        landmark.category.toLowerCase().includes(searchString)
     )
     .map((item) => {
       return (
