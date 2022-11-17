@@ -4,6 +4,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.Itinerary;
 import com.techelevator.dao.ItineraryDao;
 
+import com.techelevator.model.ItineraryLandmark;
 import com.techelevator.model.Landmark;
 import com.techelevator.model.User;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -33,20 +33,33 @@ public class ItineraryController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/createItinerary", method = RequestMethod.POST)
     public void createItinerary(@Valid @RequestBody Itinerary itinerary, Principal principal) {
         User user = userDao.findByUsername(principal.getName());
         itinerary.setUserId(user.getId());
         itineraryDao.createItinerary(itinerary);
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public List<Itinerary> getItinerary(@Valid @PathVariable Long userId, @RequestBody Principal principal) {
-        return itineraryDao.getItineraryByUserId(userId);
+    //get the whole list of user's itineraries
+    @RequestMapping(value = "/getItineraries/user/{userId}", method = RequestMethod.GET)
+    public List<Itinerary> getItineraries(@Valid @PathVariable Long userId, Principal principal) {
+        return itineraryDao.getItinerariesByUserId(userId);
     }
 
-    @RequestMapping(value = "/addLandmark", method = RequestMethod.POST)
-    public void addLandmark(@RequestBody Itinerary itinerary) {
+    //get specific itinerary from user's itineraries
+    @RequestMapping(value = "/getItinerary/user/{userId}/{itineraryId}", method = RequestMethod.GET)
+    public Itinerary getItinerary(@PathVariable int itineraryId, Principal principal) {
+        return itineraryDao.getItineraryByItineraryId(itineraryId);
+    }
+
+    //get Landmarks with itinerary ID
+    @RequestMapping(value = "/getLandmarks/user/{userId}/{itineraryId}", method = RequestMethod.GET)
+    public List<ItineraryLandmark> getLandmarks(@PathVariable int itineraryId, Principal principal) {
+        return itineraryDao.getLandmarksByItineraryId(itineraryId);
+    }
+
+    @RequestMapping(value = "/addLandmark/{itineraryId}", method = RequestMethod.POST)
+    public void addLandmark(@RequestBody Itinerary itinerary, Principal principal) {
         itineraryDao.addLandmark(itinerary);
     }
 

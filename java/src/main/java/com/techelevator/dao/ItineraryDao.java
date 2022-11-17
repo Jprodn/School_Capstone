@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.ItineraryLandmark;
 import com.techelevator.model.Landmark;
 
 import java.util.List;
@@ -10,12 +11,16 @@ public interface ItineraryDao {
 
     List<Itinerary> findAll();
 
+    List<Itinerary> getItinerariesByUserId(Long userId);
+
     Itinerary getItineraryByItineraryId(int itineraryId);
-    List<Itinerary> getItineraryByUserId(Long userId);
 
-    Itinerary findByItineraryName(String itineraryName);
+    Itinerary getByItineraryName(String itineraryName);
 
-    int findItineraryIdByItineraryName(String itineraryName);
+    int getItineraryIdByItineraryName(String itineraryName);
+
+
+    List<ItineraryLandmark> getLandmarksByItineraryId(int itineraryId);
 
     void createItinerary(Itinerary itinerary);
 

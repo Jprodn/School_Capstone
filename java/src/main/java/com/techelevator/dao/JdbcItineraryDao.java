@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.ItineraryLandmark;
 import com.techelevator.model.Landmark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,7 +35,7 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     @Override
-    public List<Itinerary> getItineraryByUserId(Long userId) {
+    public List<Itinerary> getItinerariesByUserId(Long userId) {
         List<Itinerary> itineraries = new ArrayList<>();
         String sql = "SELECT * FROM itinerary WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -48,25 +49,41 @@ public class JdbcItineraryDao implements ItineraryDao{
     @Override
     public Itinerary getItineraryByItineraryId(int itineraryId) {
         String sql = "SELECT * FROM itinerary WHERE itinerary_id = ?";
+
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
         if(results.next()) {
             return mapRowToUser(results);
         } else {
-            throw new RuntimeException("itineraryId " + itineraryId +
+            throw new RuntimeException("itineraryId " +
                     " was not found.");
         }
     }
 
     @Override
-    public Itinerary findByItineraryName(String itineraryName) {
+    public Itinerary getByItineraryName(String itineraryName) {
         return jdbcTemplate.queryForObject("SELECT itinerary_id FROM " +
                 "itinerary WHERE itinerary_name = ?", Itinerary.class, itineraryName);
     }
 
     @Override
-    public int findItineraryIdByItineraryName(String itineraryName) {
+    public int getItineraryIdByItineraryName(String itineraryName) {
         return jdbcTemplate.queryForObject("SELECT itinerary_id FROM " +
                 "itinerary WHERE itinerary_name = ?", int.class,itineraryName);
+    }
+
+    @Override
+    public List<ItineraryLandmark> getLandmarksByItineraryId(int itineraryId) {
+        List<ItineraryLandmark> landmarks = new ArrayList<>();
+        String sql = "SELECT * FROM itinerary_landmarks " +
+                     "WHERE itinerary_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
+        while(results.next()) {
+            ItineraryLandmark il = mapRowToItineraryLandmark(results);
+            landmarks.add(il);
+        }
+        return landmarks;
+
+
     }
 
     @Override
@@ -124,4 +141,13 @@ public class JdbcItineraryDao implements ItineraryDao{
         itinerary.setItineraryDate(rs.getDate("itinerary_date").toLocalDate());
         return itinerary;
     }
+
+    private ItineraryLandmark mapRowToItineraryLandmark(SqlRowSet rs) {
+        ItineraryLandmark il  = new ItineraryLandmark();
+
+        il.setItineraryId(rs.getInt("itinerary_id"));
+        il.setLandmarkId(rs.getInt("landmark_id"));
+        return il;
+    }
+
 }
