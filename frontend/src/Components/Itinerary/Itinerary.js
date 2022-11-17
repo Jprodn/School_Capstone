@@ -5,7 +5,14 @@ import axios from 'axios'
 import { baseUrl } from '../../Shared/baseUrl'
 
 
+
 export default function Itinerary(props) {
+    const [userId, setUserId] = useState ("");
+    const [name, setName] = useState ("");
+    const [start, setStart] = useState ("");
+    const [landmark, setLandmark] = useState ([]);
+    const [data, setData] = useState ("");
+
     const [itinerary, setItinerary] = useState({
         id: "",
         name: "",
@@ -13,10 +20,11 @@ export default function Itinerary(props) {
         landmark: [],
         data: ""
     })
-
     
-    const token = JSON.parse(localStorage.getItem('jwtToken'));
-    console.log("this is token" + token)
+    const token = localStorage.getItem('jwtToken');
+    const storageUserId = localStorage.getItem('jwtUserId');
+    console.log(storageUserId);
+    console.log("this is token" + token);
     const config = {
         headers:
         {
@@ -25,68 +33,18 @@ export default function Itinerary(props) {
         }
     }
     
-    // const loadItinerary = async () => {
-    //     const result = await axios.get(`http://localhost:8081/itinerary/` + itinerary.id, config)
+    useEffect(() => {    
+        const getItinerary = async () => {
+            // const result = await axios.get(`http://localhost:8081/itinerary/${storageUserId}`, config)
+            const result = await axios.get(`http://localhost:8081/itinerary/4`)
+            setData(result.data)
+        };
 
-    //     setItinerary(prev => ({
-    //         ...prev,
-    //         data: result.data
-    //     }));
-    // };
-
-    // axios.get(baseUrl + "/itinerary/" + itinerary.id, data, config)
-    //     .then(function () {
-    //         console.log("axios")
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error)
-    //     })
-
-    //   const onInputChange = (e) => {
-    //     setItinerary({ ...itinerary, [e.target.name]: e.target.value });
-    //   };
-
-    //   const onSubmit = async (e) => {
-    //     e.preventDefault();
-    //     await axios.put(`http://localhost:8081/itinerary/${id}`, itinerary);
-        
-    //   };
-    // function handleSubmit() {
-    //     console.log("handle submit")
-    //     axios.post(baseUrl + "/itinerary", data)
-    // }
-
-    const setItineraryIdObj = () => setItinerary(prev => ({...prev, id: window.localStorage.getItem('jwtBlob')}))
-    const getItineraryId = () => itinerary.id;
-
-
-    useEffect(() => {
-        setItineraryIdObj();
-        console.log("get IID:")
-        console.log(getItineraryId);
-        // axios.get(baseUrl + "/")
+        getItinerary();
     }, [])
-
 
     return (
         <div>
-            {/* Itinerary Component Test
-            <h1 className="itinerary-name">Edit Itinerary 1</h1> */}
-            {/* map */}
-            {/* <ul className="landmark-list">
-                <li>Starting Point</li>
-                <li>landmark1</li>
-                <li>landmark2</li>
-                <li>landmark3</li>
-            </ul>
-            <div className="save">
-                <button type="submit" className="save-button" onClick={handleSubmit}>Save</button>
-            </div>
-            <div className="Delete Itinerary">
-                <button className="delete-button" >Delete Itinerary</button>
-            </div> */}
-
-
             <div className="itinerary-card">
                 <h1 className="itinerary-card-title">Edit Itinerary</h1>
                 <div className="itinerary-card-image">
