@@ -139,6 +139,7 @@ public class JdbcItineraryDao implements ItineraryDao{
         itinerary.setItineraryName(rs.getString("itinerary_name"));
         itinerary.setStartingPoint(rs.getString("starting_point"));
         itinerary.setItineraryDate(rs.getDate("itinerary_date").toLocalDate());
+        itinerary.setUserId(rs.getLong("user_id"));
         return itinerary;
     }
 
