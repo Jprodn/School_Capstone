@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react"
-
 import axios from 'axios'
-
-import { baseUrl } from '../../Shared/baseUrl'
 
 
 
 export default function Itinerary(props) {
-    const [userId, setUserId] = useState ("");
-    const [name, setName] = useState ("");
-    const [start, setStart] = useState ("");
-    const [landmark, setLandmark] = useState ([]);
-    const [data, setData] = useState ("");
-
-    const [itinerary, setItinerary] = useState({
-        id: "",
-        name: "",
-        start: "",
-        landmark: [],
-        data: ""
+    const [userInfo, setUserInfo] = useState({
+        userId: "",
+        itineraries: [],
+        itineraryId: "",
+        itineraryName: "",
+        locationStart: "",
+        locationItinerary: "",
+        itineraryDate: "",
+        data: {}
     })
     
-    const token = localStorage.getItem('jwtToken');
+    const token = JSON.parse(localStorage.getItem('jwtToken'));
     const storageUserId = localStorage.getItem('jwtUserId');
     console.log(storageUserId);
     console.log("this is token" + token);
@@ -31,17 +25,36 @@ export default function Itinerary(props) {
             "Authorization": `Bearer ${token}`,
             "Content-Type": 'application/json'
         }
+        
     }
     
     useEffect(() => {    
         const getItinerary = async () => {
-            // const result = await axios.get(`http://localhost:8081/itinerary/${storageUserId}`, config)
-            const result = await axios.get(`http://localhost:8081/itinerary/4`)
-            setData(result.data)
+            const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`, config)
+            // const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/4`, config)
+            console.log(result);
+            setUserInfo(prevInfo => ({
+                ...prevInfo,
+                userId: storageUserId,
+                itineraries: [...result.data],
+                itineraryId: result.data.itineraryId,
+                itineraryName: result.data.itineraryName,
+                locationStart: "user's location",
+                locationItinerary: result.data.startingPoint,
+                itineraryDate: result.data.itineraryDate,
+                data: result
+            }))
         };
-
         getItinerary();
     }, [])
+
+    const displayItineraries = (
+        userInfo.itineraries.map((lm, count = 0) => (
+            <li className="landmark-list-items" key={count + 1}>
+                <button className="landmark-list-buttons">{lm.itineraryName}</button>
+            </li>
+        ))
+    )
 
     return (
         <div>
@@ -53,10 +66,8 @@ export default function Itinerary(props) {
                 <div className="itinerary-card-body">
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
-                            <button className="startPoint-button">Starting</button></li>
-                        <li className="landmark-list-items"><button className="landmark-list-buttons">landmark1</button></li>
-                        <li className="landmark-list-items"><button className="landmark-list-buttons">landmark2</button></li>
-                            <li className="landmark-list-items"><button className="landmark-list-buttons">landmark3</button></li>
+                            <button className="startPoint-button">{userInfo.locationStart}</button></li>
+                            {displayItineraries}
                     </ul>
                     <div className="landmark-action-buttons">
                         <div className="save">
