@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import axios from 'axios'
 
-// import { baseUrl } from '../../Shared/baseUrl'
+import { baseUrl } from '../../Shared/baseUrl'
 
 
 export default function Itinerary(props) {
