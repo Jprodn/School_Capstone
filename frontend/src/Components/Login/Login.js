@@ -35,7 +35,7 @@ class Login extends Component {
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
         window.localStorage.setItem('jwtBlob', userWithToken);
-        console.log(window.localStorage.getItem('jwtBlob'));
+        window.localStorage.setItem('jwtUserId', JSON.stringify(userWithToken.data.user.id));
         window.localStorage.setItem('jwtToken', JSON.stringify(userWithToken.data.token));
         window.location.replace('/home');
     }

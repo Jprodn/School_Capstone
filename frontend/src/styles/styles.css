@@ -18,6 +18,10 @@ img {
   display: block;
 }
 
+.border-none {
+  border: none;
+}
+
 .card {
   margin: 2rem auto;
   display: flex;
@@ -166,6 +170,10 @@ img {
   margin: 10px 0;
   /* border-style:solid;
 	border-radius: 15px; */
+}
+
+.create-button {
+  width: 30px;
 }
 
 .create-form-action {

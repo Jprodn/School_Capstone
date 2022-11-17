@@ -51,7 +51,7 @@ export default function Itinerary(props) {
     const displayItineraries = (
         userInfo.itineraries.map((lm, count = 0) => (
             <li className="landmark-list-items" key={count + 1}>
-                <button className="landmark-list-buttons">{lm.itineraryName}</button>
+                <button className="landmark-list-buttons" >{lm.itineraryName}</button>
             </li>
         ))
     )
