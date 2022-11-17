@@ -23,6 +23,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^5.6.1",
     "react-transition-group": "4.4.2",
+    "reactjs-popup": "^2.0.5",
     "reactstrap": "8.10.1",
     "redux": "^4.1.2",
     "redux-logger": "3.0.6",
