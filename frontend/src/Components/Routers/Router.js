@@ -25,6 +25,7 @@ export default function Router(props) {
             <Route exact path="/register" component={() => <Register />} />
             <Route exact path="/home" component={() => <Home />} />
             <Route exact path="/itinerary" component={() => <Itinerary />} />
+            {/* <Route exact path="/itinerary/edit/:id" component={() => <Itinerary />} /> */}
             <Route exact path="/itinerary/create" component={() => <Create />} />
             <Route exact path="/landmark" component={() => <Search />} user={props.user} />
             <Route path="*" component={() => <Error404 />} />

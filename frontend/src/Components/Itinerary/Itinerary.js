@@ -31,7 +31,6 @@ export default function Itinerary(props) {
     useEffect(() => {    
         const getItinerary = async () => {
             const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`, config)
-            // const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/4`, config)
             console.log(result);
             setUserInfo(prevInfo => ({
                 ...prevInfo,

@@ -31,7 +31,6 @@ export default function Home(props) {
     useEffect(() => {    
         const getItinerary = async () => {
             const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`, config)
-            // const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/4`, config)
             console.log(result);
             setUserInfo(prevInfo => ({
                 ...prevInfo,
@@ -50,7 +49,18 @@ export default function Home(props) {
 
     const displayItineraries = (
         userInfo.itineraries.map((lm, count = 0) => (
-            <option key={count + 1}>{lm.itineraryName}</option>
+            <li className="landmark-list-items" key={count + 1}>
+                <button
+                    // onClick={<Link to={`/edit/${lm.itineraryName}`} />}
+                    className="create-button border-none" 
+                    styles={"cursor:pointer"} 
+                    title={`Edit ${lm.itineraryName}`}>
+                        <img src="btnEdit.jpeg" alt="edit button" />
+                </button>
+                <button className="landmark-list-buttons">
+                    {lm.itineraryName}
+                </button>
+            </li>
         ))
     )
 
@@ -79,15 +89,6 @@ export default function Home(props) {
                     <button 
                         className="create-button border-none" 
                         styles={"cursor:pointer"} 
-                        title="Edit">
-                            <img src="btnEdit.jpeg" alt="edit button" />
-                    </button>
-                    <select>
-                        {displayItineraries}
-                    </select>
-                    <button 
-                        className="create-button border-none" 
-                        styles={"cursor:pointer"} 
                         title="Route">
                             <img src="btnMap.png" alt="generate route button" />
                     </button>
@@ -96,7 +97,7 @@ export default function Home(props) {
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
                             <button className="startPoint-button">{userInfo.locationStart}</button></li>
-                            {displayLandmarks}
+                            {displayItineraries}
                     </ul>
                     <div className="landmark-action-buttons">
                         <div className="save">
