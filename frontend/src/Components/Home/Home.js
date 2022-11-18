@@ -14,6 +14,7 @@ export default function Home(props) {
         itineraryDate: "",
         data: {},
     });
+    const [currentItineraryId, setCurrentItineraryId] = useState("");
 
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
@@ -57,16 +58,23 @@ export default function Home(props) {
         }));
 
     // TRIGGERS
+    const getSelectedItinerary = async (e) =>
+        await axios
+            .get(
+                `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${e.target.id}`,
+                config
+            )
+            .then((r) => console.log(r));
 
     // DISPLAYS
     const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
-            {/* button - Itinerary */}
             <button
                 className="landmark-list-buttons"
-                onClick={handleInputChange}
+                id={lm.itineraryId}
+                onClick={getSelectedItinerary}
             >
-                {lm.itineraryName}
+                {lm.itineraryName} - {lm.itineraryId}
             </button>
         </li>
     ));

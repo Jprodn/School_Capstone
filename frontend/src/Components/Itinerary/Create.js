@@ -64,6 +64,7 @@ export default function Create(props) {
                             onChange={handleChange}
                             name="itineraryName"
                             placeholder="Itinerary Name"
+                            autoComplete="off"
                         />
                         <input
                             type="text"
