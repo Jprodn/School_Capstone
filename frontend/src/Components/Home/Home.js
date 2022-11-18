@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import ControlledPopup from "../Popup/ControlledPopup";
 
@@ -57,11 +56,11 @@ export default function Home(props) {
     // }, [handleCurrentItinerary])
 
     // HANDLES
-    const handleInputChange = (event) =>
-        setUserInfo((prevInfo) => ({
-            ...prevInfo,
-            [event.target.name]: event.target.value,
-        }));
+    // const handleInputChange = (event) =>
+    //     setUserInfo((prevInfo) => ({
+    //         ...prevInfo,
+    //         [event.target.name]: event.target.value,
+    //     }));
 
     // TRIGGERS
     const getSelectedItinerary = async (landmark) => (
