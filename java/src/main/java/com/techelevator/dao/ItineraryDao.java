@@ -20,7 +20,7 @@ public interface ItineraryDao {
     int getItineraryIdByItineraryName(String itineraryName);
 
 
-    List<ItineraryLandmark> getLandmarksByItineraryId(int itineraryId);
+    List<Landmark> getLandmarksByItineraryId(int itineraryId);
 
     void createItinerary(Itinerary itinerary);
 

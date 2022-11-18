@@ -4,6 +4,14 @@ import axios from "axios";
 function Landmark(props) {
   const [data, setData] = React.useState([]);
 
+  const token = JSON.parse(localStorage.getItem("jwtToken"));
+  const config = {
+    headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+    },
+  };
+
   React.useEffect(() => {
     const fetchHours = async () => {
       const response = await axios.get(
@@ -61,6 +69,14 @@ function Landmark(props) {
     );
   });
 
+  const handleAdd = async (e) =>
+    await axios
+        .post(
+            `http://localhost:8081/itinerary/addLandmark/32`,
+            config
+        )
+        .then((r) => console.log(r));
+
   return (
     <div className="landmark">
       <div className="landmark-image-div">
@@ -80,6 +96,9 @@ function Landmark(props) {
           }`}
         </p>
         {hourElement}
+        <div className="action">
+          <button type="submit" className="action-button"  onClick={handleAdd} >Add to itinerary</button>
+        </div>
         <a
           href={props.item.mapUrl}
           target="_blank"

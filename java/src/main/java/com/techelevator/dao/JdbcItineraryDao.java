@@ -72,18 +72,18 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     @Override
-    public List<ItineraryLandmark> getLandmarksByItineraryId(int itineraryId) {
-        List<ItineraryLandmark> landmarks = new ArrayList<>();
-        String sql = "SELECT * FROM itinerary_landmarks " +
-                     "WHERE itinerary_id = ?";
+    public List<Landmark> getLandmarksByItineraryId(int itineraryId) {
+        List<Landmark> landmarks = new ArrayList<>();
+        String sql = "SELECT * FROM landmark AS l " +
+                     "JOIN itinerary_landmarks AS il ON l.landmark_id = il.landmark_id " +
+                     "WHERE il.itinerary_id = ?";
+
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
         while(results.next()) {
-            ItineraryLandmark il = mapRowToItineraryLandmark(results);
-            landmarks.add(il);
+            Landmark landmark = mapRowToLandmark(results);
+            landmarks.add(landmark);
         }
         return landmarks;
-
-
     }
 
     @Override
@@ -149,6 +149,21 @@ public class JdbcItineraryDao implements ItineraryDao{
         il.setItineraryId(rs.getInt("itinerary_id"));
         il.setLandmarkId(rs.getInt("landmark_id"));
         return il;
+    }
+
+    private Landmark mapRowToLandmark(SqlRowSet rs) {
+        Landmark landmark = new Landmark();
+        landmark.setLandmarkId(rs.getInt("landmark_id"));
+        landmark.setLandmarkName(rs.getString("landmark_name"));
+        landmark.setAddress(rs.getString("address"));
+        landmark.setCity(rs.getString("city"));
+        landmark.setState(rs.getString("state"));
+        landmark.setPostalCode(rs.getString("postal_code"));
+        landmark.setCategory(rs.getString("category"));
+        landmark.setDescription(rs.getString("description"));
+        landmark.setImgUrl(rs.getString("image_url"));
+        landmark.setMapUrl(rs.getString("map_url"));
+        return landmark;
     }
 
 }

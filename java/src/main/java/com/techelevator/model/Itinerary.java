@@ -3,7 +3,7 @@ package com.techelevator.model;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Itinerary {
+public class Itinerary extends Landmark{
 
     private int itineraryId;
     private String itineraryName;

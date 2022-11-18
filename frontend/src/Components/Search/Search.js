@@ -45,6 +45,14 @@ function Search() {
     setselectedCity(obj);
   }
 
+  // const handleAdd = async (e) =>
+  // await axios
+  //     .post(
+  //         `http://localhost:8081/itinerary//addLandmark/32`,
+  //         config
+  //     )
+  //     .then((r) => console.log(r));
+
   React.useEffect(() => {
     const fetchLandmark = async () => {
       const response = await axios.get(

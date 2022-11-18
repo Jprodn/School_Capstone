@@ -54,7 +54,7 @@ public class ItineraryController {
 
     //get Landmarks with itinerary ID
     @RequestMapping(value = "/getLandmarks/user/{userId}/{itineraryId}", method = RequestMethod.GET)
-    public List<ItineraryLandmark> getLandmarks(@PathVariable int itineraryId, Principal principal) {
+    public List<Landmark> getLandmarks(@PathVariable int itineraryId, Principal principal) {
         return itineraryDao.getLandmarksByItineraryId(itineraryId);
     }
 
