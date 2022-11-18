@@ -55,7 +55,8 @@ function Landmark(props) {
   const hourElement = data.map((hours) => {
     return (
       <p key={hours.landmarkId} className="hours">
-        {getDay(hours.weekday)} {hours.openHour}-{hours.closeHour}
+        {getDay(hours.weekday)} {hours.openHour}{" "}
+        {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
       </p>
     );
   });
