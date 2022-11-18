@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 import Login from "../Login/Login";
 import Register from "../Register/Register";
@@ -7,29 +7,37 @@ import Home from "../Home/Home";
 import Itinerary from "../Itinerary/Itinerary";
 import Create from "../Itinerary/Create";
 import Search from "../Search/Search";
-import { Error404 } from '../Error/Error404';
-import NavLinkBar from './NavLinkBar';
-
-
+import { Error404 } from "../Error/Error404";
+import NavLinkBar from "./NavLinkBar";
+import MapRoute from "../MapRoute/MapRoute";
 
 export default function Router(props) {
+  const userToken = () => window.localStorage.getItem("jwtToken");
 
-    const userToken = () => window.localStorage.getItem('jwtToken');
-    
-    return (
-        <>
-        {userToken !== undefined && <NavLinkBar />}
-        <Switch>
-            <Route exact path="/" component={() => <Login />} />
-            <Route exact path="/login" component={() => <Login />} />
-            <Route exact path="/register" component={() => <Register />} />
-            <Route exact path="/home" component={() => <Home />} />
-            <Route exact path="/itinerary" component={() => <Itinerary />} />
-            <Route exact path="/itinerary/edit/:itineraryId" component={() => <Itinerary />} />
-            <Route exact path="/itinerary/create" component={() => <Create />} />
-            <Route exact path="/landmark" component={() => <Search />} user={props.user} />
-            <Route path="*" component={() => <Error404 />} />
-        </Switch>
-        </>
-    )
+  return (
+    <>
+      {userToken !== undefined && <NavLinkBar />}
+      <Switch>
+        <Route exact path="/" component={() => <Login />} />
+        <Route exact path="/login" component={() => <Login />} />
+        <Route exact path="/register" component={() => <Register />} />
+        <Route exact path="/home" component={() => <Home />} />
+        <Route exact path="/itinerary" component={() => <Itinerary />} />
+        <Route
+          exact
+          path="/itinerary/edit/:itineraryId"
+          component={() => <Itinerary />}
+        />
+        <Route exact path="/itinerary/create" component={() => <Create />} />
+        <Route
+          exact
+          path="/landmark"
+          component={() => <Search />}
+          user={props.user}
+        />
+        <Route exact path="/map-route" component={() => <MapRoute />} />
+        <Route path="*" component={() => <Error404 />} />
+      </Switch>
+    </>
+  );
 }
