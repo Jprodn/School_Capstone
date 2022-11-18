@@ -14,11 +14,11 @@ import NavLinkBar from './NavLinkBar';
 
 export default function Router(props) {
 
-    const userToken = () => window.localStorage.getItem('jwtBlob');
+    const userToken = () => window.localStorage.getItem('jwtToken');
     
     return (
         <>
-        <NavLinkBar />
+        {userToken !== undefined && <NavLinkBar />}
         <Switch>
             <Route exact path="/" component={() => <Login />} />
             <Route exact path="/login" component={() => <Login />} />

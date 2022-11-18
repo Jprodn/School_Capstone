@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Popup from "reactjs-popup";
 import axios from "axios";
-import Create from "../Itinerary/Create";
+import ControlledPopup from "../Popup/ControlledPopup";
 
 export default function Home(props) {
     const [isHover, setIsHover] = useState(false);
@@ -62,28 +61,25 @@ export default function Home(props) {
     // DISPLAYS
     const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
+            {/* button - Itinerary */}
             <button
-                // onClick={<Link to={`/edit/${lm.itineraryName}`} />}
-                className="create-button border-none"
-                styles={"cursor:pointer"}
-                title={`Edit ${lm.itineraryName}`}
+                className="landmark-list-buttons"
+                onClick={handleInputChange}
             >
-                <img src="btnEdit.jpeg" alt="edit button" />
-            </button>
-            <button className="landmark-list-buttons">
                 {lm.itineraryName}
             </button>
         </li>
     ));
 
-    const displayLandmarks = userInfo.itineraries.map((lm, count = 0) => (
-        <li className="landmark-list-items" key={count + 1}>
-            <button className="landmark-list-buttons">
-                {lm.itineraryName}
-            </button>
-        </li>
-    ));
+    // const displayLandmarks = userInfo.itineraries.map((lm, count = 0) => (
+    //     <li className="landmark-list-items" key={count + 1}>
+    //         <button className="landmark-list-buttons">
+    //             {lm.itineraryName}
+    //         </button>
+    //     </li>
+    // ));
 
+    // JSX
     return (
         <div>
             <div className="itinerary-card">
@@ -97,25 +93,7 @@ export default function Home(props) {
                 <div className="landmark-action-buttons">
                     {/* Popup - CREATE */}
                     <div className="popup-wrapper">
-                        <Popup
-                            className="popup-content"
-                            trigger={
-                                <button
-                                    className="create-button border-none"
-                                    styles={"cursor:pointer"}
-                                    title="Create"
-                                >
-                                    <img
-                                        src="btnCreate.png"
-                                        alt="create button"
-                                    />
-                                </button>
-                            }
-                            position="right center"
-                            // closeOnDocumentClick
-                        >
-                            <Create />
-                        </Popup>
+                        <ControlledPopup />
                     </div>
                     {/* button - ROUTE */}
                     <button
@@ -133,10 +111,12 @@ export default function Home(props) {
                             <button
                                 className="startPoint-button"
                                 onMouseOver={() => setIsHover(() => true)}
-                                onMouseOut={() => setIsHover(() => false)}
+                                onMouseOut={() => setIsHover(() => false)} // ffffffffffffffffffffffffff
                             >
                                 {userInfo.locationStart}
-                                {isHover && <span>edit</span>}
+                                {isHover && (
+                                    <span className="dim"> - edit</span>
+                                )}
                             </button>
                         </li>
                         {displayItineraries}
@@ -145,11 +125,6 @@ export default function Home(props) {
                     <div className="landmark-action-buttons">
                         <div className="save">
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
-                        </div>
-                        <div className="Delete Itinerary">
-                            <button className="delete-button">
-                                Delete Itinerary
-                            </button>
                         </div>
                     </div>
                 </div>

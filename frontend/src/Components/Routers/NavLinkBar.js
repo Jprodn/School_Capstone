@@ -7,7 +7,13 @@ export default function NavLinkBar(props) {
     const handleLogout = () => {
         this.props.addToken("");
         this.props.deleteUser();
+        window.localStorage.setItem('jwtToken', '')
+        window.localStorage.setItem('jwtBlob', '')
+        window.localStorage.setItem('jwtUserId', '')
     };
+
+    let token = window.localStorage.getItem('jwtToken')
+    console.log(token);
 
     return (
         <>
@@ -15,7 +21,7 @@ export default function NavLinkBar(props) {
             <Link className="main-list" to="/itinerary">Itinerary{" "}</Link>
             <Link className="main-list" to="/itinerary/create">Create{" "}</Link>
             <Link className="main-list" to="/landmark">Search{" "}</Link>
-            <Link className="main-list" to="/login" onClick={handleLogout}>logout</Link>
+            <Link className="main-list" to="/login" onClick={handleLogout}>{token !== undefined ? "logout" : "login"}</Link>
         </>
     )
 }

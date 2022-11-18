@@ -4,7 +4,7 @@ import Landmark from "./Landmark";
 import Select from "react-select";
 
 function Search() {
-  const [searchString, setsearchString] = React.useState("");
+  const [searchString, setsearchString] = React.useState([]);
   const [data, setData] = React.useState([]);
 
   const [listState, setListState] = React.useState([]);

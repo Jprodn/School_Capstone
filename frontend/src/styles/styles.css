@@ -176,6 +176,10 @@ img {
   width: 3rem;
 }
 
+.edit-button {
+  width: 2rem;
+}
+
 .create-form-action {
   margin: 2px 30px;
   padding: 1px;
@@ -372,6 +376,13 @@ img {
   padding: 5px;
 }
 
-.startPoint-button-edit > span {
-  text-align: right;
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow:    6px 6px 12px 0px rgba(50, 50, 50, 1);
+  box-shadow:         6px 6px 12px 0px rgba(50, 50, 50, 1);
+}
+
+.dim {
+  color: lightgray;
 }
