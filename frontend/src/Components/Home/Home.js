@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import ControlledPopup from "../Popup/ControlledPopup";
 
@@ -14,7 +15,6 @@ export default function Home(props) {
         itineraryDate: "",
         data: {},
     });
-    const [currentItineraryId, setCurrentItineraryId] = useState("");
 
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
@@ -50,6 +50,12 @@ export default function Home(props) {
         getItinerary();
     }, []);
 
+    // useEffect(() => {
+    //     const itemCode = `${currentItineraryInfo.userId}${currentItineraryInfo.itineraryName}${currentItineraryInfo.itineraryId}`
+    //     console.log(itemCode);
+    //     window.localStorage.setItem(itemCode, currentItineraryInfo);
+    // }, [handleCurrentItinerary])
+
     // HANDLES
     const handleInputChange = (event) =>
         setUserInfo((prevInfo) => ({
@@ -58,13 +64,18 @@ export default function Home(props) {
         }));
 
     // TRIGGERS
-    const getSelectedItinerary = async (e) =>
-        await axios
-            .get(
-                `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${e.target.id}`,
-                config
-            )
-            .then((r) => console.log(r));
+    const getSelectedItinerary = async (landmark) => (
+        await axios.get(
+            `http://localhost:8081/itinerary/getItinerary/user/${landmark.userId}/${landmark.itineraryId}`,
+            config
+        )
+        .then (r => console.log(r))
+    )
+
+    function goToItinerary(lm) {
+        window.localStorage.setItem(`currentItinerary`, JSON.stringify(lm));
+        window.location.replace(`/itinerary`);
+    }
 
     // DISPLAYS
     const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
@@ -72,20 +83,12 @@ export default function Home(props) {
             <button
                 className="landmark-list-buttons"
                 id={lm.itineraryId}
-                onClick={getSelectedItinerary}
+                onClick={() => goToItinerary(lm)}
             >
                 {lm.itineraryName} - {lm.itineraryId}
             </button>
         </li>
     ));
-
-    // const displayLandmarks = userInfo.itineraries.map((lm, count = 0) => (
-    //     <li className="landmark-list-items" key={count + 1}>
-    //         <button className="landmark-list-buttons">
-    //             {lm.itineraryName}
-    //         </button>
-    //     </li>
-    // ));
 
     // JSX
     return (
@@ -103,14 +106,14 @@ export default function Home(props) {
                     <div className="popup-wrapper">
                         <ControlledPopup />
                     </div>
-                    {/* button - ROUTE */}
+                    {/* button - ROUTE
                     <button
                         className="create-button border-none"
                         styles={"cursor:pointer"}
                         title="Route"
                     >
                         <img src="btnMap.png" alt="generate route button" />
-                    </button>
+                    </button> */}
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
@@ -119,7 +122,7 @@ export default function Home(props) {
                             <button
                                 className="startPoint-button"
                                 onMouseOver={() => setIsHover(() => true)}
-                                onMouseOut={() => setIsHover(() => false)} // ffffffffffffffffffffffffff
+                                onMouseOut={() => setIsHover(() => false)}
                             >
                                 {userInfo.locationStart}
                                 {isHover && (

@@ -25,6 +25,9 @@ class Login extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+    componentDidMount() {
+        localStorage.clear();
+    }
 
 
     handleLogin = async (event) => {
@@ -97,38 +100,6 @@ class Login extends Component {
                     </div>
                 </div>
             </div>
-
-
-
-            //-----------------------------------------------------------------------------------------
-
-            // <div className="container">
-            //     <h1>Please Sign In</h1>
-            //     <label class="sr-only">Username</label>
-            //     <input
-            //         type="text"
-            //         id="username"
-            //         name="username"
-            //         class="form-control"
-            //         placeholder="Username"
-            //         v-model="user.username"
-            //         onChange={this.handleInputChange}
-            //         required
-            //     />
-            //     <label class="sr-only">Password</label>
-            //     <input
-            //         type="password"
-            //         id="password"
-            //         name="password"
-            //         class="form-control"
-            //         placeholder="Password"
-            //         v-model="user.password"
-            //         onChange={this.handleInputChange}
-            //         required
-            //     />
-            //     <Link to="/register">Need an account?</Link>
-            //     <button type="submit" onClick={this.handleLogin}>Sign in</button>
-            // </div>
         )
     }
 }

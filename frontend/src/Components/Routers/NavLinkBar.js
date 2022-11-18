@@ -7,9 +7,7 @@ export default function NavLinkBar(props) {
     const handleLogout = () => {
         this.props.addToken("");
         this.props.deleteUser();
-        window.localStorage.setItem('jwtToken', '')
-        window.localStorage.setItem('jwtBlob', '')
-        window.localStorage.setItem('jwtUserId', '')
+        localStorage.clear();
     };
 
     let token = window.localStorage.getItem('jwtToken')

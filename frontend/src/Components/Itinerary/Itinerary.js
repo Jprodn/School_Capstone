@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react"
-import axios from 'axios'
-
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
@@ -12,27 +10,28 @@ export default function Itinerary(props) {
         locationStart: "",
         locationItinerary: "",
         itineraryDate: "",
-        data: {}
-    })
-    
-    const token = JSON.parse(localStorage.getItem('jwtToken'));
-    const storageUserId = localStorage.getItem('jwtUserId');
+        data: {},
+    });
+
+    const token = JSON.parse(localStorage.getItem("jwtToken"));
+    const storageUserId = localStorage.getItem("jwtUserId");
     console.log(storageUserId);
     console.log("this is token" + token);
     const config = {
-        headers:
-        {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": 'application/json'
-        }
-        
-    }
-    
-    useEffect(() => {    
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    };
+
+    useEffect(() => {
         const getItinerary = async () => {
-            const result = await axios.get(`http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`, config)
+            const result = await axios.get(
+                `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
+                config
+            );
             console.log(result);
-            setUserInfo(prevInfo => ({
+            setUserInfo((prevInfo) => ({
                 ...prevInfo,
                 userId: storageUserId,
                 itineraries: [...result.data],
@@ -42,42 +41,57 @@ export default function Itinerary(props) {
                 locationItinerary: result.data.startingPoint,
                 itineraryDate: result.data.itineraryDate,
                 data: result
-            }))
+            }));
         };
         getItinerary();
-    }, [])
+    }, []);
 
-    const displayItineraries = (
-        userInfo.itineraries.map((lm, count = 0) => (
-            <li className="landmark-list-items" key={count + 1}>
-                <button className="landmark-list-buttons" >{lm.itineraryName}</button>
-            </li>
-        ))
-    )
+    const getSelectedItinerary = async (e) =>
+        await axios.get(
+            `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${e.target.id}`,
+            config
+        );
+
+    const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
+        <li className="landmark-list-items" key={count + 1}>
+            <button className="landmark-list-buttons">
+                {lm.itineraryName}
+            </button>
+        </li>
+    ));
 
     return (
         <div>
             <div className="itinerary-card">
                 <h1 className="itinerary-card-title">Edit Itinerary</h1>
                 <div className="itinerary-card-image">
-                    <img className="itinerary-image" alt="" src="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png" />
+                    <img
+                        className="itinerary-image"
+                        alt=""
+                        src="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png"
+                    />
                 </div>
                 <div className="itinerary-card-body">
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
-                            <button className="startPoint-button">{userInfo.locationStart}</button></li>
-                            {displayItineraries}
+                            <button className="startPoint-button">
+                                {userInfo.locationStart}
+                            </button>
+                        </li>
+                        {displayItineraries}
                     </ul>
                     <div className="landmark-action-buttons">
                         <div className="save">
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
                         </div>
                         <div className="Delete Itinerary">
-                            <button className="delete-button" >Delete Itinerary</button>
+                            <button className="delete-button">
+                                Delete Itinerary
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
