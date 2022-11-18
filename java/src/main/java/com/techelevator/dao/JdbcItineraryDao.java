@@ -99,36 +99,36 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     @Override
-    public void addLandmark(Itinerary itinerary) {
+    public void addLandmark(int itineraryId, int landmarkId) {
 
         String sql =  "INSERT INTO itinerary_landmarks " +
                       "(itinerary_id, landmark_id) " +
                       "VALUES (?, ?)";
 
-        jdbcTemplate.update(sql, itinerary.getItineraryId(), itinerary.getLandmarkId());
+        jdbcTemplate.update(sql, itineraryId, landmarkId);
     }
 
 
-    public void removeLandmark(Landmark landmark) {
+    public void removeLandmark(int itineraryId, int landmarkId) {
 
         String sql = "DELETE from itinerary_landmarks " +
-                     "WHERE landmark_id = ?";
+                     "WHERE itinerary_id = ? AND landmark_id = ?";
 
-        jdbcTemplate.update(sql, landmark.getLandmarkId());
+        jdbcTemplate.update(sql, itineraryId, landmarkId);
     }
 
-    public void updateStartLocation(Itinerary itinerary) {
+    public void updateStartLocation(String startLocation, int itineraryId) {
 
         String sql = "UPDATE itinerary SET starting_point = ? WHERE itinerary_id = ?";
 
-        jdbcTemplate.update(sql, itinerary.getStartingPoint(), itinerary.getItineraryId());
+        jdbcTemplate.update(sql, startLocation, itineraryId);
     }
 
-    public void deleteItinerary(Itinerary itinerary) {
+    public void deleteItinerary(int itineraryId) {
 
         String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
 
-        jdbcTemplate.update(sql, itinerary.getItineraryId());
+        jdbcTemplate.update(sql, itineraryId);
     }
 
 

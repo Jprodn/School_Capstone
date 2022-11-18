@@ -58,24 +58,24 @@ public class ItineraryController {
         return itineraryDao.getLandmarksByItineraryId(itineraryId);
     }
 
-    @RequestMapping(value = "/addLandmark/{itineraryId}", method = RequestMethod.POST)
-    public void addLandmark(@RequestBody Itinerary itinerary, Principal principal) {
-        itineraryDao.addLandmark(itinerary);
+    @RequestMapping(value = "/addLandmark/{itineraryId}/{landmarkId}", method = RequestMethod.POST)
+    public void addLandmark(@PathVariable int itineraryId, @PathVariable int landmarkId, Principal principal) {
+        itineraryDao.addLandmark(itineraryId, landmarkId);
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
-    public void removeLandmark(@Valid @RequestBody Landmark landmark) {
-        itineraryDao.removeLandmark(landmark);
+    @RequestMapping(value = "/removeLandmark/{itineraryId}/{landmarkId}", method = RequestMethod.DELETE)
+    public void removeLandmark(@PathVariable int itineraryId, @PathVariable int landmarkId, Principal principal) {
+        itineraryDao.removeLandmark(itineraryId, landmarkId);
     }
 
-    @RequestMapping(value = "/updateStart", method = RequestMethod.PUT)
-    public void updateStartLocation(@Valid @RequestBody Itinerary itinerary) {
-        itineraryDao.updateStartLocation(itinerary);
+    @RequestMapping(value = "/updateStart/{itineraryId}", method = RequestMethod.PUT)
+    public void updateStartLocation(@Valid  @RequestBody String startLocation, @PathVariable int itineraryId, Principal principal) {
+        itineraryDao.updateStartLocation(startLocation, itineraryId);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void deleteItinerary(@Valid @RequestBody Itinerary itinerary) {
-        itineraryDao.deleteItinerary(itinerary);
+    @RequestMapping(value = "/deleteItinerary/{itineraryId}", method = RequestMethod.DELETE)
+    public void deleteItinerary(@Valid @PathVariable int itineraryId, Principal principal) {
+        itineraryDao.deleteItinerary(itineraryId);
     }
 
 

@@ -24,11 +24,11 @@ public interface ItineraryDao {
 
     void createItinerary(Itinerary itinerary);
 
-    void addLandmark(Itinerary itinerary);
+    void addLandmark(int itineraryId, int landmarkId);
 
-    void removeLandmark(Landmark landmark);
+    void removeLandmark(int itineraryId, int landmarkId);
 
-    void updateStartLocation(Itinerary itinerary);
+    void updateStartLocation(String startLocation, int itineraryId);
 
-    void deleteItinerary(Itinerary itinerary);
+    void deleteItinerary(int itineraryId);
 }
