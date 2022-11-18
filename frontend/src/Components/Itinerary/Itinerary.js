@@ -13,8 +13,13 @@ export default function Itinerary(props) {
         data: {},
     });
 
+    const [userLandmarks, setUserLandmarks] = useState([]);
+
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
+    const currentItineraryInfo = JSON.parse(
+        localStorage.getItem("currentItinerary")
+    );
     console.log(storageUserId);
     console.log("this is token" + token);
     const config = {
@@ -25,6 +30,8 @@ export default function Itinerary(props) {
     };
 
     useEffect(() => {
+        console.log("currentItineraryInfo");
+        console.log(currentItineraryInfo);
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
@@ -40,30 +47,40 @@ export default function Itinerary(props) {
                 locationStart: "user's location",
                 locationItinerary: result.data.startingPoint,
                 itineraryDate: result.data.itineraryDate,
-                data: result
+                data: result,
             }));
         };
         getItinerary();
     }, []);
 
-    const getSelectedItinerary = async (e) =>
-        await axios.get(
-            `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${e.target.id}`,
-            config
-        );
+    useEffect(() => {
+        const getUserLandmarks = async () => {
+            const result = await axios.get(
+                `http://localhost:8081/itinerary/getLandmarks/user/${currentItineraryInfo.userId}/${currentItineraryInfo.itineraryId}`,
+                config
+            );
 
-    const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
+            console.log(
+                "getUserLandMarks: " + currentItineraryInfo.itineraryId
+            );
+            console.log(result);
+            setUserLandmarks(() => result.data);
+        };
+        getUserLandmarks();
+    }, []);
+
+    const displayLandmarks = userLandmarks.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
-            <button className="landmark-list-buttons">
-                {lm.itineraryName}
-            </button>
+            <button className="landmark-list-buttons">{lm.landmarkName}</button>
         </li>
     ));
 
     return (
         <div>
             <div className="itinerary-card">
-                <h1 className="itinerary-card-title">Edit Itinerary</h1>
+                <h1 className="itinerary-card-title">
+                    Edit {currentItineraryInfo.itineraryName}
+                </h1>
                 <div className="itinerary-card-image">
                     <img
                         className="itinerary-image"
@@ -78,7 +95,7 @@ export default function Itinerary(props) {
                                 {userInfo.locationStart}
                             </button>
                         </li>
-                        {displayItineraries}
+                        {displayLandmarks}
                     </ul>
                     <div className="landmark-action-buttons">
                         <div className="save">

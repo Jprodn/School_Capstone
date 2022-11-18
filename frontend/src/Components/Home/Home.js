@@ -49,28 +49,6 @@ export default function Home(props) {
         getItinerary();
     }, []);
 
-    // useEffect(() => {
-    //     const itemCode = `${currentItineraryInfo.userId}${currentItineraryInfo.itineraryName}${currentItineraryInfo.itineraryId}`
-    //     console.log(itemCode);
-    //     window.localStorage.setItem(itemCode, currentItineraryInfo);
-    // }, [handleCurrentItinerary])
-
-    // HANDLES
-    // const handleInputChange = (event) =>
-    //     setUserInfo((prevInfo) => ({
-    //         ...prevInfo,
-    //         [event.target.name]: event.target.value,
-    //     }));
-
-    // TRIGGERS
-    const getSelectedItinerary = async (landmark) => (
-        await axios.get(
-            `http://localhost:8081/itinerary/getItinerary/user/${landmark.userId}/${landmark.itineraryId}`,
-            config
-        )
-        .then (r => console.log(r))
-    )
-
     function goToItinerary(lm) {
         window.localStorage.setItem(`currentItinerary`, JSON.stringify(lm));
         window.location.replace(`/itinerary`);
