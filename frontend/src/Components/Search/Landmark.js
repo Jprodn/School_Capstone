@@ -7,8 +7,8 @@ function Landmark(props) {
   const token = JSON.parse(localStorage.getItem("jwtToken"));
   const config = {
     headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
   };
 
@@ -71,11 +71,8 @@ function Landmark(props) {
 
   const handleAdd = async (e) =>
     await axios
-        .post(
-            `http://localhost:8081/itinerary/addLandmark/32`,
-            config
-        )
-        .then((r) => console.log(r));
+      .post(`http://localhost:8081/itinerary/addLandmark/32`, config)
+      .then((r) => console.log(r));
 
   return (
     <div className="landmark">
@@ -97,7 +94,9 @@ function Landmark(props) {
         </p>
         {hourElement}
         <div className="action">
-          <button type="submit" className="action-button"  onClick={handleAdd} >Add to itinerary</button>
+          <button type="submit" className="action-button" onClick={handleAdd}>
+            Add to itinerary
+          </button>
         </div>
         <a
           href={props.item.mapUrl}
@@ -106,6 +105,15 @@ function Landmark(props) {
           className="landmark-maps"
         >
           View on Google Maps
+        </a>
+
+        <a
+          href="/map-route"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="map-route"
+        >
+          View map
         </a>
         <h1 className="landmark-name">{props.item.landmarkName}</h1>
         <p className="landmark-categoty">{props.item.category}</p>
