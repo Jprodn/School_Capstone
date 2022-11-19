@@ -18,7 +18,11 @@
     "react": "^17.0.2",
     "react-animation-components": "3.0.0",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-leaflet": ">=3.1.0 <3.2.0 || ^3.2.1",
+=======
+    "react-leaflet": "^4.1.0",
+>>>>>>> 28e6fc13c0e25a6f366cdc90cc5c1ffe9fa1bfa3
     "react-popper": "2.2.5",
     "react-redux": "7.2.6",
     "react-redux-form": "1.16.14",

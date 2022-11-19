@@ -1,10 +1,9 @@
 import { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 
 import { addToken, deleteUser } from "../../Redux/actionCreators";
-import NavLinkBar from "../Routers/NavLinkBar";
 import Router from "../Routers/Router";
 
 
