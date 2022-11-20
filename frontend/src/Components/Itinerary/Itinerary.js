@@ -58,8 +58,9 @@ export default function Itinerary(props) {
                 config
             );
 
-            console.log("getUserLandMarks: ");
-            console.log(currentItineraryInfo.itineraryId);
+            console.log(
+                "getUserLandMarks: " + currentItineraryInfo.itineraryId
+            );
             console.log(result);
             setUserLandmarks(() => result.data);
         };

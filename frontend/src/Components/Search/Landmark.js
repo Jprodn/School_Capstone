@@ -14,6 +14,8 @@ function Landmark(props) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
     },
   };
 
@@ -85,7 +87,9 @@ function Landmark(props) {
 
   const handleAdd = async (e) => (
     await axios
-      .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
+      // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
+      .post(`http://localhost:8081/itinerary/addLandmark`, {itineraryId:`${currentItineraryInfo.itineraryId}`, landmarkId:`${props.item.landmarkId}`}, config)
+      .then(console.log("config" + JSON.stringify(config)))
   );
   
 
