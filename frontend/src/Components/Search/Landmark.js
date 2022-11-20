@@ -4,6 +4,11 @@ import axios from "axios";
 function Landmark(props) {
   const [data, setData] = React.useState([]);
 
+  const [isClicked, setIsClicked] = React.useState(false);
+  function handleClick() {
+    setIsClicked((isClicked) => !isClicked);
+  }
+
   const token = JSON.parse(localStorage.getItem("jwtToken"));
   const config = {
     headers: {
@@ -83,7 +88,8 @@ function Landmark(props) {
   );
 
   return (
-    <div className="landmark">
+    <div className="landmark" onClick={handleClick}>
+      <h1 className="landmark-name">{props.item.landmarkName}</h1>
       <div className="landmark-image-div">
         <img
           className="landmark-image"
@@ -91,42 +97,43 @@ function Landmark(props) {
           alt="img"
         />
       </div>
-      <div className="landmark-info">
-        <p className="landmark-location">
-          <i className="fa-sharp fa-solid fa-location-dot"></i>
-          {`${props.item.address === null ? "" : `${props.item.address}, `}${
-            props.item.city
-          }, ${props.item.state}${
-            props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-          }`}
-        </p>
-        {hourElement}
-        <div className="action">
-          <button type="submit" className="action-button" onClick={handleAdd}>
-            Add to itinerary
-          </button>
-        </div>
-        <a
-          href={props.item.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="landmark-maps"
-        >
-          View on Google Maps
-        </a>
+      {isClicked && (
+        <div className="landmark-info">
+          <p className="landmark-location">
+            <i className="fa-sharp fa-solid fa-location-dot"></i>
+            {`${props.item.address === null ? "" : `${props.item.address}, `}${
+              props.item.city
+            }, ${props.item.state}${
+              props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+            }`}
+          </p>
+          {hourElement}
+          <div className="action">
+            <button type="submit" className="action-button" onClick={handleAdd}>
+              Add to itinerary
+            </button>
+          </div>
+          <a
+            href={props.item.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="landmark-maps"
+          >
+            View on Google Maps
+          </a>
 
-        <a
-          href="/map-route"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="map-route"
-        >
-          View map
-        </a>
-        <h1 className="landmark-name">{props.item.landmarkName}</h1>
-        <p className="landmark-categoty">{props.item.category}</p>
-        <p className="landmark-description">{props.item.description}</p>
-      </div>
+          <a
+            href="/map-route"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="map-route"
+          >
+            View map
+          </a>
+          <p className="landmark-categoty">{props.item.category}</p>
+          <p className="landmark-description">{props.item.description}</p>
+        </div>
+      )}
     </div>
   );
 }
