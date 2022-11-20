@@ -151,6 +151,17 @@ img {
 .delete-button:hover {
   background-color: lightskyblue;
 }
+
+.trash-button {
+  border: none;
+  width: 1.5rem;
+  filter: opacity(50%);
+}
+
+.trash-button:hover {
+  width: 2rem;
+}
+
 .landmark-action-buttons {
   display: flex;
   justify-content: center;
@@ -177,7 +188,13 @@ img {
 }
 
 .edit-button {
+  border: none;
   width: 2rem;
+}
+
+.modify-button-set {
+  display: flex;
+  justify-content: space-between;
 }
 
 .create-form-action {
@@ -388,7 +405,7 @@ height: 80%;
 .Landmark-card-title{
 
 font-size: larger;
-font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+font-family: 'Segoe UI', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .landmark-location{
 
@@ -513,4 +530,9 @@ color: lightskyblue;
 
 .dim {
   color: lightgray;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
 }

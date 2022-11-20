@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { isDraftable } from "immer";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
@@ -14,7 +15,8 @@ export default function Itinerary(props) {
     });
 
     const [userLandmarks, setUserLandmarks] = useState([]);
-
+    const [locationChange, setLocationChange] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
     const currentItineraryInfo = JSON.parse(
@@ -24,11 +26,14 @@ export default function Itinerary(props) {
     console.log("this is token" + token);
     const config = {
         headers: {
+           
           Authorization: `Bearer ${token}`,
+           
           "Content-Type": "application/json",
+       ,
           'Access-Control-Allow-Origin' : '*',
           'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-        },
+        },,
       };
 
     useEffect(() => {
@@ -46,7 +51,7 @@ export default function Itinerary(props) {
                 itineraries: [...result.data],
                 itineraryId: result.data.itineraryId,
                 itineraryName: result.data.itineraryName,
-                locationStart: "user's location",
+                locationStart: result.data.locationStart,
                 locationItinerary: result.data.startingPoint,
                 itineraryDate: result.data.itineraryDate,
                 data: result,
@@ -88,15 +93,34 @@ export default function Itinerary(props) {
             
     const displayLandmarks = userLandmarks.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
-            <button className="landmark-list-buttons" name={lm.landmarkId} onClick={deleteLandmark}>{lm.landmarkName}</button>
+            <button className="landmark-list-buttons modify-button-set align-center" name={lm.landmarkId} onClick={deleteLandmark}>
+                {lm.landmarkName}
+                <div className="modify-button-set">
+                    <button className="trash-button" name="delete">
+                        <img src="btnDelete.png"></img>
+                    </button>
+                </div>
+            </button>
         </li>
     ));
+
+    const handleLocationChange = (e) => {
+        setUserInfo((prevInfo) => ({
+            ...prevInfo,
+            locationStart: e.target.value,
+        }));
+        console.log(userInfo.locationStart);
+    };
+
+    const isBeingEdit = () => {
+        setIsEditing((p) => !p);
+    }
 
     return (
         <div>
             <div className="itinerary-card">
                 <h1 className="itinerary-card-title">
-                    Edit {currentItineraryInfo.itineraryName}
+                    {currentItineraryInfo.itineraryName}
                 </h1>
                 <div className="itinerary-card-image">
                     <img
@@ -109,7 +133,16 @@ export default function Itinerary(props) {
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
                             <button className="startPoint-button">
-                                {userInfo.locationStart}
+                                {isEditing ? (
+                                    <input
+                                        name="locationStart"
+                                        onChange={handleLocationChange}
+                                        onClick={isBeingEdit}
+                                        value={userInfo.locationStart}
+                                    />
+                                ) : (
+                                    <p>{userInfo.locationStart}</p>
+                                )}
                             </button>
                         </li>
                         {displayLandmarks}
