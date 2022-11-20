@@ -92,7 +92,7 @@ function Landmark(props) {
     localStorage.clear();
     localStorage.setItem(
       "address",
-      `${props.item.address} ${props.item.city} ${props.item.state} ${props.item.postalCode}`
+      `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
     );
     console.log(localStorage);
   }

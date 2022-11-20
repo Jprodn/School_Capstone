@@ -2,7 +2,6 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function MapRoute(props) {
-  console.log(`${props.latitude} ${props.longitude}`);
   return (
     <div className="map-container">
       <MapContainer
