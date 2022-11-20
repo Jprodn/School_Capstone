@@ -92,6 +92,7 @@ function Search() {
         value={selectedState}
         options={stateOptions}
         onChange={handleSelectState}
+        
       />
 
       <Select

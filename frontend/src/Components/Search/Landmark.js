@@ -78,63 +78,131 @@ function Landmark(props) {
       <p key={hours.landmarkId + (i + 1)} className="hours">
         {getDay(hours.weekday)} {hours.openHour}{" "}
         {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
-      </p>  
+      </p>
     );
   });
 
   const handleAdd = async (e) => (
     await axios
-      .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config) 
+      .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
   );
 
   return (
-    <div className="landmark" onClick={handleClick}>
-      <h1 className="landmark-name">{props.item.landmarkName}</h1>
-      <div className="landmark-image-div">
-        <img
-          className="landmark-image"
-          src={require(`../../Images/${props.item.imgUrl}`).default}
-          alt="img"
-        />
-      </div>
-      {isClicked && (
-        <div className="landmark-info">
+
+
+    
+      <div className="Landmark-card" onClick={handleClick}>
+        <div>
+          <img
+            className="landmark-card-image"
+            src={require(`../../Images/${props.item.imgUrl}`).default}
+          />
+        </div>
+
+        <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
+
+        <div className="Landmark-card-body">
+
+
           <p className="landmark-location">
             <i className="fa-sharp fa-solid fa-location-dot"></i>
-            {`${props.item.address === null ? "" : `${props.item.address}, `}${
-              props.item.city
-            }, ${props.item.state}${
-              props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-            }`}
+            {`${props.item.address === null ? "" : `${props.item.address}, `}${props.item.city
+              }, ${props.item.state}${props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+              }`}
           </p>
-          {hourElement}
+
+          <div className="Landmark-map-link">
+
+            <a
+              href={props.item.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="landmark-maps"
+            >
+              View on Google Maps
+          </a>
+
+            <a
+              href="/map-route"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="map-route"
+            >
+              View map
+          </a>
+
+          </div>
+
+          <p className="landmark-description">{props.item.description}</p>
+
+          <label className="hours">Hours</label>
+          {isClicked && (
+            <div className="hours">
+              {hourElement}
+            </div>)}
+
           <div className="action">
-            <button type="submit" className="action-button" onClick={handleAdd}>
+            <button type="submit" className="Add-itinerary-button" onClick={handleAdd}>
               Add to itinerary
             </button>
           </div>
-          <a
-            href={props.item.mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="landmark-maps"
-          >
-            View on Google Maps
-          </a>
 
-          <a
-            href="/map-route"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="map-route"
-          >
-            View map
-          </a>
-          <p className="landmark-categoty">{props.item.category}</p>
-          <p className="landmark-description">{props.item.description}</p>
+
+
         </div>
-      )}
-    </div>
+      </div>
+    
+
+
+    // <div className="landmark" onClick={handleClick}>
+    //   <h1 className="landmark-name">{props.item.landmarkName}</h1>
+    //   <div className="landmark-image-div">
+    //     <img
+    //       className="landmark-image"
+    //       src={require(`../../Images/${props.item.imgUrl}`).default}
+    //       alt="img"
+    //     />
+    //   </div>
+    //   {isClicked && (
+    //     <div className="landmark-info">
+    // <p className="landmark-location">
+    //   <i className="fa-sharp fa-solid fa-location-dot"></i>
+    //   {`${props.item.address === null ? "" : `${props.item.address}, `}${
+    //     props.item.city
+    //   }, ${props.item.state}${
+    //     props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+    //   }`}
+    // </p>
+    //       {hourElement}
+    //       <div className="action">
+    //         <button type="submit" className="action-button" onClick={handleAdd}>
+    //           Add to itinerary
+    //         </button>
+    //       </div>
+    //       <a
+    //         href={props.item.mapUrl}
+    //         target="_blank"
+    //         rel="noopener noreferrer"
+    //         className="landmark-maps"
+    //       >
+    //         View on Google Maps
+    //       </a>
+
+    //       <a
+    //         href="/map-route"
+    //         target="_blank"
+    //         rel="noopener noreferrer"
+    //         className="map-route"
+    //       >
+    //         View map
+    //       </a>
+    //       <p className="landmark-categoty">{props.item.category}</p>
+    //       <p className="landmark-description">{props.item.description}</p>
+    //     </div>
+    //   )}
+    // </div>
+
+
   );
 }
 
