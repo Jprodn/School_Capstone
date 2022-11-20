@@ -28,7 +28,7 @@ function Search() {
     .map((item) => {
       return (
         <li key={item.landmarkId} className="listItem">
-          <Landmark item={item} />
+          <Landmark item={item} bird={item.landmarkId} /> 
         </li>
       );
     });

@@ -23,8 +23,13 @@ export default function Itinerary(props) {
     console.log(storageUserId);
     console.log("this is token" + token);
     const config = {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
-    };
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+        },
+      };
 
     useEffect(() => {
         console.log("currentItineraryInfo");
@@ -67,6 +72,13 @@ export default function Itinerary(props) {
         getUserLandmarks();
     }, []);
 
+    const deleteItinerary = async () => {
+        const response = await axios.delete(
+          `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`, config
+        );
+        console.log("response" + response);
+      };
+
     const displayLandmarks = userLandmarks.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
             <button className="landmark-list-buttons">{lm.landmarkName}</button>
@@ -100,7 +112,7 @@ export default function Itinerary(props) {
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
                         </div>
                         <div className="Delete Itinerary">
-                            <button className="delete-button">
+                            <button className="delete-button" onClick={deleteItinerary}>
                                 Delete Itinerary
                             </button>
                         </div>
