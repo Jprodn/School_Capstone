@@ -12,7 +12,15 @@ function Landmark(props) {
     },
   };
 
+  const currentItineraryInfo = JSON.parse(
+    localStorage.getItem("currentItinerary")
+  );
+
   React.useEffect(() => {
+    console.log("currentItineraryInfo");
+    console.log(currentItineraryInfo);
+    console.log("props");
+    console.log(props);
     const fetchHours = async () => {
       const response = await axios.get(
         `http://www.localhost:8081/hours/${props.item.landmarkId}`
@@ -60,19 +68,19 @@ function Landmark(props) {
     return dayOfWeek;
   }
 
-  const hourElement = data.map((hours) => {
+  const hourElement = data.map((hours, i = 0) => {
     return (
-      <p key={hours.landmarkId} className="hours">
+      <p key={hours.landmarkId + (i + 1)} className="hours">
         {getDay(hours.weekday)} {hours.openHour}{" "}
         {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
-      </p>
+      </p>  
     );
   });
 
-  const handleAdd = async (e) =>
+  const handleAdd = async (e) => (
     await axios
-      .post(`http://localhost:8081/itinerary/addLandmark/32`, config)
-      .then((r) => console.log(r));
+      .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config) 
+  );
 
   return (
     <div className="landmark">

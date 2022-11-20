@@ -23,10 +23,7 @@ export default function Itinerary(props) {
     console.log(storageUserId);
     console.log("this is token" + token);
     const config = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
     };
 
     useEffect(() => {
@@ -40,7 +37,7 @@ export default function Itinerary(props) {
             console.log(result);
             setUserInfo((prevInfo) => ({
                 ...prevInfo,
-                userId: storageUserId,
+                userId: storageUserId,  
                 itineraries: [...result.data],
                 itineraryId: result.data.itineraryId,
                 itineraryName: result.data.itineraryName,
@@ -53,16 +50,16 @@ export default function Itinerary(props) {
         getItinerary();
     }, []);
 
+
     useEffect(() => {
         const getUserLandmarks = async () => {
             const result = await axios.get(
-                `http://localhost:8081/itinerary/getLandmarks/user/${currentItineraryInfo.userId}/${currentItineraryInfo.itineraryId}`,
+                `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
                 config
             );
 
-            console.log(
-                "getUserLandMarks: " + currentItineraryInfo.itineraryId
-            );
+            console.log("getUserLandMarks: ");
+            console.log(currentItineraryInfo.itineraryId);
             console.log(result);
             setUserLandmarks(() => result.data);
         };
