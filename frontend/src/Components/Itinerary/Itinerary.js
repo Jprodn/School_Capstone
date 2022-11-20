@@ -66,7 +66,7 @@ export default function Itinerary(props) {
             console.log(
                 "getUserLandMarks: " + currentItineraryInfo.itineraryId
             );
-            console.log(result);
+            console.log("result -" + JSON.stringify(result.data));
             setUserLandmarks(() => result.data);
         };
         getUserLandmarks();
@@ -76,12 +76,19 @@ export default function Itinerary(props) {
         const response = await axios.delete(
           `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`, config
         );
-        console.log("response" + response);
-      };
+        console.log("deleteItinerary response" + response);
+    };
 
+    const deleteLandmark = async (e) => {
+        await axios.delete(
+            `http://www.localhost:8081/itinerary/removeLandmark/${currentItineraryInfo.itineraryId}/${e.target.name}`, config
+            );
+        window.location.reload();
+    };
+            
     const displayLandmarks = userLandmarks.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
-            <button className="landmark-list-buttons">{lm.landmarkName}</button>
+            <button className="landmark-list-buttons" name={lm.landmarkId} onClick={deleteLandmark}>{lm.landmarkName}</button>
         </li>
     ));
 

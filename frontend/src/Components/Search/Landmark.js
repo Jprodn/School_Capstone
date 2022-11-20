@@ -125,6 +125,12 @@ function Landmark(props) {
               }, ${props.item.state}${props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
               }`}
           </p>
+          
+          <div className="action">
+            <button type="submit" className="Add-itinerary-button" onClick={handleAdd}>
+              Add to itinerary
+            </button>
+          </div>
 
           <div className="Landmark-map-link">
 
@@ -155,13 +161,6 @@ function Landmark(props) {
             <div className="hours">
               {hourElement}
             </div>)}
-
-          <div className="action">
-            <button type="submit" className="Add-itinerary-button" onClick={handleAdd}>
-              Add to itinerary
-            </button>
-          </div>
-
           
         </div>
       </div>
