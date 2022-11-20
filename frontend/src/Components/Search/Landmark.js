@@ -78,14 +78,24 @@ function Landmark(props) {
       <p key={hours.landmarkId + (i + 1)} className="hours">
         {getDay(hours.weekday)} {hours.openHour}{" "}
         {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
-      </p>  
+      </p>
     );
   });
 
-  const handleAdd = async (e) => (
-    await axios
-      .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config) 
-  );
+  const handleAdd = async (e) =>
+    await axios.post(
+      `http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`,
+      config
+    );
+
+  function storeData() {
+    localStorage.clear();
+    localStorage.setItem(
+      "address",
+      `${props.item.address} ${props.item.city} ${props.item.state} ${props.item.postalCode}`
+    );
+    console.log(localStorage);
+  }
 
   return (
     <div className="landmark" onClick={handleClick}>
@@ -127,6 +137,7 @@ function Landmark(props) {
             target="_blank"
             rel="noopener noreferrer"
             className="map-route"
+            onClick={storeData}
           >
             View map
           </a>

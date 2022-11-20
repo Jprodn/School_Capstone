@@ -10,9 +10,30 @@ import Search from "../Search/Search";
 import { Error404 } from "../Error/Error404";
 import NavLinkBar from "./NavLinkBar";
 import MapRoute from "../MapRoute/MapRoute";
+import axios from "axios";
 
 export default function Router(props) {
   const userToken = () => window.localStorage.getItem("jwtToken");
+
+  const [lat, setLatitude] = React.useState(0);
+  const [long, setLongitude] = React.useState(0);
+
+  React.useEffect(() => {
+    const fetchCords = async () => {
+      axios.defaults.headers["Authorization"] =
+        "prj_test_pk_13713837a5551a730dfaa00517e4ce2867218662";
+      const response = await axios.get(
+        `https://api.radar.io/v1/search/autocomplete?query=${localStorage.getItem(
+          "address"
+        )}`
+      );
+      setLatitude(response.data.addresses[0].latitude);
+      setLongitude(response.data.addresses[0].longitude);
+      console.log(lat + " " + long);
+    };
+
+    fetchCords();
+  }, []);
 
   return (
     <>
@@ -35,7 +56,11 @@ export default function Router(props) {
           component={() => <Search />}
           user={props.user}
         />
-        <Route exact path="/map-route" component={() => <MapRoute />} />
+        <Route
+          exact
+          path="/map-route"
+          component={() => <MapRoute latitude={lat} longitude={long} />}
+        />
         <Route path="*" component={() => <Error404 />} />
       </Switch>
     </>
