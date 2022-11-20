@@ -73,7 +73,8 @@ function Landmark(props) {
     return dayOfWeek;
   }
 
-  const hourElement = data.map((hours, i = 0) => {
+  const hourElement = data.map((hours, i = 0) => 
+  {
     return (
       <p key={hours.landmarkId + (i + 1)} className="hours">
         {getDay(hours.weekday)} {hours.openHour}{" "}
@@ -86,6 +87,16 @@ function Landmark(props) {
     await axios
       .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
   );
+  
+
+  function storeData() {
+    localStorage.clear();
+    localStorage.setItem(
+      "address",
+      `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
+    );
+    console.log(localStorage);
+  }
 
   return (
 
@@ -147,8 +158,7 @@ function Landmark(props) {
             </button>
           </div>
 
-
-
+          
         </div>
       </div>
     
