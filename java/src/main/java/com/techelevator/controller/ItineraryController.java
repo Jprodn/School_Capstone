@@ -58,9 +58,9 @@ public class ItineraryController {
         return itineraryDao.getLandmarksByItineraryId(itineraryId);
     }
 
-    @RequestMapping(value = "/addLandmark/{itineraryId}/{landmarkId}", method = RequestMethod.POST)
-    public void addLandmark(@PathVariable int itineraryId, @PathVariable int landmarkId, Principal principal) {
-        itineraryDao.addLandmark(itineraryId, landmarkId);
+    @RequestMapping(value = "/addLandmark", method = RequestMethod.POST)
+    public void addLandmark(@RequestBody ItineraryIdDTO itineraryIdDTO, Principal principal) {
+        itineraryDao.addLandmark(itineraryIdDTO.getItineraryId(), itineraryIdDTO.getLandmarkId());
     }
 
     @RequestMapping(value = "/removeLandmark/{itineraryId}/{landmarkId}", method = RequestMethod.DELETE)
@@ -78,5 +78,26 @@ public class ItineraryController {
         itineraryDao.deleteItinerary(itineraryId);
     }
 
+    public static class ItineraryIdDTO {
+        private int itineraryId;
+
+        public int getItineraryId() {
+            return itineraryId;
+        }
+
+        public void setItineraryId(int itineraryId) {
+            this.itineraryId = itineraryId;
+        }
+
+        public int getLandmarkId() {
+            return landmarkId;
+        }
+
+        public void setLandmarkId(int landmarkId) {
+            this.landmarkId = landmarkId;
+        }
+
+        private int landmarkId;
+    }
 
 }
