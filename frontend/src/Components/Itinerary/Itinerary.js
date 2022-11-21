@@ -90,11 +90,11 @@ export default function Itinerary(props) {
             
     const displayLandmarks = userLandmarks.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
-            <button className="landmark-list-buttons modify-button-set align-center" name={lm.landmarkId} onClick={deleteLandmark}>
+            <button className="landmark-list-buttons modify-button-set align-center" >
                 {lm.landmarkName}
                 <div className="modify-button-set">
                     <button className="trash-button" name="delete">
-                        <img src="btnDelete.png"></img>
+                        <img src="btnDelete.png" name={lm.landmarkId} onClick={deleteLandmark}></img>
                     </button>
                 </div>
             </button>
