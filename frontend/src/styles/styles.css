@@ -133,10 +133,10 @@ img {
 .save-button:hover {
   background-color: lightskyblue;
 }
-.delete-button {
+.delete-button, .search-button {
   width: 300px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   background-color: #876df5;
   border-radius: 6px;
   color: white;
@@ -148,24 +148,28 @@ img {
   text-align: center;
 }
 
-.delete-button:hover {
+.delete-button:hover, .search-button:hover {
   background-color: lightskyblue;
 }
 
 .trash-button {
   border: none;
-  width: 1.5rem;
+  width: 1rem;
   filter: opacity(50%);
+  position: relative;
+  right: 10px;
 }
 
 .trash-button:hover {
-  width: 2rem;
+  width: 1.5rem;
 }
 
 .landmark-action-buttons {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
 }
 
 .create-card-body {

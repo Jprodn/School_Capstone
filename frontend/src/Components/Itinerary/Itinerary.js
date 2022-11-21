@@ -25,12 +25,12 @@ export default function Itinerary(props) {
     console.log("this is token" + token);
     const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-        }
-      };
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+    };
 
     useEffect(() => {
         console.log("currentItineraryInfo");
@@ -43,7 +43,7 @@ export default function Itinerary(props) {
             console.log(result);
             setUserInfo((prevInfo) => ({
                 ...prevInfo,
-                userId: storageUserId,  
+                userId: storageUserId,
                 itineraries: [...result.data],
                 itineraryId: result.data.itineraryId,
                 itineraryName: result.data.itineraryName,
@@ -54,7 +54,6 @@ export default function Itinerary(props) {
         };
         getItinerary();
     }, []);
-
 
     useEffect(() => {
         console.log("userInfo.startingPoint");
@@ -76,27 +75,31 @@ export default function Itinerary(props) {
 
     const deleteItinerary = async () => {
         const response = await axios.delete(
-          `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`, config
+            `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`,
+            config
         );
         console.log("deleteItinerary response" + response);
+        window.location.replace("/home");
     };
 
     const deleteLandmark = async (e) => {
         await axios.delete(
-            `http://www.localhost:8081/itinerary/removeLandmark/${currentItineraryInfo.itineraryId}/${e.target.name}`, config
-            );
+            `http://www.localhost:8081/itinerary/removeLandmark/${currentItineraryInfo.itineraryId}/${e.target.name}`,
+            config
+        );
         window.location.reload();
     };
-            
+
     const displayLandmarks = userLandmarks.map((lm, count = 0) => (
         <li className="landmark-list-items" key={count + 1}>
-            <button className="landmark-list-buttons modify-button-set align-center" >
+            <button className="landmark-list-buttons modify-button-set align-center">
                 {lm.landmarkName}
-                <div className="modify-button-set">
-                    <button className="trash-button" name="delete">
-                        <img src="btnDelete.png" name={lm.landmarkId} onClick={deleteLandmark}></img>
-                    </button>
-                </div>
+                <img
+                    className="trash-button"
+                    src="btnDelete.png"
+                    name={lm.landmarkId}
+                    onClick={deleteLandmark}
+                ></img>
             </button>
         </li>
     ));
@@ -111,7 +114,9 @@ export default function Itinerary(props) {
 
     const isBeingEdit = () => {
         setIsEditing((p) => !p);
-    }
+    };
+
+    const goToSearch = () => window.location.replace("/landmark");
 
     return (
         <div>
@@ -135,7 +140,9 @@ export default function Itinerary(props) {
                                         name="startingPoint"
                                         onChange={handleLocationChange}
                                         onClick={isBeingEdit}
-                                        value={currentItineraryInfo.startingPoint}
+                                        value={
+                                            currentItineraryInfo.startingPoint
+                                        }
                                     />
                                 ) : (
                                     <p>{currentItineraryInfo.startingPoint}</p>
@@ -149,8 +156,19 @@ export default function Itinerary(props) {
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
                         </div>
                         <div className="Delete Itinerary">
-                            <button className="delete-button" onClick={deleteItinerary}>
+                            <button
+                                className="delete-button"
+                                onClick={deleteItinerary}
+                            >
                                 Delete Itinerary
+                            </button>
+                        </div>
+                        <div className="Search Itinerary">
+                            <button
+                                className="search-button"
+                                onClick={goToSearch}
+                            >
+                                Search Landmarks
                             </button>
                         </div>
                     </div>
