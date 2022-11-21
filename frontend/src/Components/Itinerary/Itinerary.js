@@ -8,8 +8,7 @@ export default function Itinerary(props) {
         itineraries: [],
         itineraryId: "",
         itineraryName: "",
-        locationStart: "",
-        locationItinerary: "",
+        startingPoint: "",
         itineraryDate: "",
         data: {},
     });
@@ -26,14 +25,11 @@ export default function Itinerary(props) {
     console.log("this is token" + token);
     const config = {
         headers: {
-           
           Authorization: `Bearer ${token}`,
-           
           "Content-Type": "application/json",
-       ,
           'Access-Control-Allow-Origin' : '*',
           'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-        },,
+        }
       };
 
     useEffect(() => {
@@ -51,8 +47,7 @@ export default function Itinerary(props) {
                 itineraries: [...result.data],
                 itineraryId: result.data.itineraryId,
                 itineraryName: result.data.itineraryName,
-                locationStart: result.data.locationStart,
-                locationItinerary: result.data.startingPoint,
+                startingPoint: result.data.startingPoint,
                 itineraryDate: result.data.itineraryDate,
                 data: result,
             }));
@@ -62,6 +57,8 @@ export default function Itinerary(props) {
 
 
     useEffect(() => {
+        console.log("userInfo.startingPoint");
+        console.log(userInfo.startingPoint);
         const getUserLandmarks = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
@@ -107,9 +104,9 @@ export default function Itinerary(props) {
     const handleLocationChange = (e) => {
         setUserInfo((prevInfo) => ({
             ...prevInfo,
-            locationStart: e.target.value,
+            startingPoint: e.target.value,
         }));
-        console.log(userInfo.locationStart);
+        console.log(userInfo.startingPoint);
     };
 
     const isBeingEdit = () => {
@@ -135,13 +132,13 @@ export default function Itinerary(props) {
                             <button className="startPoint-button">
                                 {isEditing ? (
                                     <input
-                                        name="locationStart"
+                                        name="startingPoint"
                                         onChange={handleLocationChange}
                                         onClick={isBeingEdit}
-                                        value={userInfo.locationStart}
+                                        value={currentItineraryInfo.startingPoint}
                                     />
                                 ) : (
-                                    <p>{userInfo.locationStart}</p>
+                                    <p>{currentItineraryInfo.startingPoint}</p>
                                 )}
                             </button>
                         </li>

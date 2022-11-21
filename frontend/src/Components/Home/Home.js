@@ -9,8 +9,7 @@ export default function Home(props) {
         itineraries: [],
         itineraryId: "",
         itineraryName: "",
-        locationStart: "",
-        locationItinerary: "",
+        startingPoint: "",
         itineraryDate: "",
         data: {},
     });
@@ -40,8 +39,7 @@ export default function Home(props) {
                 itineraries: [...result.data],
                 itineraryId: result.data.itineraryId,
                 itineraryName: result.data.itineraryName,
-                locationStart: "user's location",
-                locationItinerary: result.data.startingPoint,
+                startingPoint: result.data.startingPoint,
                 itineraryDate: result.data.itineraryDate,
                 data: result,
             }));
@@ -95,7 +93,7 @@ export default function Home(props) {
                 <div className="itinerary-card-body">
                     {/* location list */}
                     <ul className="landmark-list">
-                        <li className="landmark-list-items">
+                        {/* <li className="landmark-list-items">
                             <button
                                 className="startPoint-button"
                                 onMouseOver={() => setIsHover(() => true)}
@@ -106,7 +104,7 @@ export default function Home(props) {
                                     <span className="dim"> - edit</span>
                                 )}
                             </button>
-                        </li>
+                        </li> */}
                         {displayItineraries}
                     </ul>
                     {/* save / delete */}
