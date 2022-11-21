@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+
+
 function Landmark(props) {
   const [data, setData] = React.useState([]);
 
@@ -107,89 +109,123 @@ function Landmark(props) {
   }
 
   return (
-    <div className="Landmark-card" onClick={handleClick}>
-      <div>
-        <img
-          className="landmark-card-image"
-          src={require(`../../Images/${props.item.imgUrl}`).default}
-        />
-      </div>
 
-      <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
+    <div className="main-div">
 
-      <div className="Landmark-card-body">
-        <p className="landmark-location">
-          <i className="fa-sharp fa-solid fa-location-dot"></i>
-          {`${props.item.address === null ? "" : `${props.item.address}, `}${
-            props.item.city
-          }, ${props.item.state}${
-            props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-          }`}
-        </p>
 
-        <div className="action">
+
+      <div className="contacts">
+        <div className="contact-card">
+          <img
+            src={require(`../../Images/${props.item.imgUrl}`).default}
+          />
+          <h3>{props.item.landmarkName}</h3>
+
           <button
             type="submit"
             className="Add-itinerary-button"
             onClick={handleAdd}
           >
             Add to itinerary
-          </button>
+                </button>
+
+          <div className="info-group">
+            <img src="http://cdn.onlinewebfonts.com/svg/img_413782.png" />
+            <p>{`${props.item.address === null ? "" : `${props.item.address}, `}${props.item.city
+              }, ${props.item.state}${props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+              }`}</p>
+
+          </div>
+
+          <div className="info-group">
+            <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png" />
+            <p><button className="hour-button" onClick={handleClick}>Hours</button></p>
+
+
+          </div>
+
+          <div className="info-group">
+            
+            {isClicked && <div className="isClicked">{hourElement}</div>}
+          </div>
+
+          <div className="description">
+
+            {props.item.description}
+
+          </div>
+
+          <div className="description-div">
+            <ul className="description-ul">
+              <li>
+                <a
+                  className="description-link"
+                  href={props.item.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+
+                >View on Google Maps</a>
+              </li>
+
+              <li>
+                <a
+                  className="description-link"
+                  href="/map-route"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={storeData}
+                >View map</a>
+              </li>
+
+
+            </ul>
+          </div>
+
+
         </div>
 
-        <div className="Landmark-map-link">
-          <a
-            href={props.item.mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="landmark-maps"
-          >
-            View on Google Maps
-          </a>
 
-          <a
-            href="/map-route"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="map-route"
-            onClick={storeData}
-          >
-            View map
-          </a>
-        </div>
 
-        <p className="landmark-description">{props.item.description}</p>
-
-        <label className="hours">Hours</label>
-        {isClicked && <div className="hours">{hourElement}</div>}
       </div>
+
     </div>
 
-    // <div className="landmark" onClick={handleClick}>
-    //   <h1 className="landmark-name">{props.item.landmarkName}</h1>
-    //   <div className="landmark-image-div">
+
+
+
+    // <div className="Landmark-card" onClick={handleClick}>
+
+
+    //   <div>
     //     <img
-    //       className="landmark-image"
+    //       className="landmark-card-image"
     //       src={require(`../../Images/${props.item.imgUrl}`).default}
-    //       alt="img"
     //     />
     //   </div>
-    //   {isClicked && (
-    //     <div className="landmark-info">
-    // <p className="landmark-location">
-    //   <i className="fa-sharp fa-solid fa-location-dot"></i>
-    //   {`${props.item.address === null ? "" : `${props.item.address}, `}${
-    //     props.item.city
-    //   }, ${props.item.state}${
-    //     props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-    //   }`}
-    // </p>
-    //       {hourElement}
-    //       <div className="action">
-    //         <button type="submit" className="action-button" onClick={handleAdd}>
-    //           Add to itinerary
-    //         </button>
-    //       </div>
+
+    //   <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
+
+    //   <div className="Landmark-card-body">
+    //     <p className="landmark-location">
+    //       <i className="fa-sharp fa-solid fa-location-dot"></i>
+    //       {`${props.item.address === null ? "" : `${props.item.address}, `}${
+    //         props.item.city
+    //       }, ${props.item.state}${
+    //         props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+    //       }`}
+    //     </p>
+
+    //     <div className="action">
+    //       <button
+    //         type="submit"
+    //         className="Add-itinerary-button"
+    //         onClick={handleAdd}
+    //       >
+    //         Add to itinerary
+    //       </button>
+    //     </div>
+
+    //     <div className="Landmark-map-link">
     //       <a
     //         href={props.item.mapUrl}
     //         target="_blank"
@@ -204,14 +240,21 @@ function Landmark(props) {
     //         target="_blank"
     //         rel="noopener noreferrer"
     //         className="map-route"
+    //         onClick={storeData}
     //       >
     //         View map
     //       </a>
-    //       <p className="landmark-categoty">{props.item.category}</p>
-    //       <p className="landmark-description">{props.item.description}</p>
     //     </div>
-    //   )}
+
+    //     <p className="landmark-description">{props.item.description}</p>
+
+    //     <label className="hours">Hours</label>
+    //     {isClicked && <div className="hours">{hourElement}</div>}
+    //   </div>
     // </div>
+
+
+
   );
 }
 

@@ -11,6 +11,7 @@ body {
   line-height: 1.5;
   background-color: #f1f3fb;
   padding: 0 2rem;
+  
 }
 
 img {
@@ -432,15 +433,15 @@ img {
   color: lightskyblue;
 }
 .Add-itinerary-button {
-  width: 300px;
-  font-weight: 500;
-  margin-bottom: 30px;
+  /* width: 150px; */
+  font-weight: 300;
+  margin: 5px;
   background-color: transparent;
-  border-radius: 6px;
-  color: gray;
-  border: 1 lightblue;
   border-radius: 10px;
-  height: 60px;
+  color:#150050;
+  border: 1 lightblue;
+  /* border:1px solid rgba(255, 255, 255, 0.18); */
+  height: 50px;
   width: 220px;
   transition: all 0.5s;
 }
@@ -453,28 +454,33 @@ img {
   border-radius: 10px;
   /* border: 4px double #06283D; */
   color: #1b2430;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #6B728E;
+  margin: 5px 5px;
+}
+.hour-button{
+
+  border-radius: 10px;
   cursor: pointer;
-  margin: 10px;
+  border: 0;
+  text-align:left;
+  background-color: transparent;
+  transition: all 0.5s;
 }
 
-/* .hours{
-  display: grid;
-  font-size: medium;
-  font-weight: 200;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-stretch: extra-condensed;
-  color: #06283D;
-  
-} */
+.hour-button:active{
+  background-color: black;
+  color:white;
+}
+.isClicked{
+  display: flex;
+  flex-direction: column;
+}
 
-/* .landmark-image-div > img {
-  display: inline;
-} */
+
 
 .search {
   padding: 10px;
@@ -528,4 +534,130 @@ img {
 .align-center {
   display: flex;
   align-items: center;
+}
+
+/* LandmarkComponent css */
+
+.main-div{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.contacts {
+  /* display: grid;
+  grid-template-columns: repeat(2,  1fr); */
+  
+  
+}
+
+.contact-card {
+  /* flex-basis: 225px; */
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border:1px solid rgba(255, 255, 255, 0.18);
+  padding: 13px;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  width: 450px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border:1px solid rgba(255, 255, 255, 0.18);
+  /* display: flex;
+  flex-direction: column; */
+  
+  /* background-color: white; */
+  
+  
+}
+
+.contact-card > img {
+  width: 100%;
+  height: auto;
+  align-self: center;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.contact-card > h3 {
+  font-weight: 700;
+  font-size: 18px;
+}
+.description-div{
+
+  margin: 20px 10px;
+  
+}
+.description{
+display: flex;
+align-items: center;
+font-size: medium;
+box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
+margin-top: 5px;
+padding: 0 30px;
+background-color: transparent;
+color: black;
+letter-spacing: 3px;
+
+}
+
+.description-link{
+  text-decoration: none;
+  letter-spacing: -1px;
+  font-family:'Times New Roman', Times, serif;
+  color: #000000;
+}
+.description-link:hover{
+
+color: lightslategray;
+
+}
+
+.description-ul{
+  padding: 1px 0;
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  font-size: medium;
+  
+
+ 
+}
+.description-ul > li{
+
+  list-style: none;
+  
+}
+
+.grid__item {
+
+  list-style: none;
+ 
+}
+  
+  
+
+
+.info-group {
+  display: flex;
+  align-items: center;
+}
+
+.info-group > img {
+  height: 20px;
+  margin-right: 8px;
+}
+
+.info-group > p {
+  margin-block: 3px;
+  font-size: 15px;
+  color: #2B283A;
+}
+.info-group-button{
+display: flex;
+ align-content: center;
+ font-size: 15px;
+  color: #2B283A;
 }
