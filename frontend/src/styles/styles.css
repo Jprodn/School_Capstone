@@ -355,74 +355,67 @@ img {
 }
 
 /* Search-Landmark CSS */
+.leaflet-container {
+  height: 90vh;
+  width: 90vw;
+}
 
 .search-div {
-
-   /* margin: 50px; */
-  text-align: center; 
+  /* margin: 50px; */
+  text-align: center;
 
   /* max-width:  20em; */
   margin: 5em auto;
   width: 50%;
-  
-  
 }
 /* .search{
   width: 100%;
   text-align: center;
 } */
 
-.card2{
+.card2 {
   background-color: gray;
   color: black;
   margin: 10px auto;
   display: flex;
   flex-direction: column;
-  
 }
 
-.landmark-card-image{
-height: 80%;
+.landmark-card-image {
+  height: 80%;
   width: 100%;
   border-radius: 50px;
 }
 
-.Landmark-card{
+.Landmark-card {
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
   /* width: 100%; */
   max-width: 550px;
   height: 80%;
-  background-color: #EFF5F5;
+  background-color: #eff5f5;
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   margin: 40px 0;
-  
-
-
 }
-.Landmark-card-title{
-
-font-size: larger;
-font-family: 'Segoe UI', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+.Landmark-card-title {
+  font-size: larger;
+  font-family: "Segoe UI", Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
-.landmark-location{
-
+.landmark-location {
   font-size: large;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #393e46;
 }
-.landmark-description{
-
+.landmark-description {
   text-align: left;
   /* font-stretch: expanded; */
   color: #2d4b5a;
-  font-family:fantasy;
+  font-family: fantasy;
 }
 
-.Landmark-map-link a{
-
+.Landmark-map-link a {
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -431,12 +424,10 @@ font-family: 'Segoe UI', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   margin: 20px 20px;
   color: #395b64;
 }
-.Landmark-map-link a:hover{
-
-color: lightskyblue;
+.Landmark-map-link a:hover {
+  color: lightskyblue;
 }
-.Add-itinerary-button{
-
+.Add-itinerary-button {
   width: 300px;
   font-weight: 500;
   margin-bottom: 30px;
@@ -448,24 +439,23 @@ color: lightskyblue;
   height: 60px;
   width: 220px;
   transition: all 0.5s;
-  
 }
 
 .Add-itinerary-button:hover {
   background-color: black;
   color: #eef1f5;
 }
-.hours{
+.hours {
   border-radius: 10px;
   /* border: 4px double #06283D; */
-  color:#1B2430;
+  color: #1b2430;
   text-align: center;
-  font-size: 18px; 
+  font-size: 18px;
   font-weight: 600;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   cursor: pointer;
   margin: 10px;
-
 }
 
 /* .hours{
@@ -489,8 +479,7 @@ color: lightskyblue;
   text-align: center;
   border: transparent;
 }
-.search:hover{
-
+.search:hover {
   background-color: lightgray;
   color: black;
   border-radius: 20px;
@@ -524,8 +513,8 @@ color: lightskyblue;
 .popup-overlay {
   background: rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
-  -moz-box-shadow:    6px 6px 12px 0px rgba(50, 50, 50, 1);
-  box-shadow:         6px 6px 12px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
+  box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
 }
 
 .dim {

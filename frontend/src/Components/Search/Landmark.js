@@ -14,8 +14,8 @@ function Landmark(props) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
 
@@ -75,8 +75,7 @@ function Landmark(props) {
     return dayOfWeek;
   }
 
-  const hourElement = data.map((hours, i = 0) => 
-  {
+  const hourElement = data.map((hours, i = 0) => {
     return (
       <p key={hours.landmarkId + (i + 1)} className="hours">
         {getDay(hours.weekday)} {hours.openHour}{" "}
@@ -85,13 +84,18 @@ function Landmark(props) {
     );
   });
 
-  const handleAdd = async (e) => (
+  const handleAdd = async (e) =>
     await axios
       // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
-      .post(`http://localhost:8081/itinerary/addLandmark`, {itineraryId:`${currentItineraryInfo.itineraryId}`, landmarkId:`${props.item.landmarkId}`}, config)
-      .then(console.log("config" + JSON.stringify(config)))
-  );
-  
+      .post(
+        `http://localhost:8081/itinerary/addLandmark`,
+        {
+          itineraryId: `${currentItineraryInfo.itineraryId}`,
+          landmarkId: `${props.item.landmarkId}`,
+        },
+        config
+      )
+      .then(console.log("config" + JSON.stringify(config)));
 
   function storeData() {
     localStorage.clear();
@@ -103,69 +107,63 @@ function Landmark(props) {
   }
 
   return (
-
-
-    
-      <div className="Landmark-card" onClick={handleClick}>
-        <div>
-          <img
-            className="landmark-card-image"
-            src={require(`../../Images/${props.item.imgUrl}`).default}
-          />
-        </div>
-
-        <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
-
-        <div className="Landmark-card-body">
-
-
-          <p className="landmark-location">
-            <i className="fa-sharp fa-solid fa-location-dot"></i>
-            {`${props.item.address === null ? "" : `${props.item.address}, `}${props.item.city
-              }, ${props.item.state}${props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-              }`}
-          </p>
-          
-          <div className="action">
-            <button type="submit" className="Add-itinerary-button" onClick={handleAdd}>
-              Add to itinerary
-            </button>
-          </div>
-
-          <div className="Landmark-map-link">
-
-            <a
-              href={props.item.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="landmark-maps"
-            >
-              View on Google Maps
-          </a>
-
-            <a
-              href="/map-route"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="map-route"
-            >
-              View map
-          </a>
-
-          </div>
-
-          <p className="landmark-description">{props.item.description}</p>
-
-          <label className="hours">Hours</label>
-          {isClicked && (
-            <div className="hours">
-              {hourElement}
-            </div>)}
-          
-        </div>
+    <div className="Landmark-card" onClick={handleClick}>
+      <div>
+        <img
+          className="landmark-card-image"
+          src={require(`../../Images/${props.item.imgUrl}`).default}
+        />
       </div>
-    
 
+      <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
+
+      <div className="Landmark-card-body">
+        <p className="landmark-location">
+          <i className="fa-sharp fa-solid fa-location-dot"></i>
+          {`${props.item.address === null ? "" : `${props.item.address}, `}${
+            props.item.city
+          }, ${props.item.state}${
+            props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+          }`}
+        </p>
+
+        <div className="action">
+          <button
+            type="submit"
+            className="Add-itinerary-button"
+            onClick={handleAdd}
+          >
+            Add to itinerary
+          </button>
+        </div>
+
+        <div className="Landmark-map-link">
+          <a
+            href={props.item.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="landmark-maps"
+          >
+            View on Google Maps
+          </a>
+
+          <a
+            href="/map-route"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="map-route"
+            onClick={storeData}
+          >
+            View map
+          </a>
+        </div>
+
+        <p className="landmark-description">{props.item.description}</p>
+
+        <label className="hours">Hours</label>
+        {isClicked && <div className="hours">{hourElement}</div>}
+      </div>
+    </div>
 
     // <div className="landmark" onClick={handleClick}>
     //   <h1 className="landmark-name">{props.item.landmarkName}</h1>
@@ -214,8 +212,6 @@ function Landmark(props) {
     //     </div>
     //   )}
     // </div>
-
-
   );
 }
 
