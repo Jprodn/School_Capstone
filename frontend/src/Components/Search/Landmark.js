@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-
-
 function Landmark(props) {
   const [data, setData] = React.useState([]);
 
@@ -109,15 +107,12 @@ function Landmark(props) {
   }
 
   return (
-
     <div className="main-div">
-
-
-
       <div className="contacts">
         <div className="contact-card">
           <img
             src={require(`../../Images/${props.item.imgUrl}`).default}
+            alt="landmark-img"
           />
           <h3>{props.item.landmarkName}</h3>
 
@@ -127,33 +122,37 @@ function Landmark(props) {
             onClick={handleAdd}
           >
             Add to itinerary
-                </button>
+          </button>
 
           <div className="info-group">
-            <img src="http://cdn.onlinewebfonts.com/svg/img_413782.png" />
-            <p>{`${props.item.address === null ? "" : `${props.item.address}, `}${props.item.city
-              }, ${props.item.state}${props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-              }`}</p>
-
+            <img
+              src="http://cdn.onlinewebfonts.com/svg/img_413782.png"
+              alt="ico"
+            />
+            <p>{`${
+              props.item.address === null ? "" : `${props.item.address}, `
+            }${props.item.city}, ${props.item.state}${
+              props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+            }`}</p>
           </div>
 
           <div className="info-group">
-            <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png" />
-            <p><button className="hour-button" onClick={handleClick}>Hours</button></p>
-
-
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png"
+              alt="ico"
+            />
+            <p>
+              <button className="hour-button" onClick={handleClick}>
+                Hours
+              </button>
+            </p>
           </div>
 
           <div className="info-group">
-            
             {isClicked && <div className="isClicked">{hourElement}</div>}
           </div>
 
-          <div className="description">
-
-            {props.item.description}
-
-          </div>
+          <div className="description">{props.item.description}</div>
 
           <div className="description-div">
             <ul className="description-ul">
@@ -163,8 +162,9 @@ function Landmark(props) {
                   href={props.item.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-
-                >View on Google Maps</a>
+                >
+                  View on Google Maps
+                </a>
               </li>
 
               <li>
@@ -174,27 +174,17 @@ function Landmark(props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={storeData}
-                >View map</a>
+                >
+                  View map
+                </a>
               </li>
-
-
             </ul>
           </div>
-
-
         </div>
-
-
-
       </div>
-
     </div>
 
-
-
-
     // <div className="Landmark-card" onClick={handleClick}>
-
 
     //   <div>
     //     <img
@@ -252,9 +242,6 @@ function Landmark(props) {
     //     {isClicked && <div className="hours">{hourElement}</div>}
     //   </div>
     // </div>
-
-
-
   );
 }
 
