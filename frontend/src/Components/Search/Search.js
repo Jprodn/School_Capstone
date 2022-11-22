@@ -28,7 +28,7 @@ function Search() {
     .map((item) => {
       return (
         <li key={item.landmarkId} className="listItem">
-          <Landmark item={item} />
+          <Landmark item={item} bird={item.landmarkId} /> 
         </li>
       );
     });
@@ -45,13 +45,6 @@ function Search() {
     setselectedCity(obj);
   }
 
-  // const handleAdd = async (e) =>
-  // await axios
-  //     .post(
-  //         `http://localhost:8081/itinerary//addLandmark/32`,
-  //         config
-  //     )
-  //     .then((r) => console.log(r));
 
   React.useEffect(() => {
     const fetchLandmark = async () => {
@@ -59,8 +52,9 @@ function Search() {
         `http://www.localhost:8081/landmark/${selectedState.label}/${selectedCity.label}`
       );
       setData(response.data);
+      console.log("response.data");
+      console.log(response.data);
     };
-
     const fetchStates = async () => {
       const response = await axios.get(
         `http://www.localhost:8081/landmark/states`
@@ -98,6 +92,7 @@ function Search() {
         value={selectedState}
         options={stateOptions}
         onChange={handleSelectState}
+        autoFocus
       />
 
       <Select

@@ -11,6 +11,7 @@ body {
   line-height: 1.5;
   background-color: #f1f3fb;
   padding: 0 2rem;
+  
 }
 
 img {
@@ -133,10 +134,10 @@ img {
 .save-button:hover {
   background-color: lightskyblue;
 }
-.delete-button {
+.delete-button, .search-button {
   width: 300px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   background-color: #876df5;
   border-radius: 6px;
   color: white;
@@ -148,13 +149,28 @@ img {
   text-align: center;
 }
 
-.delete-button:hover {
+.delete-button:hover, .search-button:hover {
   background-color: lightskyblue;
 }
+
+.trash-button {
+  border: none;
+  width: 1rem;
+  filter: opacity(50%);
+  position: relative;
+  right: 10px;
+}
+
+.trash-button:hover {
+  width: 1.5rem;
+}
+
 .landmark-action-buttons {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
 }
 
 .create-card-body {
@@ -177,7 +193,13 @@ img {
 }
 
 .edit-button {
+  border: none;
   width: 2rem;
+}
+
+.modify-button-set {
+  display: flex;
+  justify-content: space-between;
 }
 
 .create-form-action {
@@ -338,18 +360,140 @@ img {
 }
 
 /* Search-Landmark CSS */
-.search-div {
-  margin: 50px;
-  text-align: center;
+.leaflet-container {
+  height: 90vh;
+  width: 90vw;
 }
 
-.landmark-image-div > img {
-  display: inline;
+.search-div {
+  /* margin: 50px; */
+  text-align: center;
+
+  /* max-width:  20em; */
+  margin: 5em auto;
+  width: 50%;
 }
+/* .search{
+  width: 100%;
+  text-align: center;
+} */
+
+.card2 {
+  background-color: gray;
+  color: black;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.landmark-card-image {
+  height: 80%;
+  width: 100%;
+  border-radius: 50px;
+}
+
+.Landmark-card {
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+  max-width: 550px;
+  height: 80%;
+  background-color: #eff5f5;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
+  margin: 40px 0;
+}
+.Landmark-card-title {
+  font-size: larger;
+  font-family: "Segoe UI", Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.landmark-location {
+  font-size: large;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #393e46;
+}
+.landmark-description {
+  text-align: left;
+  /* font-stretch: expanded; */
+  color: #2d4b5a;
+  font-family: fantasy;
+}
+
+.Landmark-map-link a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: medium;
+  margin: 20px 20px;
+  color: #395b64;
+}
+.Landmark-map-link a:hover {
+  color: lightskyblue;
+}
+.Add-itinerary-button {
+  /* width: 150px; */
+  font-weight: 300;
+  margin: 5px;
+  background-color: transparent;
+  border-radius: 10px;
+  color:#150050;
+  border: 1 lightblue;
+  /* border:1px solid rgba(255, 255, 255, 0.18); */
+  height: 50px;
+  width: 220px;
+  transition: all 0.5s;
+}
+
+.Add-itinerary-button:hover {
+  background-color: black;
+  color: #eef1f5;
+}
+.hours {
+  border-radius: 10px;
+  /* border: 4px double #06283D; */
+  color: #1b2430;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #6B728E;
+  margin: 5px 5px;
+}
+.hour-button{
+
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+  text-align:left;
+  background-color: transparent;
+  transition: all 0.5s;
+}
+
+.hour-button:active{
+  background-color: black;
+  color:white;
+}
+.isClicked{
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 .search {
   padding: 10px;
   font-size: 20px;
+  width: 100%;
+  text-align: center;
+  border: transparent;
+}
+.search:hover {
+  background-color: lightgray;
+  color: black;
+  border-radius: 20px;
+  border: 0;
 }
 
 .list {
@@ -379,10 +523,141 @@ img {
 .popup-overlay {
   background: rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
-  -moz-box-shadow:    6px 6px 12px 0px rgba(50, 50, 50, 1);
-  box-shadow:         6px 6px 12px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
+  box-shadow: 6px 6px 12px 0px rgba(50, 50, 50, 1);
 }
 
 .dim {
   color: lightgray;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+/* LandmarkComponent css */
+
+.main-div{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.contacts {
+  /* display: grid;
+  grid-template-columns: repeat(2,  1fr); */
+  
+  
+}
+
+.contact-card {
+  /* flex-basis: 225px; */
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border:1px solid rgba(255, 255, 255, 0.18);
+  padding: 13px;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  width: 450px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border:1px solid rgba(255, 255, 255, 0.18);
+  /* display: flex;
+  flex-direction: column; */
+  
+  /* background-color: white; */
+  
+  
+}
+
+.contact-card > img {
+  width: 100%;
+  height: auto;
+  align-self: center;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.contact-card > h3 {
+  font-weight: 700;
+  font-size: 18px;
+}
+.description-div{
+
+  margin: 20px 10px;
+  
+}
+.description{
+display: flex;
+align-items: center;
+font-size: medium;
+box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
+margin-top: 5px;
+padding: 0 30px;
+background-color: transparent;
+color: black;
+letter-spacing: 3px;
+
+}
+
+.description-link{
+  text-decoration: none;
+  letter-spacing: -1px;
+  font-family:'Times New Roman', Times, serif;
+  color: #000000;
+}
+.description-link:hover{
+
+color: lightslategray;
+
+}
+
+.description-ul{
+  padding: 1px 0;
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  font-size: medium;
+  
+
+ 
+}
+.description-ul > li{
+
+  list-style: none;
+  
+}
+
+.grid__item {
+
+  list-style: none;
+ 
+}
+  
+  
+
+
+.info-group {
+  display: flex;
+  align-items: center;
+}
+
+.info-group > img {
+  height: 20px;
+  margin-right: 8px;
+}
+
+.info-group > p {
+  margin-block: 3px;
+  font-size: 15px;
+  color: #2B283A;
+}
+.info-group-button{
+display: flex;
+ align-content: center;
+ font-size: 15px;
+  color: #2B283A;
 }

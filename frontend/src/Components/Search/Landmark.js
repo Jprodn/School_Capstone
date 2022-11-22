@@ -4,15 +4,30 @@ import axios from "axios";
 function Landmark(props) {
   const [data, setData] = React.useState([]);
 
+  const [isClicked, setIsClicked] = React.useState(false);
+  function handleClick() {
+    setIsClicked((isClicked) => !isClicked);
+  }
+
   const token = JSON.parse(localStorage.getItem("jwtToken"));
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
 
+  const currentItineraryInfo = JSON.parse(
+    localStorage.getItem("currentItinerary")
+  );
+
   React.useEffect(() => {
+    console.log("currentItineraryInfo");
+    console.log(currentItineraryInfo);
+    console.log("props");
+    console.log(props);
     const fetchHours = async () => {
       const response = await axios.get(
         `http://www.localhost:8081/hours/${props.item.landmarkId}`
@@ -60,9 +75,9 @@ function Landmark(props) {
     return dayOfWeek;
   }
 
-  const hourElement = data.map((hours) => {
+  const hourElement = data.map((hours, i = 0) => {
     return (
-      <p key={hours.landmarkId} className="hours">
+      <p key={hours.landmarkId + (i + 1)} className="hours">
         {getDay(hours.weekday)} {hours.openHour}{" "}
         {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
       </p>
@@ -71,55 +86,162 @@ function Landmark(props) {
 
   const handleAdd = async (e) =>
     await axios
-      .post(`http://localhost:8081/itinerary/addLandmark/32`, config)
-      .then((r) => console.log(r));
+      // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
+      .post(
+        `http://localhost:8081/itinerary/addLandmark`,
+        {
+          itineraryId: `${currentItineraryInfo.itineraryId}`,
+          landmarkId: `${props.item.landmarkId}`,
+        },
+        config
+      )
+      .then(console.log("config" + JSON.stringify(config)));
+
+  function storeData() {
+    localStorage.clear();
+    localStorage.setItem(
+      "address",
+      `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
+    );
+    console.log(localStorage);
+  }
 
   return (
-    <div className="landmark">
-      <div className="landmark-image-div">
-        <img
-          className="landmark-image"
-          src={require(`../../Images/${props.item.imgUrl}`).default}
-          alt="img"
-        />
-      </div>
-      <div className="landmark-info">
-        <p className="landmark-location">
-          <i className="fa-sharp fa-solid fa-location-dot"></i>
-          {`${props.item.address === null ? "" : `${props.item.address}, `}${
-            props.item.city
-          }, ${props.item.state}${
-            props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-          }`}
-        </p>
-        {hourElement}
-        <div className="action">
-          <button type="submit" className="action-button" onClick={handleAdd}>
+    <div className="main-div">
+      <div className="contacts">
+        <div className="contact-card">
+          <img
+            src={require(`../../Images/${props.item.imgUrl}`).default}
+            alt="landmark-img"
+          />
+          <h3>{props.item.landmarkName}</h3>
+
+          <button
+            type="submit"
+            className="Add-itinerary-button"
+            onClick={handleAdd}
+          >
             Add to itinerary
           </button>
-        </div>
-        <a
-          href={props.item.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="landmark-maps"
-        >
-          View on Google Maps
-        </a>
 
-        <a
-          href="/map-route"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="map-route"
-        >
-          View map
-        </a>
-        <h1 className="landmark-name">{props.item.landmarkName}</h1>
-        <p className="landmark-categoty">{props.item.category}</p>
-        <p className="landmark-description">{props.item.description}</p>
+          <div className="info-group">
+            <img
+              src="http://cdn.onlinewebfonts.com/svg/img_413782.png"
+              alt="ico"
+            />
+            <p>{`${
+              props.item.address === null ? "" : `${props.item.address}, `
+            }${props.item.city}, ${props.item.state}${
+              props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+            }`}</p>
+          </div>
+
+          <div className="info-group">
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png"
+              alt="ico"
+            />
+            <p>
+              <button className="hour-button" onClick={handleClick}>
+                Hours
+              </button>
+            </p>
+          </div>
+
+          <div className="info-group">
+            {isClicked && <div className="isClicked">{hourElement}</div>}
+          </div>
+
+          <div className="description">{props.item.description}</div>
+
+          <div className="description-div">
+            <ul className="description-ul">
+              <li>
+                <a
+                  className="description-link"
+                  href={props.item.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on Google Maps
+                </a>
+              </li>
+
+              <li>
+                <a
+                  className="description-link"
+                  href="/map-route"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={storeData}
+                >
+                  View map
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
+
+    // <div className="Landmark-card" onClick={handleClick}>
+
+    //   <div>
+    //     <img
+    //       className="landmark-card-image"
+    //       src={require(`../../Images/${props.item.imgUrl}`).default}
+    //     />
+    //   </div>
+
+    //   <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
+
+    //   <div className="Landmark-card-body">
+    //     <p className="landmark-location">
+    //       <i className="fa-sharp fa-solid fa-location-dot"></i>
+    //       {`${props.item.address === null ? "" : `${props.item.address}, `}${
+    //         props.item.city
+    //       }, ${props.item.state}${
+    //         props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+    //       }`}
+    //     </p>
+
+    //     <div className="action">
+    //       <button
+    //         type="submit"
+    //         className="Add-itinerary-button"
+    //         onClick={handleAdd}
+    //       >
+    //         Add to itinerary
+    //       </button>
+    //     </div>
+
+    //     <div className="Landmark-map-link">
+    //       <a
+    //         href={props.item.mapUrl}
+    //         target="_blank"
+    //         rel="noopener noreferrer"
+    //         className="landmark-maps"
+    //       >
+    //         View on Google Maps
+    //       </a>
+
+    //       <a
+    //         href="/map-route"
+    //         target="_blank"
+    //         rel="noopener noreferrer"
+    //         className="map-route"
+    //         onClick={storeData}
+    //       >
+    //         View map
+    //       </a>
+    //     </div>
+
+    //     <p className="landmark-description">{props.item.description}</p>
+
+    //     <label className="hours">Hours</label>
+    //     {isClicked && <div className="hours">{hourElement}</div>}
+    //   </div>
+    // </div>
   );
 }
 
