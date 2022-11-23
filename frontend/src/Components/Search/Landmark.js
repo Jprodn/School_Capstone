@@ -180,6 +180,12 @@ function Landmark(props) {
                 </a>
               </li>
             </ul>
+        <div class="like grow">
+          <i class="fa fa-thumbs-up fa-2x like" aria-hidden="true"></i>
+        </div>
+        <div class="dislike grow">
+          <i class="fa fa-thumbs-down fa-2x like" aria-hidden="true"></i>
+        </div>
           </div>
         </div>
       </div>

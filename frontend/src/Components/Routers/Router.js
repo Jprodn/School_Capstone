@@ -21,7 +21,7 @@ export default function Router(props) {
   React.useEffect(() => {
     const fetchCords = async () => {
       axios.defaults.headers["Authorization"] =
-        "prj_test_pk_13713837a5551a730dfaa00517e4ce2867218662";
+        process.env.REACT_APP_APY_KEY_LOCATIONS;
       const response = await axios.get(
         `https://api.radar.io/v1/search/autocomplete?query=${localStorage.getItem(
           "address"
