@@ -3,7 +3,6 @@ import axios from "axios";
 import ControlledPopup from "../Popup/ControlledPopup";
 
 export default function Home(props) {
-    const [isHover, setIsHover] = useState(false);
     const [userInfo, setUserInfo] = useState({
         userId: "",
         itineraries: [],
@@ -16,8 +15,6 @@ export default function Home(props) {
 
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
-    // console.log(storageUserId);
-    // console.log("this is token" + token);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -27,6 +24,7 @@ export default function Home(props) {
 
     // USE EFFECT
     useEffect(() => {
+        console.log("------------------HOME-----------------");
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
@@ -45,6 +43,7 @@ export default function Home(props) {
             }));
         };
         getItinerary();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function goToItinerary(lm) {
