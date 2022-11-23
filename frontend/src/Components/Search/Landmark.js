@@ -2,77 +2,11 @@ import React from "react";
 import axios from "axios";
 
 function Landmark(props) {
-  const [data, setData] = React.useState([]);
+    const [data, setData] = React.useState([]);
 
-  const [isClicked, setIsClicked] = React.useState(false);
-  function handleClick() {
-    setIsClicked((isClicked) => !isClicked);
-  }
-
-  const token = JSON.parse(localStorage.getItem("jwtToken"));
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
-    },
-  };
-
-  const currentItineraryInfo = JSON.parse(
-    localStorage.getItem("currentItinerary")
-  );
-
-  React.useEffect(() => {
-    console.log("currentItineraryInfo");
-    console.log(currentItineraryInfo);
-    console.log("props");
-    console.log(props);
-    const fetchHours = async () => {
-      const response = await axios.get(
-        `http://www.localhost:8081/hours/${props.item.landmarkId}`
-      );
-      setData(response.data);
-    };
-    fetchHours();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.item.landmarkId]);
-
-  function getDay(day) {
-    let dayOfWeek = "";
-    switch (day) {
-      case 1:
-        dayOfWeek = "Sunday";
-        break;
-
-      case 2:
-        dayOfWeek = "Monday";
-        break;
-
-      case 3:
-        dayOfWeek = "Tuesday";
-        break;
-
-      case 4:
-        dayOfWeek = "Wednesday";
-        break;
-
-      case 5:
-        dayOfWeek = "Thursday";
-        break;
-
-      case 6:
-        dayOfWeek = "Friday";
-        break;
-
-      case 7:
-        dayOfWeek = "Saturday";
-        break;
-
-      default:
-        dayOfWeek = "OPEN";
-        break;
+    const [isClicked, setIsClicked] = React.useState(false);
+    function handleClick() {
+        setIsClicked((isClicked) => !isClicked);
     }
 
     const token = JSON.parse(localStorage.getItem("jwtToken"));
@@ -82,51 +16,17 @@ function Landmark(props) {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+            "Access-Control-Allow-Headers":
+                "Origin, Content-Type, X-Auth-Token",
         },
-        config
-    }
-      .then(console.log("config" + JSON.stringify(config)));
+    };
 
-  const handleLikes= async (e) =>
-  await axios
-    .put(
-      `http://localhost:8081/landmark/rating/likes/${e.target.name}`,
-      // {
-      //   landmarkId: `${props.item.landmarkId}`,
-      // },
-      config
-    )
-    .then(console.log("e.target-" + JSON.stringify(e.target.name)))
-    .then(console.log("config" + JSON.stringify(config)));
-
-  
-  const handleDislikes= async (e) =>
-  await axios
-    .put(
-      `http://localhost:8081/landmark/rating/dislikes/${e.target.name}`,
-      // {
-      //   landmarkId: `${props.item.landmarkId}`,
-      // },
-      config
-    )
-    .then(console.log("config" + JSON.stringify(config)));
-
-  function storeData() {
-    localStorage.clear();
-    localStorage.setItem(
-      "address",
-      `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
+    const currentItineraryInfo = JSON.parse(
+        localStorage.getItem("currentItinerary")
     );
 
     React.useEffect(() => {
-        console.log(
-            "%c--------------Landmark--------------",
-            "color: dodgerblue; background-color: black"
-        );
-        console.log(
-            "%ccurrentItineraryInfo",
-            "color: dodgerblue; background-color: black"
-        );
+        console.log("%ccurrentItineraryInfo", "color: dodgerblue; background-color: black");
         console.log(currentItineraryInfo);
         console.log("%cprops", "color: dodgerblue; background-color: black");
         console.log(props);
@@ -187,7 +87,7 @@ function Landmark(props) {
         );
     });
 
-    const handleAdd = async (e) => {
+    const handleAdd = async (e) =>
         await axios
             // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
             .post(
@@ -198,14 +98,30 @@ function Landmark(props) {
                 },
                 config
             )
-            .then((r) => {
-                console.log(
-                    "%cconfig",
-                    "color: dodgerblue; background-color: black",
-                    config
-                );
-            });
-    };
+            .then(console.log("%cconfig", "color: dodgerblue; background-color: black", config));
+
+    const handleLikes = async (e) =>
+        await axios
+            .put(
+                `http://localhost:8081/landmark/rating/likes/${e.target.name}`,
+                // {
+                //   landmarkId: `${props.item.landmarkId}`,
+                // },
+                config
+            )
+            .then(console.log("%ce.target-", "color: dodgerblue; background-color: black", e.target.name))
+            .then(console.log("%cconfig", "color: dodgerblue; background-color: black", config));
+
+    const handleDislikes = async (e) =>
+        await axios
+            .put(
+                `http://localhost:8081/landmark/rating/dislikes/${e.target.name}`,
+                // {
+                //   landmarkId: `${props.item.landmarkId}`,
+                // },
+                config
+            )
+            .then(console.log("%cconfig", "color: dodgerblue; background-color: black", config));
 
     function storeData() {
         localStorage.clear();
@@ -213,6 +129,7 @@ function Landmark(props) {
             "address",
             `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
         );
+        console.log("%clocalStorage", "color: dodgerblue; background-color: black");
         console.log(localStorage);
     }
 
@@ -299,16 +216,16 @@ function Landmark(props) {
                                 </a>
                             </li>
                         </ul>
-                        <div class="like grow">
+                        <div className="like grow">
                             <i
-                                class="fa fa-thumbs-up fa-2x like"
+                                className="fa fa-thumbs-up fa-2x like"
                                 aria-hidden="true"
                                 onClick={handleLikes}
                             ></i>
                         </div>
-                        <div class="dislike grow">
+                        <div className="dislike grow">
                             <i
-                                class="fa fa-thumbs-down fa-2x like"
+                                className="fa fa-thumbs-down fa-2x like"
                                 aria-hidden="true"
                                 onClick={handleDislikes}
                             ></i>
