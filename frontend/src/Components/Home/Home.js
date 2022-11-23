@@ -24,14 +24,17 @@ export default function Home(props) {
 
     // USE EFFECT
     useEffect(() => {
-        console.log("%c------------------HOME-----------------", "color: green");
+        console.log(
+            "%c------------------HOME-----------------",
+            "color: green; background-color: black"
+        );
         let isMounted = true;
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
-            console.log("%cresult", "color: magenta")
+            console.log("%cresult", "color: green; background-color: black");
             console.log(result);
             if (isMounted) {
                 setUserInfo((prevInfo) => ({
@@ -90,9 +93,7 @@ export default function Home(props) {
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
-                    <ul className="landmark-list">
-                        {displayItineraries}
-                    </ul>
+                    <ul className="landmark-list">{displayItineraries}</ul>
                     {/* save / delete */}
                     <div className="landmark-action-buttons">
                         <div className="save">

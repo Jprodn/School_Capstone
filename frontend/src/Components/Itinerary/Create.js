@@ -19,12 +19,15 @@ export default function Create(props) {
 
     function handleSubmit(event) {
         console.log(baseUrl);
-        console.log("%chandle submit", "color: magenta");
+        console.log(
+            "%chandle submit",
+            "color: magenta; background-color: black"
+        );
         const data = itineraryData;
         console.log(data);
 
         const token = JSON.parse(localStorage.getItem("jwtToken"));
-        console.log("%cToken:", "color: magenta");
+        console.log("%cToken:", "color: magenta; background-color: black");
         console.log(token);
         const config = {
             headers: {
@@ -36,7 +39,10 @@ export default function Create(props) {
         axios
             .post(baseUrl + "/itinerary/createItinerary", data, config)
             .then(function () {
-                console.log("%caxios", "color: magenta");
+                console.log(
+                    "%caxios",
+                    "color: magenta; background-color: black"
+                );
             })
             .catch(function (error) {
                 console.log(error);
@@ -81,7 +87,10 @@ export default function Create(props) {
                             placeholder="Date"
                         />
                         <div className="create-form-action">
-                            <button className="cancel-button" onClick={props.close}>
+                            <button
+                                className="cancel-button"
+                                onClick={props.close}
+                            >
                                 Clear
                             </button>
                             <button
