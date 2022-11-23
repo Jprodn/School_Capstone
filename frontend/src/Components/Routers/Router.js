@@ -19,6 +19,7 @@ export default function Router(props) {
   const [long, setLongitude] = React.useState(0);
 
   React.useEffect(() => {
+    console.log("%c--------------Router-------------", "color: green");
     const fetchCords = async () => {
       axios.defaults.headers["Authorization"] =
         process.env.REACT_APP_APY_KEY_LOCATIONS;
@@ -29,6 +30,7 @@ export default function Router(props) {
       );
       setLatitude(response.data.addresses[0].latitude);
       setLongitude(response.data.addresses[0].longitude);
+      console.log("%clat / long", "color: magenta")
       console.log(lat + " " + long);
     };
 

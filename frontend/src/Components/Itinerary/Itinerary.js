@@ -29,8 +29,8 @@ export default function Itinerary(props) {
     };
 
     useEffect(() => {
-        console.log("--------------Itinerary---------------");
-        console.log("currentItineraryInfo");
+        console.log("%c--------------Itinerary---------------", "color: green");
+        console.log("%ccurrentItineraryInfo", "color: magenta");
         console.log(currentItineraryInfo);
         let isMounted = true;
         const getItinerary = async () => {
@@ -38,7 +38,7 @@ export default function Itinerary(props) {
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
-            console.log("result");
+            console.log("%cresult", "color: magenta");
             console.log(result);
             if (isMounted) {
                 setUserInfo((prevInfo) => ({
@@ -53,9 +53,9 @@ export default function Itinerary(props) {
                 }));
             }
         };
-        console.log("userInfo");
+        console.log("%cuserInfo", "color: magenta");
         console.log(userInfo);
-        console.log("UserInfo.startingPoint:");
+        console.log("%cUserInfo.startingPoint", "color: magenta");
         console.log(userInfo.startingPoint);
         getItinerary();
         return () => {
@@ -71,7 +71,7 @@ export default function Itinerary(props) {
                 `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
                 config
             );
-            console.log("result.data");
+            console.log("%cresult.data", "color: magenta");
             console.log(result.data);
             if (isMounted) {
             setUserLandmarks(() => result.data);

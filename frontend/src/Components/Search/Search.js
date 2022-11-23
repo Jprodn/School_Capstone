@@ -47,12 +47,13 @@ function Search() {
 
 
   React.useEffect(() => {
+    console.log("%c------------Search--------------", "color: green")
     const fetchLandmark = async () => {
       const response = await axios.get(
         `http://www.localhost:8081/landmark/${selectedState.label}/${selectedCity.label}`
       );
       setData(response.data);
-      console.log("response.data");
+      console.log("%cresponse.data", "color: magenta");
       console.log(response.data);
     };
     const fetchStates = async () => {

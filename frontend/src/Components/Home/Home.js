@@ -24,13 +24,14 @@ export default function Home(props) {
 
     // USE EFFECT
     useEffect(() => {
-        console.log("------------------HOME-----------------");
+        console.log("%c------------------HOME-----------------", "color: green");
         let isMounted = true;
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
+            console.log("%cresult", "color: magenta")
             console.log(result);
             if (isMounted) {
                 setUserInfo((prevInfo) => ({
@@ -86,30 +87,10 @@ export default function Home(props) {
                     <div className="popup-wrapper">
                         <ControlledPopup />
                     </div>
-                    {/* button - ROUTE
-                    <button
-                        className="create-button border-none"
-                        styles={"cursor:pointer"}
-                        title="Route"
-                    >
-                        <img src="btnMap.png" alt="generate route button" />
-                    </button> */}
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
                     <ul className="landmark-list">
-                        {/* <li className="landmark-list-items">
-                            <button
-                                className="startPoint-button"
-                                onMouseOver={() => setIsHover(() => true)}
-                                onMouseOut={() => setIsHover(() => false)}
-                            >
-                                {userInfo.locationStart}
-                                {isHover && (
-                                    <span className="dim"> - edit</span>
-                                )}
-                            </button>
-                        </li> */}
                         {displayItineraries}
                     </ul>
                     {/* save / delete */}
