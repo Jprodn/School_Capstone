@@ -25,24 +25,30 @@ export default function Home(props) {
     // USE EFFECT
     useEffect(() => {
         console.log("------------------HOME-----------------");
+        let isMounted = true;
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
             console.log(result);
-            setUserInfo((prevInfo) => ({
-                ...prevInfo,
-                userId: storageUserId,
-                itineraries: [...result.data],
-                itineraryId: result.data.itineraryId,
-                itineraryName: result.data.itineraryName,
-                startingPoint: result.data.startingPoint,
-                itineraryDate: result.data.itineraryDate,
-                data: result,
-            }));
+            if (isMounted) {
+                setUserInfo((prevInfo) => ({
+                    ...prevInfo,
+                    userId: storageUserId,
+                    itineraries: [...result.data],
+                    itineraryId: result.data.itineraryId,
+                    itineraryName: result.data.itineraryName,
+                    startingPoint: result.data.startingPoint,
+                    itineraryDate: result.data.itineraryDate,
+                    data: result,
+                }));
+            }
         };
         getItinerary();
+        return () => {
+            isMounted = false;
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

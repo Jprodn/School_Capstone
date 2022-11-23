@@ -7,7 +7,7 @@ export default function Itinerary(props) {
         itineraries: [],
         itineraryId: "",
         itineraryName: "",
-        startingPoint: " ",
+        startingPoint: null,
         itineraryDate: "",
         data: {},
     });
@@ -32,6 +32,7 @@ export default function Itinerary(props) {
         console.log("--------------Itinerary---------------");
         console.log("currentItineraryInfo");
         console.log(currentItineraryInfo);
+        let isMounted = true;
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
@@ -39,26 +40,32 @@ export default function Itinerary(props) {
             );
             console.log("result");
             console.log(result);
-            setUserInfo((prevInfo) => ({
-                ...prevInfo,
-                userId: storageUserId,
-                itineraries: [...result.data],
-                itineraryId: result.data.itineraryId,
-                itineraryName: result.data.itineraryName,
-                startingPoint: result.data.startingPoint,
-                itineraryDate: result.data.itineraryDate,
-                data: result,
-            }));
+            if (isMounted) {
+                setUserInfo((prevInfo) => ({
+                    ...prevInfo,
+                    userId: storageUserId,
+                    itineraries: [...result.data],
+                    itineraryId: result.data.itineraryId,
+                    itineraryName: result.data.itineraryName,
+                    startingPoint: result.data.startingPoint,
+                    itineraryDate: result.data.itineraryDate,
+                    data: result,
+                }));
+            }
         };
         console.log("userInfo");
         console.log(userInfo);
         console.log("UserInfo.startingPoint:");
         console.log(userInfo.startingPoint);
         getItinerary();
+        return () => {
+            isMounted = false;
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
+        let isMounted = true;
         const getUserLandmarks = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
@@ -66,9 +73,12 @@ export default function Itinerary(props) {
             );
             console.log("result.data");
             console.log(result.data);
+            if (isMounted) {
             setUserLandmarks(() => result.data);
+            }
         };
         getUserLandmarks();
+        return () => { isMounted = false; };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -142,7 +152,7 @@ export default function Itinerary(props) {
                                     <input
                                         name="startingPoint"
                                         onChange={handleLocationChange}
-                                        value={userInfo.startingPoint}
+                                        value={userInfo.startingPoint || ""}
                                         autoFocus
                                         onKeyUp={removeLocationFocus}
                                     />
