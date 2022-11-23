@@ -16,6 +16,7 @@ function Landmark(props) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
     },
   };
 
@@ -97,6 +98,30 @@ function Landmark(props) {
         config
       )
       .then(console.log("config" + JSON.stringify(config)));
+
+  const handleLikes= async (e) =>
+  await axios
+    .put(
+      `http://localhost:8081/landmark/rating/likes/${e.target.name}`,
+      // {
+      //   landmarkId: `${props.item.landmarkId}`,
+      // },
+      config
+    )
+    .then(console.log("e.target-" + JSON.stringify(e.target.name)))
+    .then(console.log("config" + JSON.stringify(config)));
+
+  
+  const handleDislikes= async (e) =>
+  await axios
+    .put(
+      `http://localhost:8081/landmark/rating/dislikes/${e.target.name}`,
+      // {
+      //   landmarkId: `${props.item.landmarkId}`,
+      // },
+      config
+    )
+    .then(console.log("config" + JSON.stringify(config)));
 
   function storeData() {
     localStorage.clear();
@@ -181,10 +206,10 @@ function Landmark(props) {
               </li>
             </ul>
         <div class="like grow">
-          <i class="fa fa-thumbs-up fa-2x like" aria-hidden="true"></i>
+          <i class="fa fa-thumbs-up fa-2x like" aria-hidden="true" onClick={handleLikes}></i>
         </div>
         <div class="dislike grow">
-          <i class="fa fa-thumbs-down fa-2x like" aria-hidden="true"></i>
+          <i class="fa fa-thumbs-down fa-2x like" aria-hidden="true" onClick={handleDislikes}></i>
         </div>
           </div>
         </div>
