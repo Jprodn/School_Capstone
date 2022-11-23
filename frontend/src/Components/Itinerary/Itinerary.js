@@ -29,8 +29,14 @@ export default function Itinerary(props) {
     };
 
     useEffect(() => {
-        console.log("%c--------------Itinerary---------------", "color: green");
-        console.log("%ccurrentItineraryInfo", "color: magenta");
+        console.log(
+            "%c--------------Itinerary---------------",
+            "color: orange; background-color: black"
+        );
+        console.log(
+            "%ccurrentItineraryInfo",
+            "color: orange; background-color: black"
+        );
         console.log(currentItineraryInfo);
         let isMounted = true;
         const getItinerary = async () => {
@@ -38,7 +44,7 @@ export default function Itinerary(props) {
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
-            console.log("%cresult", "color: magenta");
+            console.log("%cresult", "color: orange; background-color: black");
             console.log(result);
             if (isMounted) {
                 setUserInfo((prevInfo) => ({
@@ -53,9 +59,12 @@ export default function Itinerary(props) {
                 }));
             }
         };
-        console.log("%cuserInfo", "color: magenta");
+        console.log("%cuserInfo", "color: orange; background-color: black");
         console.log(userInfo);
-        console.log("%cUserInfo.startingPoint", "color: magenta");
+        console.log(
+            "%cUserInfo.startingPoint",
+            "color: orange; background-color: black"
+        );
         console.log(userInfo.startingPoint);
         getItinerary();
         return () => {
@@ -71,14 +80,19 @@ export default function Itinerary(props) {
                 `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
                 config
             );
-            console.log("%cresult.data", "color: magenta");
+            console.log(
+                "%cresult.data",
+                "color: orange; background-color: black"
+            );
             console.log(result.data);
             if (isMounted) {
-            setUserLandmarks(() => result.data);
+                setUserLandmarks(() => result.data);
             }
         };
         getUserLandmarks();
-        return () => { isMounted = false; };
+        return () => {
+            isMounted = false;
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -122,10 +136,18 @@ export default function Itinerary(props) {
 
     const isBeingEdit = () => setIsEditing((p) => !p);
     const goToSearch = () => window.location.replace("/landmark");
-    const removeLocationFocus = (e) => {
+    const removeLocationFocus = async (e) => {
         if (e.keyCode === 13) {
             isBeingEdit();
         }
+        setUserInfo(p => ({
+            ...p,
+            startingPoint: e.target.value
+        }))
+        await axios.put(
+            `http://localHost:8081/itinerary/updateStart/${userInfo.startingPoint}`,
+            config
+        )
     };
 
     return (

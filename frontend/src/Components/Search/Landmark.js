@@ -2,254 +2,283 @@ import React from "react";
 import axios from "axios";
 
 function Landmark(props) {
-  const [data, setData] = React.useState([]);
-
-  const [isClicked, setIsClicked] = React.useState(false);
-  function handleClick() {
-    setIsClicked((isClicked) => !isClicked);
-  }
-
-  const token = JSON.parse(localStorage.getItem("jwtToken"));
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
-
-  const currentItineraryInfo = JSON.parse(
-    localStorage.getItem("currentItinerary")
-  );
-
-  React.useEffect(() => {
-    console.log("currentItineraryInfo");
-    console.log(currentItineraryInfo);
-    console.log("props");
-    console.log(props);
-    const fetchHours = async () => {
-      const response = await axios.get(
-        `http://www.localhost:8081/hours/${props.item.landmarkId}`
-      );
-      setData(response.data);
-    };
-    fetchHours();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.item.landmarkId]);
-
-  function getDay(day) {
-    let dayOfWeek = "";
-    switch (day) {
-      case 1:
-        dayOfWeek = "Sunday";
-        break;
-
-      case 2:
-        dayOfWeek = "Monday";
-        break;
-
-      case 3:
-        dayOfWeek = "Tuesday";
-        break;
-
-      case 4:
-        dayOfWeek = "Wednesday";
-        break;
-
-      case 5:
-        dayOfWeek = "Thursday";
-        break;
-
-      case 6:
-        dayOfWeek = "Friday";
-        break;
-
-      case 7:
-        dayOfWeek = "Saturday";
-        break;
-
-      default:
-        dayOfWeek = "OPEN";
-        break;
+    const [data, setData] = React.useState([]);
+    const [isClicked, setIsClicked] = React.useState(false);
+    function handleClick() {
+        setIsClicked((isClicked) => !isClicked);
     }
-    return dayOfWeek;
-  }
 
-  const hourElement = data.map((hours, i = 0) => {
-    return (
-      <p key={hours.landmarkId + (i + 1)} className="hours">
-        {getDay(hours.weekday)} {hours.openHour}{" "}
-        {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
-      </p>
-    );
-  });
-
-  const handleAdd = async (e) =>
-    await axios
-      // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
-      .post(
-        `http://localhost:8081/itinerary/addLandmark`,
-        {
-          itineraryId: `${currentItineraryInfo.itineraryId}`,
-          landmarkId: `${props.item.landmarkId}`,
+    const token = JSON.parse(localStorage.getItem("jwtToken"));
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
-        config
-      )
-      .then(console.log("config" + JSON.stringify(config)));
+    };
 
-  function storeData() {
-    localStorage.clear();
-    localStorage.setItem(
-      "address",
-      `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
+    const currentItineraryInfo = JSON.parse(
+        localStorage.getItem("currentItinerary")
     );
-    console.log(localStorage);
-  }
 
-  return (
-    <div className="main-div">
-      <div className="contacts">
-        <div className="contact-card">
-          <img
-            src={require(`../../Images/${props.item.imgUrl}`).default}
-            alt="landmark-img"
-          />
-          <h3>{props.item.landmarkName}</h3>
+    React.useEffect(() => {
+        console.log(
+            "%c--------------Landmark--------------",
+            "color: dodgerblue; background-color: black"
+        );
+        console.log(
+            "%ccurrentItineraryInfo",
+            "color: dodgerblue; background-color: black"
+        );
+        console.log(currentItineraryInfo);
+        console.log("%cprops", "color: dodgerblue; background-color: black");
+        console.log(props);
+        const fetchHours = async () => {
+            const response = await axios.get(
+                `http://www.localhost:8081/hours/${props.item.landmarkId}`
+            );
+            setData(response.data);
+        };
+        fetchHours();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.item.landmarkId]);
 
-          <button
-            type="submit"
-            className="Add-itinerary-button"
-            onClick={handleAdd}
-          >
-            Add to itinerary
-          </button>
+    function getDay(day) {
+        let dayOfWeek = "";
+        switch (day) {
+            case 1:
+                dayOfWeek = "Sunday";
+                break;
 
-          <div className="info-group">
-            <img
-              src="http://cdn.onlinewebfonts.com/svg/img_413782.png"
-              alt="ico"
-            />
-            <p>{`${
-              props.item.address === null ? "" : `${props.item.address}, `
-            }${props.item.city}, ${props.item.state}${
-              props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-            }`}</p>
-          </div>
+            case 2:
+                dayOfWeek = "Monday";
+                break;
 
-          <div className="info-group">
-            <img
-              src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png"
-              alt="ico"
-            />
-            <p>
-              <button className="hour-button" onClick={handleClick}>
-                Hours
-              </button>
+            case 3:
+                dayOfWeek = "Tuesday";
+                break;
+
+            case 4:
+                dayOfWeek = "Wednesday";
+                break;
+
+            case 5:
+                dayOfWeek = "Thursday";
+                break;
+
+            case 6:
+                dayOfWeek = "Friday";
+                break;
+
+            case 7:
+                dayOfWeek = "Saturday";
+                break;
+
+            default:
+                dayOfWeek = "OPEN";
+                break;
+        }
+        return dayOfWeek;
+    }
+
+    const hourElement = data.map((hours, i = 0) => {
+        return (
+            <p key={hours.landmarkId + (i + 1)} className="hours">
+                {getDay(hours.weekday)} {hours.openHour}{" "}
+                {hours.closeHour === null ? "" : `- ${hours.closeHour}`}
             </p>
-          </div>
+        );
+    });
 
-          <div className="info-group">
-            {isClicked && <div className="isClicked">{hourElement}</div>}
-          </div>
+    const handleAdd = async (e) => {
+        await axios
+            // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
+            .post(
+                `http://localhost:8081/itinerary/addLandmark`,
+                {
+                    itineraryId: `${currentItineraryInfo.itineraryId}`,
+                    landmarkId: `${props.item.landmarkId}`,
+                },
+                config
+            )
+            .then((r) => {
+                console.log(
+                    "%cconfig",
+                    "color: dodgerblue; background-color: black",
+                    config
+                );
+            });
+    };
 
-          <div className="description">{props.item.description}</div>
+    function storeData() {
+        localStorage.clear();
+        localStorage.setItem(
+            "address",
+            `${props.item.address}, ${props.item.city}, ${props.item.state}, ${props.item.postalCode}`
+        );
+        console.log(localStorage);
+    }
 
-          <div className="description-div">
-            <ul className="description-ul">
-              <li>
-                <a
-                  className="description-link"
-                  href={props.item.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View on Google Maps
-                </a>
-              </li>
+    return (
+        <div className="main-div">
+            <div className="contacts">
+                <div className="contact-card">
+                    <img
+                        src={
+                            require(`../../Images/${props.item.imgUrl}`).default
+                        }
+                        alt="landmark-img"
+                    />
+                    <h3>{props.item.landmarkName}</h3>
 
-              <li>
-                <a
-                  className="description-link"
-                  href="/map-route"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={storeData}
-                >
-                  View map
-                </a>
-              </li>
-            </ul>
-        <div class="like grow">
-          <i class="fa fa-thumbs-up fa-2x like" aria-hidden="true"></i>
+                    <button
+                        type="submit"
+                        className="Add-itinerary-button"
+                        onClick={handleAdd}
+                    >
+                        Add to itinerary
+                    </button>
+                    <div className="info-group">
+                        <img
+                            src="http://cdn.onlinewebfonts.com/svg/img_413782.png"
+                            alt="ico"
+                        />
+                        <p>{`${
+                            props.item.address === null
+                                ? ""
+                                : `${props.item.address}, `
+                        }${props.item.city}, ${props.item.state}${
+                            props.item.postalCode === null
+                                ? ""
+                                : `, ${props.item.postalCode}`
+                        }`}</p>
+                    </div>
+
+                    <div className="info-group">
+                        <img
+                            src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png"
+                            alt="ico"
+                        />
+                        <p>
+                            <button
+                                className="hour-button"
+                                onClick={handleClick}
+                            >
+                                Hours
+                            </button>
+                        </p>
+                    </div>
+
+                    <div className="info-group">
+                        {isClicked && (
+                            <div className="isClicked">{hourElement}</div>
+                        )}
+                    </div>
+
+                    <div className="description">{props.item.description}</div>
+
+                    <div className="description-div">
+                        <ul className="description-ul">
+                            <li>
+                                <a
+                                    className="description-link"
+                                    href={props.item.mapUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View on Google Maps
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    className="description-link"
+                                    href="/map-route"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={storeData}
+                                >
+                                    View map
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="like grow">
+                            <i
+                                class="fa fa-thumbs-up fa-2x like"
+                                aria-hidden="true"
+                            ></i>
+                        </div>
+                        <div class="dislike grow">
+                            <i
+                                class="fa fa-thumbs-down fa-2x like"
+                                aria-hidden="true"
+                            ></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="dislike grow">
-          <i class="fa fa-thumbs-down fa-2x like" aria-hidden="true"></i>
-        </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    // <div className="Landmark-card" onClick={handleClick}>
+        // <div className="Landmark-card" onClick={handleClick}>
 
-    //   <div>
-    //     <img
-    //       className="landmark-card-image"
-    //       src={require(`../../Images/${props.item.imgUrl}`).default}
-    //     />
-    //   </div>
+        //   <div>
+        //     <img
+        //       className="landmark-card-image"
+        //       src={require(`../../Images/${props.item.imgUrl}`).default}
+        //     />
+        //   </div>
 
-    //   <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
+        //   <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
 
-    //   <div className="Landmark-card-body">
-    //     <p className="landmark-location">
-    //       <i className="fa-sharp fa-solid fa-location-dot"></i>
-    //       {`${props.item.address === null ? "" : `${props.item.address}, `}${
-    //         props.item.city
-    //       }, ${props.item.state}${
-    //         props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-    //       }`}
-    //     </p>
+        //   <div className="Landmark-card-body">
+        //     <p className="landmark-location">
+        //       <i className="fa-sharp fa-solid fa-location-dot"></i>
+        //       {`${props.item.address === null ? "" : `${props.item.address}, `}${
+        //         props.item.city
+        //       }, ${props.item.state}${
+        //         props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
+        //       }`}
+        //     </p>
 
-    //     <div className="action">
-    //       <button
-    //         type="submit"
-    //         className="Add-itinerary-button"
-    //         onClick={handleAdd}
-    //       >
-    //         Add to itinerary
-    //       </button>
-    //     </div>
+        //     <div className="action">
+        //       <button
+        //         type="submit"
+        //         className="Add-itinerary-button"
+        //         onClick={handleAdd}
+        //       >
+        //         Add to itinerary
+        //       </button>
+        //     </div>
 
-    //     <div className="Landmark-map-link">
-    //       <a
-    //         href={props.item.mapUrl}
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //         className="landmark-maps"
-    //       >
-    //         View on Google Maps
-    //       </a>
+        //     <div className="Landmark-map-link">
+        //       <a
+        //         href={props.item.mapUrl}
+        //         target="_blank"
+        //         rel="noopener noreferrer"
+        //         className="landmark-maps"
+        //       >
+        //         View on Google Maps
+        //       </a>
 
-    //       <a
-    //         href="/map-route"
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //         className="map-route"
-    //         onClick={storeData}
-    //       >
-    //         View map
-    //       </a>
-    //     </div>
+        //       <a
+        //         href="/map-route"
+        //         target="_blank"
+        //         rel="noopener noreferrer"
+        //         className="map-route"
+        //         onClick={storeData}
+        //       >
+        //         View map
+        //       </a>
+        //     </div>
 
-    //     <p className="landmark-description">{props.item.description}</p>
+        //     <p className="landmark-description">{props.item.description}</p>
 
-    //     <label className="hours">Hours</label>
-    //     {isClicked && <div className="hours">{hourElement}</div>}
-    //   </div>
-    // </div>
-  );
+        //     <label className="hours">Hours</label>
+        //     {isClicked && <div className="hours">{hourElement}</div>}
+        //   </div>
+        // </div>
+    );
 }
 
 export default Landmark;
