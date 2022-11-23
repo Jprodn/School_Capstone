@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { isDraftable } from "immer";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
@@ -8,21 +7,18 @@ export default function Itinerary(props) {
         itineraries: [],
         itineraryId: "",
         itineraryName: "",
-        startingPoint: "",
+        startingPoint: " ",
         itineraryDate: "",
         data: {},
     });
 
     const [userLandmarks, setUserLandmarks] = useState([]);
-    const [locationChange, setLocationChange] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
     const currentItineraryInfo = JSON.parse(
         localStorage.getItem("currentItinerary")
     );
-    console.log(storageUserId);
-    console.log("this is token" + token);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -33,6 +29,7 @@ export default function Itinerary(props) {
     };
 
     useEffect(() => {
+        console.log("--------------Itinerary---------------");
         console.log("currentItineraryInfo");
         console.log(currentItineraryInfo);
         const getItinerary = async () => {
@@ -40,6 +37,7 @@ export default function Itinerary(props) {
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
+            console.log("result");
             console.log(result);
             setUserInfo((prevInfo) => ({
                 ...prevInfo,
@@ -52,33 +50,33 @@ export default function Itinerary(props) {
                 data: result,
             }));
         };
+        console.log("userInfo");
+        console.log(userInfo);
+        console.log("UserInfo.startingPoint:");
+        console.log(userInfo.startingPoint);
         getItinerary();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        console.log("userInfo.startingPoint");
-        console.log(userInfo.startingPoint);
         const getUserLandmarks = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
                 config
             );
-
-            console.log(
-                "getUserLandMarks: " + currentItineraryInfo.itineraryId
-            );
-            console.log("result -" + JSON.stringify(result.data));
+            console.log("result.data");
+            console.log(result.data);
             setUserLandmarks(() => result.data);
         };
         getUserLandmarks();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const deleteItinerary = async () => {
-        const response = await axios.delete(
+        await axios.delete(
             `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`,
             config
         );
-        console.log("deleteItinerary response" + response);
         window.location.replace("/home");
     };
 
@@ -95,6 +93,7 @@ export default function Itinerary(props) {
             <button className="landmark-list-buttons modify-button-set align-center">
                 {lm.landmarkName}
                 <img
+                    alt=""
                     className="trash-button"
                     src="btnDelete.png"
                     name={lm.landmarkId}
@@ -109,14 +108,15 @@ export default function Itinerary(props) {
             ...prevInfo,
             startingPoint: e.target.value,
         }));
-        console.log(userInfo.startingPoint);
     };
 
-    const isBeingEdit = () => {
-        setIsEditing((p) => !p);
-    };
-
+    const isBeingEdit = () => setIsEditing((p) => !p);
     const goToSearch = () => window.location.replace("/landmark");
+    const removeLocationFocus = (e) => {
+        if (e.keyCode === 13) {
+            isBeingEdit();
+        }
+    };
 
     return (
         <div>
@@ -134,27 +134,26 @@ export default function Itinerary(props) {
                 <div className="itinerary-card-body">
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
-                            <button className="startPoint-button">
+                            <button
+                                className="startPoint-button"
+                                onDoubleClick={isBeingEdit}
+                            >
                                 {isEditing ? (
                                     <input
                                         name="startingPoint"
                                         onChange={handleLocationChange}
-                                        onClick={isBeingEdit}
-                                        value={
-                                            currentItineraryInfo.startingPoint
-                                        }
+                                        value={userInfo.startingPoint}
+                                        autoFocus
+                                        onKeyUp={removeLocationFocus}
                                     />
                                 ) : (
-                                    <p>{currentItineraryInfo.startingPoint}</p>
+                                    <span>{userInfo.startingPoint}</span>
                                 )}
                             </button>
                         </li>
                         {displayLandmarks}
                     </ul>
                     <div className="landmark-action-buttons">
-                        <div className="save">
-                            {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
-                        </div>
                         <div className="Delete Itinerary">
                             <button
                                 className="delete-button"

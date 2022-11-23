@@ -35,6 +35,7 @@ function Landmark(props) {
       setData(response.data);
     };
     fetchHours();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.item.landmarkId]);
 
   function getDay(day) {
