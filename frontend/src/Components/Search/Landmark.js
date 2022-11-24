@@ -97,6 +97,30 @@ function Landmark(props) {
       )
       .then(console.log("config" + JSON.stringify(config)));
 
+  const handleLikes = async (e) =>
+      await axios
+          .put(
+              `http://localhost:8081/landmark/rating/likes/${e.target.name}`,
+              // {
+              //   landmarkId: `${props.item.landmarkId}`,
+              // },
+              config
+          )
+          .then(console.log("%ce.target-", "color: dodgerblue; background-color: black", e.target.name))
+          .then(console.log("%cconfig", "color: dodgerblue; background-color: black", config));
+
+  const handleDislikes = async (e) =>
+      await axios
+          .put(
+              `http://localhost:8081/landmark/rating/dislikes/${e.target.name}`,
+              // {
+              //   landmarkId: `${props.item.landmarkId}`,
+              // },
+              config
+          )
+          .then(console.log("%cconfig", "color: dodgerblue; background-color: black", config));
+
+
   function storeData() {
     localStorage.clear();
     localStorage.setItem(
@@ -179,6 +203,22 @@ function Landmark(props) {
                 </a>
               </li>
             </ul>
+            <div class="rating">
+            <div class="like grow">
+              <i
+                  className="fa fa-thumbs-up fa-2x like"
+                  aria-hidden="true"
+                  onClick={handleLikes}
+              ></i>
+            </div>
+            <div className="dislike grow">
+                <i
+                    className="fa fa-thumbs-down fa-2x like"
+                    aria-hidden="true"
+                    onClick={handleDislikes}
+                ></i>
+            </div>
+            </div>
           </div>
         </div>
       </div>
