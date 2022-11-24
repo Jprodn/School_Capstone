@@ -10,6 +10,8 @@ export default function Create(props) {
         itineraryDate: "",
     }));
 
+    const createTheme = "color: pink; background-color: black";
+
     function handleChange(e) {
         setItineraryData((prevData) => ({
             ...prevData,
@@ -18,14 +20,12 @@ export default function Create(props) {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
-        console.log(baseUrl);
-        console.log("handle submit");
+        console.log("%chandleSubmit: baseUrl", createTheme, baseUrl);
         const data = itineraryData;
-        console.log(data);
+        console.log("%cdata", createTheme, data);
 
         const token = JSON.parse(localStorage.getItem("jwtToken"));
-        console.log("this is token" + token);
+        console.log("%cToken", createTheme, token);
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -36,10 +36,10 @@ export default function Create(props) {
         axios
             .post(baseUrl + "/itinerary/createItinerary", data, config)
             .then(function () {
-                console.log("axios");
+                console.log("%caxios", createTheme);
             })
             .catch(function (error) {
-                console.log(error);
+                console.log("%cerror", createTheme, error);
             });
     }
 

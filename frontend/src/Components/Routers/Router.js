@@ -13,56 +13,68 @@ import MapRoute from "../MapRoute/MapRoute";
 import axios from "axios";
 
 export default function Router(props) {
-  const userToken = () => window.localStorage.getItem("jwtToken");
+    const userToken = () => window.localStorage.getItem("jwtToken");
+    const routerTheme = "color: pink; background-color: black";
+    const [lat, setLatitude] = React.useState(0);
+    const [long, setLongitude] = React.useState(0);
 
-  const [lat, setLatitude] = React.useState(0);
-  const [long, setLongitude] = React.useState(0);
+    React.useEffect(() => {
+        console.log("%c--------------Router-------------", routerTheme);
+        const fetchCords = async () => {
+            axios.defaults.headers["Authorization"] =
+                process.env.REACT_APP_APY_KEY_LOCATIONS;
+            const response = await axios.get(
+                `https://api.radar.io/v1/search/autocomplete?query=${localStorage.getItem(
+                    "address"
+                )}`
+            );
+            setLatitude(response.data.addresses[0].latitude);
+            setLongitude(response.data.addresses[0].longitude);
+            console.log("%clat / long", routerTheme);
+            console.log(lat + " " + long);
+        };
 
-  React.useEffect(() => {
-    const fetchCords = async () => {
-      axios.defaults.headers["Authorization"] =
-        process.env.REACT_APP_APY_KEY_LOCATIONS;
-      const response = await axios.get(
-        `https://api.radar.io/v1/search/autocomplete?query=${localStorage.getItem(
-          "address"
-        )}`
-      );
-      setLatitude(response.data.addresses[0].latitude);
-      setLongitude(response.data.addresses[0].longitude);
-      console.log(lat + " " + long);
-    };
+        fetchCords();
+    });
 
-    fetchCords();
-  });
-
-  return (
-    <>
-      {userToken !== undefined && <NavLinkBar />}
-      <Switch>
-        <Route exact path="/" component={() => <Login />} />
-        <Route exact path="/login" component={() => <Login />} />
-        <Route exact path="/register" component={() => <Register />} />
-        <Route exact path="/home" component={() => <Home />} />
-        <Route exact path="/itinerary" component={() => <Itinerary />} />
-        <Route
-          exact
-          path="/itinerary/edit/:itineraryId"
-          component={() => <Itinerary />}
-        />
-        <Route exact path="/itinerary/create" component={() => <Create />} />
-        <Route
-          exact
-          path="/landmark"
-          component={() => <Search />}
-          user={props.user}
-        />
-        <Route
-          exact
-          path="/map-route"
-          component={() => <MapRoute latitude={lat} longitude={long} />}
-        />
-        <Route path="*" component={() => <Error404 />} />
-      </Switch>
-    </>
-  );
+    return (
+        <>
+            {userToken !== undefined && <NavLinkBar />}
+            <Switch>
+                <Route exact path="/" component={() => <Login />} />
+                <Route exact path="/login" component={() => <Login />} />
+                <Route exact path="/register" component={() => <Register />} />
+                <Route exact path="/home" component={() => <Home />} />
+                <Route
+                    exact
+                    path="/itinerary"
+                    component={() => <Itinerary />}
+                />
+                <Route
+                    exact
+                    path="/itinerary/edit/:itineraryId"
+                    component={() => <Itinerary />}
+                />
+                <Route
+                    exact
+                    path="/itinerary/create"
+                    component={() => <Create />}
+                />
+                <Route
+                    exact
+                    path="/landmark"
+                    component={() => <Search />}
+                    user={props.user}
+                />
+                <Route
+                    exact
+                    path="/map-route"
+                    component={() => (
+                        <MapRoute latitude={lat} longitude={long} />
+                    )}
+                />
+                <Route path="*" component={() => <Error404 />} />
+            </Switch>
+        </>
+    );
 }

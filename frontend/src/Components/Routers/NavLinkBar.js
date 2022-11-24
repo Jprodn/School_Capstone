@@ -9,7 +9,8 @@ export default function NavLinkBar(props) {
   };
 
   let token = window.localStorage.getItem("jwtToken");
-  console.log(token);
+  console.log("%c-----NavLinkBar-----", "color: yellow; background-color: black");
+  console.log("%cToken", "color: yellow; background-color: black", token);
 
   return (
     <>
