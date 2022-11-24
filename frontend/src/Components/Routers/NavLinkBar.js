@@ -9,6 +9,7 @@ export default function NavLinkBar(props) {
   };
 
   let token = window.localStorage.getItem("jwtToken");
+  console.log(token);
 
   return (
     <>

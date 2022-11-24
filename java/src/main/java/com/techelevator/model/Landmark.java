@@ -11,9 +11,9 @@ public class Landmark {
     private String category;
     private String description;
     private String imgUrl;
-
     private String mapUrl;
-    private int getLandmarkId() {
+
+    public int getLandmarkId() {
         return landmarkId;
     }
 
@@ -92,7 +92,6 @@ public class Landmark {
     public void setMapUrl(String mapUrl) {
         this.mapUrl = mapUrl;
     }
-
 
     @Override
     public String toString() {

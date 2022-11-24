@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { isDraftable } from "immer";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
@@ -7,18 +8,21 @@ export default function Itinerary(props) {
         itineraries: [],
         itineraryId: "",
         itineraryName: "",
-        startingPoint: null,
+        startingPoint: "",
         itineraryDate: "",
         data: {},
     });
 
     const [userLandmarks, setUserLandmarks] = useState([]);
+    const [locationChange, setLocationChange] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
     const currentItineraryInfo = JSON.parse(
         localStorage.getItem("currentItinerary")
     );
+    console.log(storageUserId);
+    console.log("this is token" + token);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -29,78 +33,52 @@ export default function Itinerary(props) {
     };
 
     useEffect(() => {
-        console.log(
-            "%c--------------Itinerary---------------",
-            "color: orange; background-color: black"
-        );
-        console.log(
-            "%ccurrentItineraryInfo",
-            "color: orange; background-color: black"
-        );
+        console.log("currentItineraryInfo");
         console.log(currentItineraryInfo);
-        let isMounted = true;
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
-            console.log("%cresult", "color: orange; background-color: black");
             console.log(result);
-            if (isMounted) {
-                setUserInfo((prevInfo) => ({
-                    ...prevInfo,
-                    userId: storageUserId,
-                    itineraries: [...result.data],
-                    itineraryId: result.data.itineraryId,
-                    itineraryName: result.data.itineraryName,
-                    startingPoint: result.data.startingPoint,
-                    itineraryDate: result.data.itineraryDate,
-                    data: result,
-                }));
-            }
+            setUserInfo((prevInfo) => ({
+                ...prevInfo,
+                userId: storageUserId,
+                itineraries: [...result.data],
+                itineraryId: result.data.itineraryId,
+                itineraryName: result.data.itineraryName,
+                startingPoint: result.data.startingPoint,
+                itineraryDate: result.data.itineraryDate,
+                data: result,
+            }));
         };
-        console.log("%cuserInfo", "color: orange; background-color: black");
-        console.log(userInfo);
-        console.log(
-            "%cUserInfo.startingPoint",
-            "color: orange; background-color: black"
-        );
-        console.log(userInfo.startingPoint);
         getItinerary();
-        return () => {
-            isMounted = false;
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        let isMounted = true;
+        console.log("userInfo.startingPoint");
+        console.log(userInfo.startingPoint);
         const getUserLandmarks = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
                 config
             );
+
             console.log(
-                "%cresult.data",
-                "color: orange; background-color: black"
+                "getUserLandMarks: " + currentItineraryInfo.itineraryId
             );
-            console.log(result.data);
-            if (isMounted) {
-                setUserLandmarks(() => result.data);
-            }
+            console.log("result -" + JSON.stringify(result.data));
+            setUserLandmarks(() => result.data);
         };
         getUserLandmarks();
-        return () => {
-            isMounted = false;
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const deleteItinerary = async () => {
-        await axios.delete(
+        const response = await axios.delete(
             `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`,
             config
         );
+        console.log("deleteItinerary response" + response);
         window.location.replace("/home");
     };
 
@@ -117,7 +95,6 @@ export default function Itinerary(props) {
             <button className="landmark-list-buttons modify-button-set align-center">
                 {lm.landmarkName}
                 <img
-                    alt=""
                     className="trash-button"
                     src="btnDelete.png"
                     name={lm.landmarkId}
@@ -132,23 +109,14 @@ export default function Itinerary(props) {
             ...prevInfo,
             startingPoint: e.target.value,
         }));
+        console.log(userInfo.startingPoint);
     };
 
-    const isBeingEdit = () => setIsEditing((p) => !p);
-    const goToSearch = () => window.location.replace("/landmark");
-    const removeLocationFocus = async (e) => {
-        if (e.keyCode === 13) {
-            isBeingEdit();
-        }
-        setUserInfo(p => ({
-            ...p,
-            startingPoint: e.target.value
-        }))
-        await axios.put(
-            `http://localHost:8081/itinerary/updateStart/${userInfo.startingPoint}`,
-            config
-        )
+    const isBeingEdit = () => {
+        setIsEditing((p) => !p);
     };
+
+    const goToSearch = () => window.location.replace("/landmark");
 
     return (
         <div>
@@ -166,26 +134,27 @@ export default function Itinerary(props) {
                 <div className="itinerary-card-body">
                     <ul className="landmark-list">
                         <li className="landmark-list-items">
-                            <button
-                                className="startPoint-button"
-                                onDoubleClick={isBeingEdit}
-                            >
+                            <button className="startPoint-button">
                                 {isEditing ? (
                                     <input
                                         name="startingPoint"
                                         onChange={handleLocationChange}
-                                        value={userInfo.startingPoint || ""}
-                                        autoFocus
-                                        onKeyUp={removeLocationFocus}
+                                        onClick={isBeingEdit}
+                                        value={
+                                            currentItineraryInfo.startingPoint
+                                        }
                                     />
                                 ) : (
-                                    <span>{userInfo.startingPoint}</span>
+                                    <p>{currentItineraryInfo.startingPoint}</p>
                                 )}
                             </button>
                         </li>
                         {displayLandmarks}
                     </ul>
                     <div className="landmark-action-buttons">
+                        <div className="save">
+                            {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
+                        </div>
                         <div className="Delete Itinerary">
                             <button
                                 className="delete-button"

@@ -132,6 +132,7 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
 
+
     private Itinerary mapRowToUser(SqlRowSet rs) {
         Itinerary itinerary = new Itinerary();
         itinerary.setItineraryId(rs.getInt("itinerary_id"));

@@ -3,6 +3,7 @@ import axios from "axios";
 import ControlledPopup from "../Popup/ControlledPopup";
 
 export default function Home(props) {
+    const [isHover, setIsHover] = useState(false);
     const [userInfo, setUserInfo] = useState({
         userId: "",
         itineraries: [],
@@ -15,6 +16,8 @@ export default function Home(props) {
 
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
+    // console.log(storageUserId);
+    // console.log("this is token" + token);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -24,36 +27,24 @@ export default function Home(props) {
 
     // USE EFFECT
     useEffect(() => {
-        console.log(
-            "%c------------------HOME-----------------",
-            "color: green; background-color: black"
-        );
-        let isMounted = true;
         const getItinerary = async () => {
             const result = await axios.get(
                 `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
                 config
             );
-            console.log("%cresult", "color: green; background-color: black");
             console.log(result);
-            if (isMounted) {
-                setUserInfo((prevInfo) => ({
-                    ...prevInfo,
-                    userId: storageUserId,
-                    itineraries: [...result.data],
-                    itineraryId: result.data.itineraryId,
-                    itineraryName: result.data.itineraryName,
-                    startingPoint: result.data.startingPoint,
-                    itineraryDate: result.data.itineraryDate,
-                    data: result,
-                }));
-            }
+            setUserInfo((prevInfo) => ({
+                ...prevInfo,
+                userId: storageUserId,
+                itineraries: [...result.data],
+                itineraryId: result.data.itineraryId,
+                itineraryName: result.data.itineraryName,
+                startingPoint: result.data.startingPoint,
+                itineraryDate: result.data.itineraryDate,
+                data: result,
+            }));
         };
         getItinerary();
-        return () => {
-            isMounted = false;
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function goToItinerary(lm) {
@@ -90,10 +81,32 @@ export default function Home(props) {
                     <div className="popup-wrapper">
                         <ControlledPopup />
                     </div>
+                    {/* button - ROUTE
+                    <button
+                        className="create-button border-none"
+                        styles={"cursor:pointer"}
+                        title="Route"
+                    >
+                        <img src="btnMap.png" alt="generate route button" />
+                    </button> */}
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
-                    <ul className="landmark-list">{displayItineraries}</ul>
+                    <ul className="landmark-list">
+                        {/* <li className="landmark-list-items">
+                            <button
+                                className="startPoint-button"
+                                onMouseOver={() => setIsHover(() => true)}
+                                onMouseOut={() => setIsHover(() => false)}
+                            >
+                                {userInfo.locationStart}
+                                {isHover && (
+                                    <span className="dim"> - edit</span>
+                                )}
+                            </button>
+                        </li> */}
+                        {displayItineraries}
+                    </ul>
                     {/* save / delete */}
                     <div className="landmark-action-buttons">
                         <div className="save">

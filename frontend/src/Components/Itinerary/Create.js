@@ -18,17 +18,14 @@ export default function Create(props) {
     }
 
     function handleSubmit(event) {
+        event.preventDefault();
         console.log(baseUrl);
-        console.log(
-            "%chandle submit",
-            "color: magenta; background-color: black"
-        );
+        console.log("handle submit");
         const data = itineraryData;
         console.log(data);
 
         const token = JSON.parse(localStorage.getItem("jwtToken"));
-        console.log("%cToken:", "color: magenta; background-color: black");
-        console.log(token);
+        console.log("this is token" + token);
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -39,10 +36,7 @@ export default function Create(props) {
         axios
             .post(baseUrl + "/itinerary/createItinerary", data, config)
             .then(function () {
-                console.log(
-                    "%caxios",
-                    "color: magenta; background-color: black"
-                );
+                console.log("axios");
             })
             .catch(function (error) {
                 console.log(error);
@@ -87,10 +81,7 @@ export default function Create(props) {
                             placeholder="Date"
                         />
                         <div className="create-form-action">
-                            <button
-                                className="cancel-button"
-                                onClick={props.close}
-                            >
+                            <button type="Reset" className="cancel-button">
                                 Clear
                             </button>
                             <button
