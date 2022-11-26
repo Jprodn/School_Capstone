@@ -200,6 +200,15 @@ export default function Itinerary(props) {
                         <div className="save">
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
                         </div>
+                            <button
+                                className="delete-button"
+                                href="/map-route"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                // onClick={goToSearch}
+                            >
+                                Generate Travel Route
+                            </button>
                         <div className="Delete Itinerary">
                             <button
                                 className="delete-button"
