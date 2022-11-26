@@ -171,7 +171,7 @@ export default function Itinerary(props) {
                     <img
                         className="itinerary-image"
                         alt=""
-                        src="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png"
+                        src="mapping.jpg"
                     />
                 </div>
                 <div className="itinerary-card-body">
