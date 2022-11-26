@@ -5,9 +5,12 @@ import com.techelevator.model.ItineraryLandmark;
 import com.techelevator.model.Landmark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,6 +125,15 @@ public class JdbcItineraryDao implements ItineraryDao{
         String sql = "UPDATE itinerary SET starting_point = ? WHERE itinerary_id = ?";
 
         jdbcTemplate.update(sql, startLocation, itineraryId);
+    }
+
+    public String getStartLocation(int itineraryId) {
+
+        String sql = "SELECT starting_point\n" +
+                "FROM itinerary \n" +
+                "WHERE itinerary_id = ?";
+
+        return jdbcTemplate.queryForObject(sql, String.class, itineraryId);
     }
 
     public void deleteItinerary(int itineraryId) {

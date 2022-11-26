@@ -73,6 +73,11 @@ public class ItineraryController {
         itineraryDao.updateStartLocation(startLocation, itineraryId);
     }
 
+    @RequestMapping(value = "/getStart/{itineraryId}", method = RequestMethod.GET)
+    public String getStartLocation(@Valid @PathVariable int itineraryId, Principal principal) {
+        return itineraryDao.getStartLocation(itineraryId);
+    }
+
     @RequestMapping(value = "/deleteItinerary/{itineraryId}", method = RequestMethod.DELETE)
     public void deleteItinerary(@Valid @PathVariable int itineraryId, Principal principal) {
         itineraryDao.deleteItinerary(itineraryId);

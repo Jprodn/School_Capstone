@@ -30,5 +30,7 @@ public interface ItineraryDao {
 
     void updateStartLocation(String startLocation, int itineraryId);
 
+    String getStartLocation(int itineraryId);
+
     void deleteItinerary(int itineraryId);
 }
