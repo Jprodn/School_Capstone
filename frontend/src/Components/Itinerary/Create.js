@@ -19,10 +19,11 @@ export default function Create(props) {
         }));
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
+        event.preventDefault();
         console.log("%chandleSubmit: baseUrl", createTheme, baseUrl);
         const data = itineraryData;
-        console.log("%cdata", createTheme, data);
+        console.log("%cdata: itineraryData", createTheme, data);
 
         const token = JSON.parse(localStorage.getItem("jwtToken"));
         console.log("%cToken", createTheme, token);
@@ -33,11 +34,8 @@ export default function Create(props) {
             },
         };
 
-        axios
+        await axios
             .post(baseUrl + "/itinerary/createItinerary", data, config)
-            .then(function () {
-                console.log("%caxios", createTheme);
-            })
             .catch(function (error) {
                 console.log("%cerror", createTheme, error);
             });

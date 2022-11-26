@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { defaultTheme } from "react-select";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
@@ -12,7 +13,7 @@ export default function Itinerary(props) {
         data: {},
     });
     const itineraryTheme = "color: orange; background-color: black";
-
+    const itineraryURL = "http://localhost:8081/itinerary";
     const [userLandmarks, setUserLandmarks] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const token = JSON.parse(localStorage.getItem("jwtToken"));
@@ -30,6 +31,14 @@ export default function Itinerary(props) {
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
     };
+    const config2 = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "text/plain",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "PUT",
+        },
+    };
 
     useEffect(() => {
         console.log("%c-----Itinerary-----", itineraryTheme);
@@ -38,26 +47,39 @@ export default function Itinerary(props) {
             itineraryTheme,
             currentItineraryInfo
         );
+
         let isMounted = true;
+        let startPoint = '';
+        
+        const itineraryStartingPoint = async () => {
+            startPoint = await axios.get(
+                `${itineraryURL}/getStart/${currentItineraryInfo.itineraryId}`,
+                config
+            )
+            console.log("%cStartPoint:", itineraryTheme, startPoint);
+            if (isMounted) {
+                setUserInfo((prevInfo) => ({
+                    ...prevInfo,
+                    startingPoint: startPoint.data,
+                }));
+            }
+        };
         const getItinerary = async () => {
             const result = await axios.get(
-                `http://localhost:8081/itinerary/getItineraries/user/${storageUserId}`,
+                `${itineraryURL}/getItineraries/user/${storageUserId}`,
                 config
             );
+
             console.log("%cgetItinerary: result", itineraryTheme, result);
             if (isMounted) {
                 setUserInfo((prevInfo) => ({
                     ...prevInfo,
                     userId: storageUserId,
                     itineraries: [...result.data],
-                    itineraryId: result.data.itineraryId,
-                    itineraryName: result.data.itineraryName,
-                    startingPoint: result.data.startingPoint,
-                    itineraryDate: result.data.itineraryDate,
-                    data: result,
                 }));
             }
         };
+        itineraryStartingPoint();
         getItinerary();
         return () => {
             isMounted = false;
@@ -74,7 +96,7 @@ export default function Itinerary(props) {
         let isMounted = true;
         const getUserLandmarks = async () => {
             const result = await axios.get(
-                `http://localhost:8081/itinerary/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
+                `${itineraryURL}/getLandmarks/user/${storageUserId}/${currentItineraryInfo.itineraryId}`,
                 config
             );
 
@@ -99,7 +121,7 @@ export default function Itinerary(props) {
 
     const deleteItinerary = async () => {
         const response = await axios.delete(
-            `http://www.localhost:8081/itinerary/deleteItinerary/${currentItineraryInfo.itineraryId}`,
+            `${itineraryURL}/deleteItinerary/${currentItineraryInfo.itineraryId}`,
             config
         );
         console.log("%cdeleteItinerary response", itineraryTheme, response);
@@ -108,7 +130,7 @@ export default function Itinerary(props) {
 
     const deleteLandmark = async (e) => {
         await axios.delete(
-            `http://www.localhost:8081/itinerary/removeLandmark/${currentItineraryInfo.itineraryId}/${e.target.name}`,
+            `${itineraryURL}/removeLandmark/${currentItineraryInfo.itineraryId}/${e.target.name}`,
             config
         );
         window.location.reload();
@@ -148,17 +170,29 @@ export default function Itinerary(props) {
     const goToSearch = () => window.location.replace("/landmark");
 
     const removeLocationFocus = async (e) => {
-        if (e.keyCode === 13) {
-            setIsEditing(false);
+        if (e.keyCode === 13 && isEditing) {
             setUserInfo((p) => ({
                 ...p,
-                startingPoint: [e.startingPoint, e.target.value],
+                startingPoint: e.target.value,
             }));
-            await axios(
-                `http://localHost:8081/itinerary/updateStart/${userInfo.startingPoint}`,
-                config
+            const data = userInfo.startingPoint;
+            await axios.put(
+                `${itineraryURL}/updateStart/${currentItineraryInfo.itineraryId}`,
+                data,
+                config2
             );
+            setIsEditing(false);
         }
+    };
+
+    const updateStartingLocation = async () => {
+        setIsEditing(false);
+        const data = userInfo.startingPoint;
+        await axios.put(
+            `${itineraryURL}/updateStart/${currentItineraryInfo.itineraryId}`,
+            data,
+            config2
+        );
     };
 
     return (
@@ -188,9 +222,12 @@ export default function Itinerary(props) {
                                         value={userInfo.startingPoint || ""}
                                         autoFocus
                                         onKeyUp={removeLocationFocus}
+                                        onBlur={updateStartingLocation}
                                     />
                                 ) : (
-                                    <span>{userInfo.startingPoint}</span>
+                                    <>
+                                        <span>{userInfo.startingPoint}</span>
+                                    </>
                                 )}
                             </button>
                         </li>

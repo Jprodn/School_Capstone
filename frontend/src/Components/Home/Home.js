@@ -65,7 +65,7 @@ export default function Home(props) {
                 className="landmark-list-buttons"
                 id={lm.itineraryId}
                 onClick={() => goToItinerary(lm)}
-            >
+                >
                 {lm.itineraryName} - {lm.itineraryId}
             </button>
         </li>
