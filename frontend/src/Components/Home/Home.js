@@ -71,22 +71,17 @@ export default function Home(props) {
         </li>
     ));
 
+    const goToCreate = () => window.location.replace("/itinerary/create");
+
     // JSX
     return (
         <div>
             <div className="itinerary-card">
                 {/* title */}
-                <h1 className="itinerary-card-title">Itinerary Lists</h1>
+                <h1 className="itinerary-card-title"></h1>
                 {/* image */}
                 <div className="itinerary-card-image">
-                    <img className="itinerary-image" alt="" src="Map.png" />
-                </div>
-                {/* edit buttons */}
-                <div className="landmark-action-buttons">
-                    {/* Popup - CREATE */}
-                    <div className="popup-wrapper">
-                        <ControlledPopup />
-                    </div>
+                    <img className="itinerary-image" alt="" src="travel.jpg" />
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
@@ -99,6 +94,19 @@ export default function Home(props) {
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
                         </div>
                     </div>
+                                    {/* edit buttons */}
+                <div className="landmark-action-buttons">
+                    {/* Popup - CREATE */}
+                            <button
+                                className="delete-button"
+                                onClick={goToCreate}
+                            >
+                                Create Itinerary
+                            </button>
+                    {/* <div className="popup-wrapper">
+                        <ControlledPopup />
+                    </div> */}
+                </div>
                 </div>
             </div>
         </div>

@@ -164,13 +164,7 @@ function Landmark(props) {
                         alt="landmark-img"
                     />
                     <h3>{props.item.landmarkName}</h3>
-                    <button
-                        type="submit"
-                        className="Add-itinerary-button"
-                        onClick={handleAdd}
-                    >
-                        Add to itinerary
-                    </button>
+
                     <div className="info-group">
                         <img
                             src="http://cdn.onlinewebfonts.com/svg/img_413782.png"
@@ -234,6 +228,13 @@ function Landmark(props) {
                                 </a>
                             </li>
                         </ul>
+                        <button
+                        type="submit"
+                        className="Add-itinerary-button"
+                        onClick={handleAdd}
+                        >
+                        Add to itinerary
+                        </button>
                         <div className="rating">
                             <div className="like grow">
                                 <i

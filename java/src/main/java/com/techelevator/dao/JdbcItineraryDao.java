@@ -137,10 +137,12 @@ public class JdbcItineraryDao implements ItineraryDao{
     }
 
     public void deleteItinerary(int itineraryId) {
+        String sql = "DELETE FROM itinerary_landmarks WHERE itinerary_id = ?";
+        String sql1 = "DELETE FROM itinerary WHERE itinerary_id = ? ";
 
-        String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
 
         jdbcTemplate.update(sql, itineraryId);
+        jdbcTemplate.update(sql1, itineraryId);
     }
 
 
