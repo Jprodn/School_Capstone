@@ -1,9 +1,14 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Itinerary;
 import com.techelevator.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class JdbcReviewDao implements ReviewDao {
@@ -22,4 +27,24 @@ public class JdbcReviewDao implements ReviewDao {
         jdbcTemplate.update(sql, review.getLandmarkId(), review.getTitle(), review.getName(), review.getReview());
     }
 
+    @Override
+    public List<Review> getReviews() {
+        List<Review> reviews = new ArrayList<>();
+        String sql = "SELECT * FROM review";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Review review = mapRowToReview(results);
+            reviews.add(review);
+        }
+        return reviews;
+    }
+
+    private Review mapRowToReview(SqlRowSet rs) {
+        Review review = new Review();
+        review.setLandmarkId(rs.getInt("landmark_id"));
+        review.setTitle(rs.getString("title"));
+        review.setName(rs.getString("name"));
+        review.setReview(rs.getString("review"));
+        return review;
+    }
 }
