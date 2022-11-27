@@ -32,6 +32,7 @@ export default function Router(props) {
             setLongitude(response.data.addresses[0].longitude);
             console.log("%clat / long", routerTheme);
             console.log(lat + " " + long);
+            console.log(userToken);
         };
 
         fetchCords();
@@ -39,7 +40,7 @@ export default function Router(props) {
 
     return (
         <>
-            {userToken !== undefined && <NavLinkBar />}
+            {userToken !== null && <NavLinkBar/>}
             <Switch>
                 <Route exact path="/" component={() => <Login />} />
                 <Route exact path="/login" component={() => <Login />} />

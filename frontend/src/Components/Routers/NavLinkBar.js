@@ -12,6 +12,10 @@ export default function NavLinkBar(props) {
   console.log("%c-----NavLinkBar-----", "color: yellow; background-color: black");
   console.log("%cToken", "color: yellow; background-color: black", token);
 
+  if (!token) {
+    return null
+  }
+  
   return (
     <>
       <Link className="main-list" to="/home">
