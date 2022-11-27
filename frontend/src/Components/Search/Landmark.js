@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import { baseUrl } from "../../Shared/baseUrl";
+
 function Landmark(props) {
     const [data, setData] = React.useState([]);
 
@@ -8,6 +10,13 @@ function Landmark(props) {
     function handleClick() {
         setIsClicked((isClicked) => !isClicked);
     }
+
+    const [review, setReview] = React.useState(() => ({
+      landmarkId: props.item.landmarkId,
+      title: "",
+      name: "",
+      review: "",
+  }));
 
     const landmarkTheme = "color: dodgerblue; background-color: black";
     const token = JSON.parse(localStorage.getItem("jwtToken"));
@@ -91,7 +100,6 @@ function Landmark(props) {
 
     const handleAdd = async (e) =>
         await axios
-            // .post(`http://localhost:8081/itinerary/addLandmark/${currentItineraryInfo.itineraryId}/${props.item.landmarkId}`, config)
             .post(
                 `http://localhost:8081/itinerary/addLandmark`,
                 {
@@ -105,10 +113,7 @@ function Landmark(props) {
     const handleLikes = async (e) =>
         await axios
             .put(
-                `http://localhost:8081/landmark/rating/likes/${e.target.name}`,
-                // {
-                //   landmarkId: `${props.item.landmarkId}`,
-                // },
+                `http://localhost:8081/landmark/rating/likes/${props.item.landmarkId}`,
                 config
             )
             .then(
@@ -129,10 +134,7 @@ function Landmark(props) {
     const handleDislikes = async (e) => {
         await axios
             .put(
-                `http://localhost:8081/landmark/rating/dislikes/${e.target.name}`,
-                // {
-                //   landmarkId: `${props.item.landmarkId}`,
-                // },
+                `http://localhost:8081/landmark/rating/dislikes/${props.item.landmarkId}`,
                 config
             )
             .then(
@@ -143,6 +145,22 @@ function Landmark(props) {
                 )
             );
     };
+
+    function handleChange(e) {
+      setReview((prevData) => ({
+          ...prevData,
+          [e.target.name]: e.target.value,
+      }));
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      await axios
+          .post(baseUrl + "/landmark/review/add-review", review, config)
+          .catch(function (error) {
+              console.log("error");
+          });
+  }
 
     function storeData() {
         localStorage.clear();
@@ -228,34 +246,70 @@ function Landmark(props) {
                                 </a>
                             </li>
                         </ul>
-                        <button
-                        type="submit"
-                        className="Add-itinerary-button"
-                        onClick={handleAdd}
-                        >
-                        Add to itinerary
-                        </button>
-                        <div className="rating">
-                            <div className="like grow">
-                                <i
-                                    className="fa fa-thumbs-up fa-2x like"
-                                    aria-hidden="true"
-                                    onClick={handleLikes}
-                                ></i>
-                            </div>
-                            <div className="dislike grow">
-                                <i
-                                    className="fa fa-thumbs-down fa-2x like"
-                                    aria-hidden="true"
-                                    onClick={handleDislikes}
-                                ></i>
-                            </div>
-                            <h5>Write your review:</h5>
-                            <input className="form-control" placeholder="Title"></input>
-                            <input className="form-control" placeholder="Name"></input>
-                            <textarea className="form-control"></textarea>
-			                      <button className="btn btn-success">Submit</button>
+                    <button
+                      type="submit"
+                      className="Add-itinerary-button"
+                      onClick={handleAdd}
+                    >
+                    Add to itinerary
+                    </button>
+                    <div className="rating">
+                        <div className="like grow">
+                            <i
+                                className="fa fa-thumbs-up fa-1x like"
+                                aria-hidden="true"
+                                onClick={handleLikes}
+                            ></i>
                         </div>
+                        <div className="dislike grow">
+                            <i
+                                className="fa fa-thumbs-down fa-1x like"
+                                aria-hidden="true"
+                                onClick={handleDislikes}
+                            ></i>
+                        </div>
+                        {/* <h5>Write your review:</h5>
+                        <input className="form-control" placeholder="Title"></input>
+                        <input className="form-control" placeholder="Name"></input>
+                        <textarea className="form-control" placeholder="Your review here..."></textarea>
+                        <button className="btn btn-success">Submit</button> */}
+                    </div>
+                  <div className="create-card-body">
+                    <form className="create-form">
+                        <input
+                            type="text"
+                            className="create-input-form"
+                            onChange={handleChange}
+                            placeholder="Title"
+                            autoComplete="off"
+                        />
+                        <input
+                            type="text"
+                            className="create-input-form"
+                            onChange={handleChange}
+                            name="Name"
+                            placeholder="Name"
+                        />
+                        <textarea
+                            type="text"
+                            className="create-input-form"
+                            onChange={handleChange}
+                            placeholder="Your review here..."
+                        />
+                        <div className="create-form-action">
+                            <button type="Reset" className="cancel-button">
+                                Clear
+                            </button>
+                            <button
+                                type="Submit"
+                                className="ok-button"
+                                onClick={handleSubmit}
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
                     </div>
                 </div>
             </div>
