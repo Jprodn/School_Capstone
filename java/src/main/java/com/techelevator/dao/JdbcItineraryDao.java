@@ -31,7 +31,7 @@ public class JdbcItineraryDao implements ItineraryDao{
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
-            Itinerary itinerary = mapRowToUser(results);
+            Itinerary itinerary = mapRowToItinerary(results);
             itineraries.add(itinerary);
         }
         return itineraries;
@@ -43,7 +43,7 @@ public class JdbcItineraryDao implements ItineraryDao{
         String sql = "SELECT * FROM itinerary WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while(results.next()) {
-            Itinerary itinerary = mapRowToUser(results);
+            Itinerary itinerary = mapRowToItinerary(results);
             itineraries.add(itinerary);
         }
         return itineraries;
@@ -55,7 +55,7 @@ public class JdbcItineraryDao implements ItineraryDao{
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
         if(results.next()) {
-            return mapRowToUser(results);
+            return mapRowToItinerary(results);
         } else {
             throw new RuntimeException("itineraryId " +
                     " was not found.");
@@ -147,7 +147,7 @@ public class JdbcItineraryDao implements ItineraryDao{
 
 
 
-    private Itinerary mapRowToUser(SqlRowSet rs) {
+    private Itinerary mapRowToItinerary(SqlRowSet rs) {
         Itinerary itinerary = new Itinerary();
         itinerary.setItineraryId(rs.getInt("itinerary_id"));
         itinerary.setItineraryName(rs.getString("itinerary_name"));

@@ -15,8 +15,6 @@ export default function NavLinkBar(props) {
   console.log("%c-----NavLinkBar-----", "color: yellow; background-color: black");
   console.log("%cToken", "color: yellow; background-color: black", token);
 
-  
-
   const [active, setActive] = useState("nav__menu");
   const [icon, setIcon] = useState("nav__toggler");
   const navToggle = () => {
@@ -36,6 +34,25 @@ export default function NavLinkBar(props) {
     behavior: "smooth"
   })
   
+
+  // Navbar Hiding
+  if (!token) {
+    return (
+      <>
+      <nav className="nav">
+      <Link className="main-list"  to="/home">
+        Home{" "}
+      </Link>
+              <li className="nav__item">
+        <Link className="main-list" to="/login" onClick={handleLogout}>
+        {"login"}
+      </Link>
+      </li>
+      </nav>
+      </>
+    )
+  }
+
 
   return (
     <>
@@ -82,3 +99,4 @@ export default function NavLinkBar(props) {
     </>
   );
 }
+
