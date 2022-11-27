@@ -250,71 +250,17 @@ function Landmark(props) {
                                     onClick={handleDislikes}
                                 ></i>
                             </div>
+                            <h5>Write your review:</h5>
+                            <input className="form-control" placeholder="Title"></input>
+                            <input className="form-control" placeholder="Name"></input>
+                            <textarea className="form-control"></textarea>
+			                      <button className="btn btn-success">Submit</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-
-    // <div className="Landmark-card" onClick={handleClick}>
-
-    //   <div>
-    //     <img
-    //       className="landmark-card-image"
-    //       src={require(`../../Images/${props.item.imgUrl}`).default}
-    //     />
-    //   </div>
-
-    //   <h1 className="Landmark-card-title">{props.item.landmarkName}</h1>
-
-    //   <div className="Landmark-card-body">
-    //     <p className="landmark-location">
-    //       <i className="fa-sharp fa-solid fa-location-dot"></i>
-    //       {`${props.item.address === null ? "" : `${props.item.address}, `}${
-    //         props.item.city
-    //       }, ${props.item.state}${
-    //         props.item.postalCode === null ? "" : `, ${props.item.postalCode}`
-    //       }`}
-    //     </p>
-
-    //     <div className="action">
-    //       <button
-    //         type="submit"
-    //         className="Add-itinerary-button"
-    //         onClick={handleAdd}
-    //       >
-    //         Add to itinerary
-    //       </button>
-    //     </div>
-
-    //     <div className="Landmark-map-link">
-    //       <a
-    //         href={props.item.mapUrl}
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //         className="landmark-maps"
-    //       >
-    //         View on Google Maps
-    //       </a>
-
-    //       <a
-    //         href="/map-route"
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //         className="map-route"
-    //         onClick={storeData}
-    //       >
-    //         View map
-    //       </a>
-    //     </div>
-
-    //     <p className="landmark-description">{props.item.description}</p>
-
-    //     <label className="hours">Hours</label>
-    //     {isClicked && <div className="hours">{hourElement}</div>}
-    //   </div>
-    // </div>
 }
 
 export default Landmark;

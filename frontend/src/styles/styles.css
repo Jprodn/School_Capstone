@@ -235,6 +235,10 @@ img {
   margin: 5px;
 }
 
+.btn-success {
+  margin-top: 10px;
+}
+
 .ok-button:hover {
   background-color: #cccccc;
 }
