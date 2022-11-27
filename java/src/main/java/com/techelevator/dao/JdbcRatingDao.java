@@ -16,14 +16,26 @@ public class JdbcRatingDao implements RatingDao {
 
     @Override
     public void addLikes(int landmarkId) {
-        String sql = "UPDATE Rating SET likes=likes+1 Where landmark_id = ?";
+        String sql = "UPDATE Rating SET likes=likes+1 WHERE landmark_id = ?";
         jdbcTemplate.update(sql, landmarkId);
     }
 
     @Override
     public void addDislikes(int landmarkId) {
-        String sql = "UPDATE Rating SET dislikes=dislikes+1 Where landmark_id = ?";
+        String sql = "UPDATE Rating SET dislikes=dislikes+1 WHERE landmark_id = ?";
         jdbcTemplate.update(sql, landmarkId);
+    }
+
+    @Override
+    public int getLikeCount(int landmarkId) {
+        String sql = "SELECT likes FROM rating WHERE landmark_id = ?";
+        return jdbcTemplate.update(sql, landmarkId);
+    }
+
+    @Override
+    public int getDislikeCount(int landmarkId) {
+        String sql = "SELECT dislikes FROM rating WHERE landmark_id = ?";
+        return jdbcTemplate.update(sql, landmarkId);
     }
 }
 

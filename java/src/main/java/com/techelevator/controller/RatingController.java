@@ -25,4 +25,14 @@ public class RatingController {
         ratingDao.addDislikes(landmarkId);
     }
 
+    @RequestMapping(value = "/like-count/{landmarkId}", method = RequestMethod.GET)
+    public int getLikeCount(@PathVariable int landmarkId) {
+        return ratingDao.getLikeCount(landmarkId);
+    }
+
+    @RequestMapping(value = "/dislike-count/{landmarkId}", method = RequestMethod.GET)
+    public int getDislikeCount(@PathVariable int landmarkId) {
+        return ratingDao.getDislikeCount(landmarkId);
+    }
+
 }
