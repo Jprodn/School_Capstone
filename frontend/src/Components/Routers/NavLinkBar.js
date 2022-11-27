@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -8,6 +8,8 @@ export default function NavLinkBar(props) {
     this.props.deleteUser();
     localStorage.clear();
   };
+
+
 
   let token = window.localStorage.getItem("jwtToken");
   console.log("%c-----NavLinkBar-----", "color: yellow; background-color: black");
@@ -27,6 +29,13 @@ export default function NavLinkBar(props) {
       setIcon("nav__toggler toggle");
     } else setIcon("nav__toggler");
   };
+
+  const [isTop, setIsTop] = useState({ 
+    top: 0,
+    left: 0, 
+    behavior: "smooth"
+  })
+  
 
   return (
     <>
@@ -65,7 +74,11 @@ export default function NavLinkBar(props) {
         <div className="line3"></div>
       </div>
     </nav>
-
+    <button
+      className="toTop"
+      onClick={() => {
+          window.scrollTo(isTop);
+      }}><img src="chevron.png" className="chevron"></img></button>
     </>
   );
 }

@@ -797,4 +797,14 @@ img {
   transform: rotate(45deg) translate(-4px, -5px);
 }
 
+.toTop {
+  position: fixed;
+  top: 90vh;
+  left: 90vw;
+  width: 50px;
+}
 
+.chevron {
+  border: none; 
+  color: rgba(0, 0, 0, 0.5)
+}
