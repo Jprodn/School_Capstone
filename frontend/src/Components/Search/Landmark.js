@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { baseUrl } from "../../Shared/baseUrl";
@@ -25,7 +25,7 @@ function Landmark(props) {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
         },
     };
 
@@ -160,7 +160,43 @@ function Landmark(props) {
           .catch(function (error) {
               console.log("error");
           });
-  }
+    }
+
+    const [likes, setLikes] = useState({
+      likeCounts: 0,
+      dislikeCounts: 0
+    })
+
+    useEffect(() => {
+      const getLikeCounts = async () => {
+       await axios
+        .get(`${baseUrl}/landmark/review/like-count/${props.item.landmarkId}`, config)
+        .then(val => {
+          console.log("VAL: " + val);
+          // setLikes(...prevLikes => ({
+          //   ...prevLikes,
+          //   likeCounts: val
+          // }))
+        })
+        .catch(function (error) {
+          console.log("error");
+        });
+
+        await axios
+        .get(`${baseUrl}/landmark/review/dislike-count/${props.item.landmarkId}`, config)
+        .then(val => {
+          setLikes(...prevLikes => ({
+            ...prevLikes,
+            dislikeCounts: val
+          }))
+        })
+        .catch(function (error) {
+          console.log("error");
+        });
+      }
+
+      getLikeCounts();
+    }, [])
 
     function storeData() {
         localStorage.clear();
@@ -260,6 +296,7 @@ function Landmark(props) {
                                 aria-hidden="true"
                                 onClick={handleLikes}
                             ></i>
+                            {likes.likeCounts}
                         </div>
                         <div className="dislike grow">
                             <i
@@ -267,6 +304,7 @@ function Landmark(props) {
                                 aria-hidden="true"
                                 onClick={handleDislikes}
                             ></i>
+                            {likes.dislikeCounts}
                         </div>
                         {/* <h5>Write your review:</h5>
                         <input className="form-control" placeholder="Title"></input>
