@@ -130,8 +130,8 @@ public class JdbcItineraryDao implements ItineraryDao{
     public String getStartLocation(int itineraryId) {
 
         String sql = "SELECT starting_point\n" +
-                "FROM itinerary \n" +
-                "WHERE itinerary_id = ?";
+                     "FROM itinerary \n" +
+                     "WHERE itinerary_id = ?";
 
         return jdbcTemplate.queryForObject(sql, String.class, itineraryId);
     }

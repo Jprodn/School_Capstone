@@ -29,13 +29,13 @@ public class JdbcRatingDao implements RatingDao {
     @Override
     public int getLikeCount(int landmarkId) {
         String sql = "SELECT likes FROM rating WHERE landmark_id = ?";
-        return jdbcTemplate.update(sql, landmarkId);
+        return jdbcTemplate.queryForObject(sql, int.class, landmarkId);
     }
 
     @Override
     public int getDislikeCount(int landmarkId) {
         String sql = "SELECT dislikes FROM rating WHERE landmark_id = ?";
-        return jdbcTemplate.update(sql, landmarkId);
+        return jdbcTemplate.queryForObject(sql, int.class, landmarkId);
     }
 }
 
