@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ControlledPopup from "../Popup/ControlledPopup";
 
 export default function Home(props) {
     const [userInfo, setUserInfo] = useState({
@@ -66,7 +65,7 @@ export default function Home(props) {
                 id={lm.itineraryId}
                 onClick={() => goToItinerary(lm)}
                 >
-                {lm.itineraryName} - {lm.itineraryId}
+                {lm.itineraryName}
             </button>
         </li>
     ));

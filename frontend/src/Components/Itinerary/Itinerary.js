@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { defaultTheme } from "react-select";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
