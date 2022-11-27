@@ -11,6 +11,8 @@ export default function Create(props) {
     }));
 
     const createTheme = "color: pink; background-color: black";
+    
+    let token = window.localStorage.getItem("jwtToken");
 
     function handleChange(e) {
         setItineraryData((prevData) => ({
@@ -41,6 +43,17 @@ export default function Create(props) {
             });
     }
 
+    if (!token) {
+        const timeout = setTimeout(() => {
+          window.location.replace('http://localhost:3000');
+        }, 2000);
+      
+    return (
+        <>
+            <h1>Unauthorized User... Please log in.</h1>
+        </>
+    )
+}
     return (
         <div>
             <div className="create-card">

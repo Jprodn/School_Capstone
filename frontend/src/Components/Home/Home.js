@@ -53,9 +53,13 @@ export default function Home(props) {
     }, []);
 
     function goToItinerary(lm) {
+        if (!token) {
+            window.location.replace(`/login`);
+    }else{
         window.localStorage.setItem(`currentItinerary`, JSON.stringify(lm));
         window.location.replace(`/itinerary`);
     }
+}   
 
     // DISPLAYS
     const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
@@ -70,8 +74,14 @@ export default function Home(props) {
         </li>
     ));
 
-    const goToCreate = () => window.location.replace("/itinerary/create");
-
+    const goToCreate = () => {
+        if (!token) {
+            window.location.replace(`/login`);
+        }else{
+         window.location.replace("/itinerary/create");
+        }
+    }
+    
     // JSX
     return (
         <div>

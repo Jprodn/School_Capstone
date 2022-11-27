@@ -194,6 +194,18 @@ export default function Itinerary(props) {
         );
     };
 
+    if (!token) {
+        const timeout = setTimeout(() => {
+          window.location.replace('http://localhost:3000');
+        }, 2000);
+      
+    return (
+        <>
+            <h1>Unauthorized User... Please log in.</h1>
+        </>
+    )
+}
+
     return (
         <div>
             <div className="itinerary-card">

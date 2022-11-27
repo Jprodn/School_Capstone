@@ -9,6 +9,8 @@ function Search() {
     const searchTheme = "color: green; background-color: black";
     const [listState, setListState] = React.useState([]);
     const [listCity, setListCity] = React.useState([]);
+    
+    let token = window.localStorage.getItem("jwtToken");
 
     const [selectedState, setselectedState] = React.useState({
         value: "select",
@@ -94,6 +96,18 @@ function Search() {
     const styles = {
         control: (styles) => ({ ...styles, marginBottom: "50px" }),
     };
+
+    if (!token) {
+            const timeout = setTimeout(() => {
+              window.location.replace('http://localhost:3000');
+            }, 2000);
+          
+        return (
+            <>
+                <h1>Unauthorized User... Please log in.</h1>
+            </>
+        )
+    }
 
     return (
         <div className="search-div">
