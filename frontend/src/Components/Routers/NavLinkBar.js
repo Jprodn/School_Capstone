@@ -13,6 +13,38 @@ export default function NavLinkBar(props) {
   console.log("%c-----NavLinkBar-----", "color: yellow; background-color: black");
   console.log("%cToken", "color: yellow; background-color: black", token);
 
+  const [active, setActive] = useState("nav__menu");
+  const [icon, setIcon] = useState("nav__toggler");
+  const navToggle = () => {
+    if (active === "nav__menu") {
+      setActive("nav__menu nav__active");
+    } else setActive("nav__menu");
+
+    // Icon Toggler
+    if (icon === "nav__toggler") {
+      setIcon("nav__toggler toggle");
+    } else setIcon("nav__toggler");
+  };
+
+  // Navbar Hiding
+  if (!token) {
+    return (
+      <>
+      <nav className="nav">
+      <Link className="main-list"  to="/home">
+        Home{" "}
+      </Link>
+              <li className="nav__item">
+        <Link className="main-list" to="/login" onClick={handleLogout}>
+        {"login"}
+      </Link>
+      </li>
+      </nav>
+      </>
+    )
+  }
+
+
   return (
     <>
 
@@ -54,3 +86,4 @@ export default function NavLinkBar(props) {
     </>
   );
 }
+
