@@ -111,6 +111,10 @@ function Landmark(props) {
             .then(console.log("%cconfig", landmarkTheme, config));
 
     const handleLikes = async (e) => {
+        setLikes(prevLikes => ({
+          ...prevLikes,
+          likeCounts: prevLikes.likeCounts + 1
+        }))
         await axios
             .put(
                 `http://localhost:8081/landmark/rating/likes/${props.item.landmarkId}`,
@@ -133,6 +137,10 @@ function Landmark(props) {
     }
 
     const handleDislikes = async (e) => {
+      setLikes(prevLikes => ({
+        ...prevLikes,
+        dislikeCounts: prevLikes.dislikeCounts + 1
+      }))
         await axios
             .put(
                 `http://localhost:8081/landmark/rating/dislikes/${props.item.landmarkId}`,
@@ -196,7 +204,7 @@ function Landmark(props) {
         }
         
         getDislikeCounts();
-      }, [likes.dislikeCounts])
+      }, [])
 
     function storeData() {
         localStorage.clear();
