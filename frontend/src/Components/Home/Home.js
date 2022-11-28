@@ -55,11 +55,11 @@ export default function Home(props) {
     function goToItinerary(lm) {
         if (!token) {
             window.location.replace(`/login`);
-    }else{
-        window.localStorage.setItem(`currentItinerary`, JSON.stringify(lm));
-        window.location.replace(`/itinerary`);
+        } else {
+            window.localStorage.setItem(`currentItinerary`, JSON.stringify(lm));
+            window.location.replace(`/itinerary`);
+        }
     }
-}   
 
     // DISPLAYS
     const displayItineraries = userInfo.itineraries.map((lm, count = 0) => (
@@ -68,7 +68,7 @@ export default function Home(props) {
                 className="landmark-list-buttons"
                 id={lm.itineraryId}
                 onClick={() => goToItinerary(lm)}
-                >
+            >
                 {lm.itineraryName}
             </button>
         </li>
@@ -77,14 +77,14 @@ export default function Home(props) {
     const goToCreate = () => {
         if (!token) {
             window.location.replace(`/login`);
-        }else{
-         window.location.replace("/itinerary/create");
+        } else {
+            window.location.replace("/itinerary/create");
         }
     }
-    
+
     // JSX
     return (
-        <div>
+        <div className="main-itinerary-div">
             <div className="itinerary-card">
                 {/* title */}
                 <h1 className="itinerary-card-title"></h1>
@@ -94,28 +94,35 @@ export default function Home(props) {
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
+
+                   
+         
                     <ul className="landmark-list">
-                        {displayItineraries}
-                    </ul>
+                        
+                      {displayItineraries}
+
+                    </ul> 
+
+
                     {/* save / delete */}
                     <div className="landmark-action-buttons">
                         <div className="save">
                             {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
                         </div>
                     </div>
-                                    {/* edit buttons */}
-                <div className="landmark-action-buttons">
-                    {/* Popup - CREATE */}
-                            <button
-                                className="delete-button"
-                                onClick={goToCreate}
-                            >
-                                Create Itinerary
+                    {/* edit buttons */}
+                    <div className="landmark-action-buttons">
+                        {/* Popup - CREATE */}
+                        <button
+                            className="delete-button"
+                            onClick={goToCreate}
+                        >
+                            Create Itinerary
                             </button>
-                    {/* <div className="popup-wrapper">
+                        {/* <div className="popup-wrapper">
                         <ControlledPopup />
                     </div> */}
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
