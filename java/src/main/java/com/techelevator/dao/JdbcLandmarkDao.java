@@ -117,6 +117,32 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return cities;
     }
 
+    @Override
+    public List<String> getLandmarkAddress(int itineraryId) {
+        List<Landmark> landmarks = new ArrayList<>();
+        List<String> address = new ArrayList<>();
+
+        String sql = "SELECT address, city, state, postal_code " +
+                "FROM landmark " +
+                "JOIN itinerary_landmarks " +
+                "ON itinerary_landmarks.landmark_id = landmark.landmark_id " +
+                "JOIN itinerary " +
+                "ON itinerary.itinerary_id = itinerary_landmarks.itinerary_id " +
+                "WHERE itinerary.itinerary_id = ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, itineraryId);
+
+        while (rowSet.next())
+        {
+            landmarks.add(mapRowToAddress(rowSet));
+        }
+
+        for (Landmark lm: landmarks) {
+            address.add(lm.getAddress() + ", " + lm.getCity() + ", " + lm.getState() + ", " + lm.getPostalCode());
+        }
+
+        return address;
+    }
+
 
     private Landmark mapRowToLandmark(SqlRowSet rs) {
         Landmark landmark = new Landmark();
@@ -142,6 +168,15 @@ public class JdbcLandmarkDao implements LandmarkDao {
     private Landmark mapRowToCities(SqlRowSet rs) {
         Landmark landmark = new Landmark();
         landmark.setCity(rs.getString("city"));
+        return landmark;
+    }
+
+    private Landmark mapRowToAddress(SqlRowSet rs) {
+        Landmark landmark = new Landmark();
+        landmark.setAddress(rs.getString("address"));
+        landmark.setCity(rs.getString("city"));
+        landmark.setState(rs.getString("state"));
+        landmark.setPostalCode(rs.getString("postal_code"));
         return landmark;
     }
 

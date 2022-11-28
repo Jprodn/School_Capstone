@@ -49,6 +49,11 @@ public class LandmarkController {
         return landmarkDao.getCityInState(state);
     }
 
+    @GetMapping(path = "/landmark/itinerary/{itineraryId}")
+    public List<String> getLandmarkAddress(@PathVariable int itineraryId){
+        return landmarkDao.getLandmarkAddress(itineraryId);
+    }
+
 
 
 }

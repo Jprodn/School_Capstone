@@ -18,4 +18,6 @@ public interface LandmarkDao {
 
     List<String> getCityInState(String state);
 
+    List<String> getLandmarkAddress(int itineraryId);
+
 }
