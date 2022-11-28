@@ -11,12 +11,12 @@ function Landmark(props) {
         setIsClicked((isClicked) => !isClicked);
     }
 
-    const [review, setReview] = React.useState(() => ({
+    const [review, setReview] = React.useState({
       landmarkId: props.item.landmarkId,
       title: "",
       name: "",
       review: "",
-  }));
+  });
 
     const landmarkTheme = "color: dodgerblue; background-color: black";
     const token = JSON.parse(localStorage.getItem("jwtToken"));
@@ -166,6 +166,7 @@ function Landmark(props) {
       event.preventDefault();
       await axios
           .post(baseUrl + "/landmark/review/add-review", review, config)
+          .then(console.log("review=" + JSON.stringify(review)))
           .catch(function (error) {
               console.log("error");
           });
@@ -327,8 +328,7 @@ function Landmark(props) {
                             className="create-input-form"
                             onChange={handleChange}
                             placeholder="Title"
-                            name-="title"
-                            autoComplete="off"
+                            name="title"
                         />
                         <input
                             type="text"
