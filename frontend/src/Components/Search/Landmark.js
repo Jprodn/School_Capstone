@@ -110,7 +110,7 @@ function Landmark(props) {
             )
             .then(console.log("%cconfig", landmarkTheme, config));
 
-    const handleLikes = async (e) =>
+    const handleLikes = async (e) => {
         await axios
             .put(
                 `http://localhost:8081/landmark/rating/likes/${props.item.landmarkId}`,
@@ -130,6 +130,7 @@ function Landmark(props) {
                     config
                 )
             );
+    }
 
     const handleDislikes = async (e) => {
         await axios
@@ -177,8 +178,14 @@ function Landmark(props) {
             likeCounts: val.data
           }))
         })
+      }
+        getLikeCounts();
+        console.log("looping ?");
+    }, [])
 
-        await axios
+    useEffect((config) => {
+        const getDislikeCounts = async () => {
+          await axios
         .get(`${baseUrl}/landmark/rating/dislike-count/${review.landmarkId}`, config)
         .then(val => {
           setLikes(prevLikes => ({
@@ -186,10 +193,10 @@ function Landmark(props) {
             dislikeCounts: val.data
           }))
         })
-      }
-
-      getLikeCounts();
-    }, [likes])
+        }
+        
+        getDislikeCounts();
+      }, [likes.dislikeCounts])
 
     function storeData() {
         localStorage.clear();
