@@ -19,7 +19,7 @@ function MapRoute(props) {
         {/* <Marker position={[props.latitude, props.longitude]}>
           <Popup>Your location</Popup>
         </Marker> */}
-        <MapRouter />
+        <MapRouter latitude={props.latitude} longitude={props.longitude} />
       </MapContainer>
     </div>
   );
