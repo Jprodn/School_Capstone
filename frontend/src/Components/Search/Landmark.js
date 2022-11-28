@@ -167,36 +167,29 @@ function Landmark(props) {
       dislikeCounts: 0
     })
 
-    useEffect(() => {
+    useEffect((config) => {
       const getLikeCounts = async () => {
        await axios
-        .get(`${baseUrl}/landmark/review/like-count/${props.item.landmarkId}`, config)
+        .get(`${baseUrl}/landmark/rating/like-count/${review.landmarkId}`, config)
         .then(val => {
-          console.log("VAL: " + val);
-          // setLikes(...prevLikes => ({
-          //   ...prevLikes,
-          //   likeCounts: val
-          // }))
-        })
-        .catch(function (error) {
-          console.log("error");
-        });
-
-        await axios
-        .get(`${baseUrl}/landmark/review/dislike-count/${props.item.landmarkId}`, config)
-        .then(val => {
-          setLikes(...prevLikes => ({
+          setLikes(prevLikes => ({
             ...prevLikes,
-            dislikeCounts: val
+            likeCounts: val.data
           }))
         })
-        .catch(function (error) {
-          console.log("error");
-        });
+
+        await axios
+        .get(`${baseUrl}/landmark/rating/dislike-count/${review.landmarkId}`, config)
+        .then(val => {
+          setLikes(prevLikes => ({
+            ...prevLikes,
+            dislikeCounts: val.data
+          }))
+        })
       }
 
       getLikeCounts();
-    }, [])
+    }, [likes])
 
     function storeData() {
         localStorage.clear();
