@@ -327,19 +327,21 @@ function Landmark(props) {
                             className="create-input-form"
                             onChange={handleChange}
                             placeholder="Title"
+                            name-="title"
                             autoComplete="off"
                         />
                         <input
                             type="text"
                             className="create-input-form"
                             onChange={handleChange}
-                            name="Name"
+                            name="name"
                             placeholder="Name"
                         />
                         <textarea
                             type="text"
                             className="create-input-form"
                             onChange={handleChange}
+                            name="review"
                             placeholder="Your review here..."
                         />
                         <div className="create-form-action">
