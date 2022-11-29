@@ -28,10 +28,10 @@ public class JdbcReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> getReviews() {
+    public List<Review> getReviews(int landmarkId) {
         List<Review> reviews = new ArrayList<>();
-        String sql = "SELECT * FROM review";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        String sql = "SELECT * FROM review WHERE landmark_id = ? ORDER BY review_id DESC LIMIT 3";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkId);
         while(results.next()) {
             Review review = mapRowToReview(results);
             reviews.add(review);

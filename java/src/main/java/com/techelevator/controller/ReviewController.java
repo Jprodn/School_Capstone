@@ -23,8 +23,8 @@ public class ReviewController {
         reviewDao.addReview(review);
     }
 
-    @RequestMapping(value = "/get-reviews", method = RequestMethod.GET)
-    public List<Review> getReviews() {
-        return reviewDao.getReviews();
+    @RequestMapping(value = "/get-reviews/{landmarkId}", method = RequestMethod.GET)
+    public List<Review> getReviews(@PathVariable int landmarkId) {
+        return reviewDao.getReviews(landmarkId);
     }
 }
