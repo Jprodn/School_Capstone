@@ -98,7 +98,7 @@ function Search() {
     };
 
     if (!token) {
-            const timeout = setTimeout(() => {
+            setTimeout(() => {
               window.location.replace('http://localhost:3000');
             }, 2000);
           

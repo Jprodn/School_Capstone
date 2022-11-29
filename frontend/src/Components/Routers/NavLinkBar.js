@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -100,7 +100,7 @@ export default function NavLinkBar(props) {
       className="toTop"
       onClick={() => {
           window.scrollTo(isTop);
-      }}><img src="chevron.png" className="chevron"></img></button>
+      }}><img src="chevron.png" alt="" className="chevron"></img></button>
     </>
   );
 }

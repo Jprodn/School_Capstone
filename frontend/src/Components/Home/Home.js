@@ -87,7 +87,7 @@ export default function Home(props) {
         <div className="main-itinerary-div">
             <div className="itinerary-card">
                 {/* title */}
-                <h1 className="itinerary-card-title"></h1>
+                <h1 className="itinerary-card-title"> </h1>
                 {/* image */}
                 <div className="itinerary-card-image">
                     <img className="itinerary-image" alt="" src="travel.jpg" />

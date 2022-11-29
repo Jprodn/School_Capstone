@@ -30,7 +30,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password,
         };
-        const userWithToken = await axios
+        await axios
             .post(baseUrl + "/login", data)
             .then((userToken) => {
                 console.log("userToken:");
