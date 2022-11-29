@@ -195,7 +195,7 @@ export default function Itinerary(props) {
     };
 
     return (
-        <div>
+        <div className="card">
             <div className="itinerary-card">
                 <h1 className="itinerary-card-title">
                     {currentItineraryInfo.itineraryName}

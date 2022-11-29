@@ -55,7 +55,7 @@ export default function Create(props) {
     )
 }
     return (
-        <div>
+        <div className="itinerary-card">
             <div className="create-card">
                 <div>
                     <img
