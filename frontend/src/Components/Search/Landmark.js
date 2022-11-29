@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { baseUrl } from "../../Shared/baseUrl";
+import Reviews from "./Reviews";
+import ReviewSubmit from "./ReviewSubmit";
+import Ratings from "./Ratings";
 
 function Landmark(props) {
     const [data, setData] = React.useState([]);
@@ -301,22 +304,7 @@ function Landmark(props) {
                     Add to itinerary
                     </button>
                     <div className="rating">
-                        <div className="like grow">
-                            <i
-                                className="fa fa-thumbs-up fa-1x like"
-                                aria-hidden="true"
-                                onClick={handleLikes}
-                            ></i>
-                            {likes.likeCounts}
-                        </div>
-                        <div className="dislike grow">
-                            <i
-                                className="fa fa-thumbs-down fa-1x like"
-                                aria-hidden="true"
-                                onClick={handleDislikes}
-                            ></i>
-                            {likes.dislikeCounts}
-                        </div>
+                        <Ratings likes={likes} handleLikes={handleLikes} handleDislikes={handleDislikes} />
                         {/* <h5>Write your review:</h5>
                         <input className="form-control" placeholder="Title"></input>
                         <input className="form-control" placeholder="Name"></input>
@@ -324,92 +312,10 @@ function Landmark(props) {
                         <button className="btn btn-success">Submit</button> */}
                       </div>
                       <div className="create-card-body">
-                        <form className="create-form">
-                            <input
-                                type="text"
-                                className="create-input-form"
-                                onChange={handleChange}
-                                placeholder="Title"
-                                name="title"
-                            />
-                            <input
-                                type="text"
-                                className="create-input-form"
-                                onChange={handleChange}
-                                name="name"
-                                placeholder="Name"
-                            />
-                            <textarea
-                                type="text"
-                                className="create-input-form"
-                                onChange={handleChange}
-                                name="review"
-                                placeholder="Your review here..."
-                            />
-                            <div className="create-form-action">
-                                <button type="Reset" className="cancel-button">
-                                    Clear
-                                </button>
-                                <button
-                                    type="Submit"
-                                    className="ok-button"
-                                    onClick={handleSubmit}
-                                >
-                                    Submit review
-                                </button>
-                            </div>
-                        </form>
+                        <ReviewSubmit handleChange={handleChange} handleSubmit={handleSubmit} />
                       </div>
                   </div>
-
-                  <div className="section-padding">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="section-title">
-                                    <h4>Reviews</h4>
-
-                                    <div className="section-borders">
-                                        <span></span>
-                                        <span className="black-border"></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="owl-carousel client-testimonial-carousel">
-                                    <div className="single-testimonial-item">
-                                        <span>Title</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
-                                        <span>Name</span>
-                                    </div>
-                                    <div className="single-testimonial-item">
-                                        <span>Title</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
-                                        <span>Name</span>
-                                    </div>
-                                    <div className="single-testimonial-item">
-                                        <span>Title</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
-                                        <span>Name</span>
-                                    </div>
-                                    <div className="single-testimonial-item">
-                                        <span>Title</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
-                                        <span>Name</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                  
+                  <Reviews />
                 </div>
             </div>
         </div>
