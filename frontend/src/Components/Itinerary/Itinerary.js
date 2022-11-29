@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { defaultTheme } from "react-select";
 
 export default function Itinerary(props) {
     const [userInfo, setUserInfo] = useState({
@@ -193,18 +194,6 @@ export default function Itinerary(props) {
             config2
         );
     };
-
-    if (!token) {
-        const timeout = setTimeout(() => {
-          window.location.replace('http://localhost:3000');
-        }, 2000);
-      
-    return (
-        <>
-            <h1>Unauthorized User... Please log in.</h1>
-        </>
-    )
-}
 
     return (
         <div>

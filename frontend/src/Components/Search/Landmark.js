@@ -216,6 +216,7 @@ function Landmark(props) {
         console.log("%clocalStorage", landmarkTheme, localStorage);
     }
 
+
     return (
         <div className="main-div">
             <div className="contacts">
@@ -320,45 +321,94 @@ function Landmark(props) {
                         <input className="form-control" placeholder="Name"></input>
                         <textarea className="form-control" placeholder="Your review here..."></textarea>
                         <button className="btn btn-success">Submit</button> */}
-                    </div>
-                  <div className="create-card-body">
-                    <form className="create-form">
-                        <input
-                            type="text"
-                            className="create-input-form"
-                            onChange={handleChange}
-                            placeholder="Title"
-                            name="title"
-                        />
-                        <input
-                            type="text"
-                            className="create-input-form"
-                            onChange={handleChange}
-                            name="name"
-                            placeholder="Name"
-                        />
-                        <textarea
-                            type="text"
-                            className="create-input-form"
-                            onChange={handleChange}
-                            name="review"
-                            placeholder="Your review here..."
-                        />
-                        <div className="create-form-action">
-                            <button type="Reset" className="cancel-button">
-                                Clear
-                            </button>
-                            <button
-                                type="Submit"
-                                className="ok-button"
-                                onClick={handleSubmit}
-                            >
-                                Submit
-                            </button>
+                      </div>
+                      <div className="create-card-body">
+                        <form className="create-form">
+                            <input
+                                type="text"
+                                className="create-input-form"
+                                onChange={handleChange}
+                                placeholder="Title"
+                                name="title"
+                            />
+                            <input
+                                type="text"
+                                className="create-input-form"
+                                onChange={handleChange}
+                                name="name"
+                                placeholder="Name"
+                            />
+                            <textarea
+                                type="text"
+                                className="create-input-form"
+                                onChange={handleChange}
+                                name="review"
+                                placeholder="Your review here..."
+                            />
+                            <div className="create-form-action">
+                                <button type="Reset" className="cancel-button">
+                                    Clear
+                                </button>
+                                <button
+                                    type="Submit"
+                                    className="ok-button"
+                                    onClick={handleSubmit}
+                                >
+                                    Submit review
+                                </button>
+                            </div>
+                        </form>
+                      </div>
+                  </div>
+
+                  <div className="section-padding">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="section-title">
+                                    <h4>Reviews</h4>
+
+                                    <div className="section-borders">
+                                        <span></span>
+                                        <span className="black-border"></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="owl-carousel client-testimonial-carousel">
+                                    <div className="single-testimonial-item">
+                                        <span>Title</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
+                                        <span>Name</span>
+                                    </div>
+                                    <div className="single-testimonial-item">
+                                        <span>Title</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
+                                        <span>Name</span>
+                                    </div>
+                                    <div className="single-testimonial-item">
+                                        <span>Title</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
+                                        <span>Name</span>
+                                    </div>
+                                    <div className="single-testimonial-item">
+                                        <span>Title</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Eveniet ex labore id beatae molestiae, libero quis eum nam voluptates quidem.</p>
+                                        <span>Name</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                  
                 </div>
             </div>
         </div>
