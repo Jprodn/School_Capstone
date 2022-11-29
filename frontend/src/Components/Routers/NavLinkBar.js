@@ -58,19 +58,24 @@ export default function NavLinkBar(props) {
     <>
 
 <nav className="nav">
-<Link className="main-list"  to="/home">
+{/* <Link className="main-list"  to="/home">
         Home{" "}
-      </Link>
+      </Link> */}
       <ul className={active}>
       
-        {/* <li className="nav__item">
-        <Link className="main-list"  to="/itinerary">
-        Itinerary{" "}
+        <li className="nav__item">
+        <Link className="main-list"  to="/home">
+        Home{" "}
       </Link>
-        </li> */}
+        </li>
         <li className="nav__item">
         <Link className="main-list"  to="/itinerary/create">
         Create{" "}
+      </Link>
+        </li>
+        <li className="nav__item">
+        <Link className="main-list"  to="/itinerary">
+        itinerary{" "}
       </Link>
         </li>
         <li className="nav__item">
