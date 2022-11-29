@@ -7,6 +7,7 @@ const Testimonials = (props) => {
 
     return (
         <div>
+            <hr style={{height: "3px"}} />
             <h3 className="comment-title">{title}</h3>
             <h4 className="comment-name">{name}</h4>
             <p className="comment-review">

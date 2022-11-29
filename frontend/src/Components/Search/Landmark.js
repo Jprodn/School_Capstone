@@ -166,13 +166,12 @@ function Landmark(props) {
     }
 
     async function handleSubmit(event) {
-      event.preventDefault();
-      await axios
-          .post(baseUrl + "/landmark/review/add-review", review, config)
-          .then(console.log("%creview","color: dodgerblue; background-color: black", review))
-          .catch(function (error) {
-              console.log("error");
-          });
+        event.preventDefault();
+        await axios
+            .post(baseUrl + "/landmark/review/add-review", review, config)
+            .catch(function (error) {
+                console.log("error");
+            });
     }
 
     const [likes, setLikes] = useState({
@@ -210,7 +209,7 @@ function Landmark(props) {
         getDislikeCounts();
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
-
+      
     function storeData() {
         localStorage.clear();
         localStorage.setItem(
