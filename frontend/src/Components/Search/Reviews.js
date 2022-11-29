@@ -1,6 +1,26 @@
+import axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
+import Testimonials from "./Testimonials";
+import { baseUrl } from "../../Shared/baseUrl";
+import { config } from "../../Shared/config";
 
 const Reviews = (props) => {
+    const [testimonials, setTestimonials] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(
+                `${baseUrl}/landmark/review/get-reviews/${props.review.landmarkId}`,
+                config
+            )
+            .then((r) => setTestimonials(r.data));
+    }, []);
+
+    const showTestimonials = testimonials.map((t, i) => {
+        return <Testimonials rev={t} key={i} />;
+    });
+
     return (
         <div className="section-padding">
             <div className="container">
@@ -20,46 +40,7 @@ const Reviews = (props) => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="owl-carousel client-testimonial-carousel">
-                            <div className="single-testimonial-item">
-                                <span>Title</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Eveniet ex labore id
-                                    beatae molestiae, libero quis eum nam
-                                    voluptates quidem.
-                                </p>
-                                <span>Name</span>
-                            </div>
-                            <div className="single-testimonial-item">
-                                <span>Title</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Eveniet ex labore id
-                                    beatae molestiae, libero quis eum nam
-                                    voluptates quidem.
-                                </p>
-                                <span>Name</span>
-                            </div>
-                            <div className="single-testimonial-item">
-                                <span>Title</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Eveniet ex labore id
-                                    beatae molestiae, libero quis eum nam
-                                    voluptates quidem.
-                                </p>
-                                <span>Name</span>
-                            </div>
-                            <div className="single-testimonial-item">
-                                <span>Title</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Eveniet ex labore id
-                                    beatae molestiae, libero quis eum nam
-                                    voluptates quidem.
-                                </p>
-                                <span>Name</span>
-                            </div>
+                            {showTestimonials}
                         </div>
                     </div>
                 </div>

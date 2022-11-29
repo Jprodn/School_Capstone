@@ -169,7 +169,7 @@ function Landmark(props) {
       event.preventDefault();
       await axios
           .post(baseUrl + "/landmark/review/add-review", review, config)
-          .then(console.log("review=" + JSON.stringify(review)))
+          .then(console.log("%creview","color: dodgerblue; background-color: black", review))
           .catch(function (error) {
               console.log("error");
           });
@@ -315,7 +315,7 @@ function Landmark(props) {
                         <ReviewSubmit handleChange={handleChange} handleSubmit={handleSubmit} />
                       </div>
                   </div>
-                  <Reviews />
+                  <Reviews item={props.item} review={review} />
                 </div>
             </div>
         </div>
