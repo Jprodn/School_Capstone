@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-
 import { baseUrl } from "../../Shared/baseUrl";
+import swal from '@sweetalert/with-react';
 
 export default function Create(props) {
     const [itineraryData, setItineraryData] = React.useState(() => ({
@@ -40,7 +40,13 @@ export default function Create(props) {
             .post(baseUrl + "/itinerary/createItinerary", data, config)
             .catch(function (error) {
                 console.log("%cerror", createTheme, error);
-            });
+            })
+            .then(
+                swal("Success!", "Itinerary has been created!", "success")
+            )
+        setTimeout(() => {
+            window.location.replace("/home");       
+        }, 2000);
     }
 
     if (!token) {

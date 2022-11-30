@@ -28,7 +28,6 @@ const Reviews = (props) => {
                     <div className="col-md-12">
                         <div className="section-title">
                             <h4>Reviews</h4>
-
                             <div className="section-borders">
                                 <span></span>
                                 <span className="black-border"></span>

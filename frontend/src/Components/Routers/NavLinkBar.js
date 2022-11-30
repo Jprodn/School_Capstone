@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 export default function NavLinkBar(props) {
   const handleLogout = () => {
     this.props.addToken("");
     this.props.deleteUser();
     localStorage.clear();
   };
-
-
 
   let token = window.localStorage.getItem("jwtToken");
   console.log("%c-----NavLinkBar-----", "color: yellow; background-color: black");
@@ -33,61 +30,56 @@ export default function NavLinkBar(props) {
     left: 0, 
     behavior: "smooth"
   })
-  
 
   // Navbar Hiding
   if (!token) {
     return (
       <>
-      <nav className="nav">
-      <Link className="main-list"  to="/home">
-        Home{" "}
-      </Link>
-              <li className="nav__item">
-        <Link className="main-list" to="/login" onClick={handleLogout}>
-        {"login"}
-      </Link>
-      </li>
-      </nav>
+        <nav className="nav">
+          <Link className="main-list"  to="/home">
+            Home{" "}
+          </Link>
+            <li className="nav__item">
+              <Link className="main-list" to="/login" onClick={handleLogout}>
+                {"login"}
+              </Link>
+            </li>
+        </nav>
       </>
     )
   }
 
-
   return (
     <>
-
-<nav className="nav">
-{/* <Link className="main-list"  to="/home">
-        Home{" "}
-      </Link> */}
+      <nav className="nav">
+      {/* <Link className="main-list"  to="/home">
+              Home{" "}
+            </Link> */}
       <ul className={active}>
-      
         <li className="nav__item">
-        <Link className="main-list"  to="/home">
-        Home{" "}
-      </Link>
+          <Link className="main-list" to="/home">
+            Home{" "}
+          </Link>
         </li>
         <li className="nav__item">
-        <Link className="main-list"  to="/itinerary/create">
-        Create{" "}
-      </Link>
+          <Link className="main-list" to="/itinerary/create">
+            Create{" "}
+          </Link>
         {/* </li>
         <li className="nav__item">
         <Link className="main-list"  to="/itinerary">
         itinerary{" "}
-      </Link> */}
+        </Link> */}
         </li>
         <li className="nav__item">
-        <Link className="main-list" to="/landmark">
-        Search{" "}
-      </Link>
+          <Link className="main-list" to="/landmark">
+            Search{" "}
+          </Link>
         </li>
-
         <li className="nav__item">
-        <Link className="main-list" to="/login" onClick={handleLogout}>
-        {token !== undefined ? "logout" : "login"}
-      </Link>
+          <Link className="main-list" to="/login" onClick={handleLogout}>
+            {token !== undefined ? "logout" : "login"}
+          </Link>
         </li>
       </ul>
       <div onClick={navToggle} className={icon}>

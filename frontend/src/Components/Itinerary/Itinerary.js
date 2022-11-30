@@ -11,6 +11,7 @@ export default function Itinerary(props) {
         itineraryDate: "",
         data: {},
     });
+
     const itineraryTheme = "color: orange; background-color: black";
     const itineraryURL = "http://localhost:8081/itinerary";
     const [userLandmarks, setUserLandmarks] = useState([]);
@@ -18,7 +19,7 @@ export default function Itinerary(props) {
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
     const currentItineraryInfo = JSON.parse(
-        localStorage.getItem("currentItinerary")
+          localStorage.getItem("currentItinerary")
     );
     console.log("%cstorageUserId", itineraryTheme, storageUserId);
     console.log("%cToken", itineraryTheme, token);
@@ -30,6 +31,7 @@ export default function Itinerary(props) {
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
     };
+
     const config2 = {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -195,7 +197,7 @@ export default function Itinerary(props) {
     };
 
     return (
-        <div className="card">
+        <div className="itinerary-card">
             <div className="itinerary-card">
                 <h1 className="itinerary-card-title">
                     {currentItineraryInfo.itineraryName}

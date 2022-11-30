@@ -94,16 +94,9 @@ export default function Home(props) {
                 </div>
                 <div className="itinerary-card-body">
                     {/* location list */}
-
-                   
-         
                     <ul className="landmark-list">
-                        
                       {displayItineraries}
-
                     </ul> 
-
-
                     {/* save / delete */}
                     <div className="landmark-action-buttons">
                         <div className="save">

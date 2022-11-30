@@ -35,7 +35,6 @@ img {
   padding: 0.75rem;
 }
 
-
 .create-card {
   margin: 1rem auto;
   display: flex;
@@ -48,6 +47,7 @@ img {
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
 }
+
 .itinerary-card {
   margin: 1rem auto;
   display: flex;
@@ -58,15 +58,18 @@ img {
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
 }
+
 .itinerary-card-title {
   text-align: center;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 2rem;
   color: #29323d;
 }
+
 .itinerary-card-image {
   padding: 0px 30px;
 }
+
 .landmark-list {
   display: flex;
   flex-direction: column;
@@ -74,21 +77,16 @@ img {
   align-items: center;
   padding-top: 30px;
   padding-right: 30px;
- 
 }
+
 .landmark-list-items {
   list-style-type: none;
   padding: 5px;
-  
 }
 
 .displayItineraries-list{
-
   display: flex;
   flex-direction: column;
-  
-
- 
 }
 
 
@@ -131,10 +129,12 @@ img {
   transition: all 0.5s;
   text-align: left;
 }
+
 .startPoint-button:hover {
   background-color: darkgray;
   width: 300px;
 }
+
 .landmark-list-buttons {
   width: 300px;
   font-weight: 500;
@@ -147,6 +147,7 @@ img {
   transition: all 0.5s;
   text-align: left;
 }
+
 .landmark-list-buttons:hover {
   background-color: darkgray;
 }
@@ -165,9 +166,11 @@ img {
   text-align: center;
   margin-right: 10px;
 }
+
 .save-button:hover {
   background-color: lightskyblue;
 }
+
 .delete-button,
 .search-button {
   width: 300px;
@@ -213,11 +216,13 @@ img {
   width: 100%;
   /* height: 50vh; */
 }
+
 .create-form {
   /* padding:5px 0; */
   display: flex;
   flex-direction: column;
 }
+
 .create-input-form {
   margin: 10px 0;
   font-size: medium;
@@ -258,6 +263,7 @@ img {
   cursor: pointer;
   margin: 5px;
 }
+
 .ok-button {
   /* background-color: rgb(185, 179, 179); */
   border-radius: 10px;
@@ -279,6 +285,7 @@ img {
 .ok-button:hover {
   background-color: #cccccc;
 }
+
 .cancel-button:hover {
   background-color: #cccccc;
 }
@@ -288,14 +295,15 @@ img {
   justify-content: center;
   padding: 2px 0;
 }
+
 .main-list {
   text-decoration: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: larger;
   color: #EEEEEE;
   text-align: center;
-  
 }
+
 .main-list:hover {
   border-radius: 10px;
   color: rgb(181, 181, 190);
@@ -454,15 +462,18 @@ img {
   box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   margin: 40px 0;
 }
+
 .Landmark-card-title {
   font-size: larger;
   font-family: "Segoe UI", Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
+
 .landmark-location {
   font-size: large;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #393e46;
 }
+
 .landmark-description {
   text-align: left;
   /* font-stretch: expanded; */
@@ -479,9 +490,11 @@ img {
   margin: 20px 20px;
   color: #395b64;
 }
+
 .Landmark-map-link a:hover {
   color: lightskyblue;
 }
+
 .Add-itinerary-button {
   /* width: 150px; */
   font-size: large;
@@ -501,6 +514,7 @@ img {
   background-color: black;
   color: #eef1f5;
 }
+
 .hours {
   border-radius: 10px;
   /* border: 4px double #06283D; */
@@ -512,6 +526,7 @@ img {
     "Lucida Sans", Arial, sans-serif;
   margin: 5px 5px;
 }
+
 .hour-button {
   border-radius: 10px;
   cursor: pointer;
@@ -525,6 +540,7 @@ img {
   background-color: black;
   color: white;
 }
+
 .isClicked {
   display: flex;
   flex-direction: column;
@@ -788,13 +804,11 @@ img {
   }
 
   .search-div {
-    
     text-align: center;
     margin: 10px auto;
-
   }
+
   .contact-card {
-   
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -810,20 +824,19 @@ img {
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-   
   }
+
   .itinerary-card{
-
- margin: 1rem auto;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
-  margin-left: 0;
-  align-items: center;
-
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
+    margin-left: 0;
+    align-items: center;
   }
+
   .landmark-list-buttons {
     width: 150px;
     font-weight: 500;
@@ -839,19 +852,20 @@ img {
 
   
   .delete-button,
-.search-button {
-  width: 170px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  background-color: #876df5;
-  border-radius: 6px;
-  color: white;
-  border: 0;
-  border-radius: 10px;
-  height: 40px;
-  transition: all 0.5s;
-  text-align: center;
-}
+  .search-button {
+    width: 170px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    background-color: #876df5;
+    border-radius: 6px;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    transition: all 0.5s;
+    text-align: center;
+  }
+
   .startPoint-button {
     width: 170px;
     font-weight: 500;
@@ -880,14 +894,12 @@ img {
   .rating {
     width: 100%;
   }
-
 }
 
 
 @media screen and (max-width: 418px) {
 
   .contact-card {
-   
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -903,14 +915,13 @@ img {
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-   
   }
+
   .search-div {
-    
     text-align: center;
     margin-right: 100px;
-
   }
+
   .Add-itinerary-button {
     /* width: 150px; */
     font-size: large;
@@ -927,20 +938,18 @@ img {
   }
 
   .create-form-action {
-  
     display: flex;
     margin-left: -30px;
-   
   }
+
   .cancel-button {
-   
- width: 100px;
-    
-  }
-  .ok-button {
-   
     width: 100px;
   }
+
+  .ok-button {
+    width: 100px;
+  }
+
   .landmark-list-buttons {
     width: 100px;
     font-weight: 500;
@@ -968,37 +977,32 @@ img {
     transition: all 0.5s;
     text-align: center;
   }
-    .startPoint-button {
-      width: 130px;
-      font-weight: 500;
-      margin-bottom: 5px;
-      background-color: #eef1f5;
-      border-radius: 6px;
-      color: #2d4b5a;
-      border: 0;
-      border-radius: 10px;
-      height: 50px;
-      transition: all 0.5s;
-      text-align: left;
-    }
 
-    .create-card {
-      margin: 1rem 0;
-      display: flex;
-      flex-direction: column;
-      width: 60%;
-      max-width: 550px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
-    }
+  .startPoint-button {
+    width: 130px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    background-color: #eef1f5;
+    border-radius: 6px;
+    color: #2d4b5a;
+    border: 0;
+    border-radius: 10px;
+    height: 50px;
+    transition: all 0.5s;
+    text-align: left;
+  }
 
-
-
+  .create-card {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    max-width: 550px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
+  }
 }
-
-
-
 
 .nav__active {
   transform: translateX(0%);
@@ -1007,9 +1011,11 @@ img {
 .toggle .line1 {
   transform: rotate(-45deg) translate(-4px, 5px);
 }
+
 .toggle .line2 {
   opacity: 0;
 }
+
 .toggle .line3 {
   transform: rotate(45deg) translate(-4px, -5px);
 }
@@ -1025,9 +1031,6 @@ img {
   border: none; 
   color: rgba(0, 0, 0, 0.5)
 }
-
-
-
 
 .section-padding {
   padding: 20px 0;

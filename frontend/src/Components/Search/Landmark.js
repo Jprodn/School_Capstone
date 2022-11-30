@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import { baseUrl } from "../../Shared/baseUrl";
 import Reviews from "./Reviews";
 import ReviewSubmit from "./ReviewSubmit";
 import Ratings from "./Ratings";
+import swal from '@sweetalert/with-react';
 
 function Landmark(props) {
     const [data, setData] = React.useState([]);
@@ -19,7 +19,7 @@ function Landmark(props) {
       title: "",
       name: "",
       review: "",
-  });
+    });
 
     const landmarkTheme = "color: dodgerblue; background-color: black";
     const token = JSON.parse(localStorage.getItem("jwtToken"));
@@ -111,6 +111,9 @@ function Landmark(props) {
                 },
                 config
             )
+            .then(
+                swal("Success!", "Landmark has been added!", "success")
+            )
             .then(console.log("%cconfig", landmarkTheme, config));
 
     const handleLikes = async (e) => {
@@ -165,13 +168,29 @@ function Landmark(props) {
       }));
     }
 
+    // useEffect(() => {
+    //     async function handleSubmit(event) {
+    //         event.preventDefault();
+    //         await axios
+    //             .post(baseUrl + "/landmark/review/add-review", review, config)
+    //             .catch(function (error) {
+    //                 console.log("error");
+    //             });
+    //     }
+    // }, )
     async function handleSubmit(event) {
         event.preventDefault();
         await axios
             .post(baseUrl + "/landmark/review/add-review", review, config)
             .catch(function (error) {
                 console.log("error");
-            });
+            })
+            .then(
+                swal("Thank you!", "You review was submitted!", "success")
+            )
+        setTimeout(() => {
+                window.location.reload();     
+            }, 2000);
     }
 
     const [likes, setLikes] = useState({
@@ -218,7 +237,6 @@ function Landmark(props) {
         );
         console.log("%clocalStorage", landmarkTheme, localStorage);
     }
-
 
     return (
         <div className="main-div">
@@ -296,23 +314,18 @@ function Landmark(props) {
                             </li>
                         </ul>
                     <button
-                      type="submit"
-                      className="Add-itinerary-button"
-                      onClick={handleAdd}
+                        type="submit"
+                        className="Add-itinerary-button"
+                        onClick={handleAdd}
                     >
                     Add to itinerary
                     </button>
                     <div className="rating">
                         <Ratings likes={likes} handleLikes={handleLikes} handleDislikes={handleDislikes} />
-                        {/* <h5>Write your review:</h5>
-                        <input className="form-control" placeholder="Title"></input>
-                        <input className="form-control" placeholder="Name"></input>
-                        <textarea className="form-control" placeholder="Your review here..."></textarea>
-                        <button className="btn btn-success">Submit</button> */}
-                      </div>
-                      <div className="create-card-body">
+                    </div>
+                    <div className="create-card-body">
                         <ReviewSubmit handleChange={handleChange} handleSubmit={handleSubmit} />
-                      </div>
+                    </div>
                   </div>
                   <Reviews item={props.item} review={review} />
                 </div>
