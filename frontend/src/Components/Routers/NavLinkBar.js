@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ScrollTop from "./ScrollTop";
 
 export default function NavLinkBar(props) {
   const handleLogout = () => {
@@ -25,6 +26,7 @@ export default function NavLinkBar(props) {
     } else setIcon("nav__toggler");
   };
 
+  const [visibile, setVisible] =useState(false)
   const [isTop, setIsTop] = useState({ 
     top: 0,
     left: 0, 
@@ -88,11 +90,7 @@ export default function NavLinkBar(props) {
         <div className="line3"></div>
       </div>
     </nav>
-    <button
-      className="toTop"
-      onClick={() => {
-          window.scrollTo(isTop);
-      }}><img src="chevron.png" alt="" className="chevron"></img></button>
+    <ScrollTop className="toTop" />
     </>
   );
 }

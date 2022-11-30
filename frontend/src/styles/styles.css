@@ -66,6 +66,10 @@ img {
   color: #29323d;
 }
 
+.itinerary-card-date {
+  margin: auto;
+}
+
 .itinerary-card-image {
   padding: 0px 30px;
 }
@@ -145,6 +149,10 @@ img {
   word-spacing: 2px;
 }
 
+.carousel-inner > .active {
+  color: black;
+}
+
 .startPoint-button {
   width: 300px;
   font-weight: 500;
@@ -161,7 +169,11 @@ img {
 
 .startPoint-button:hover {
   background-color: darkgray;
-  width: 300px;
+}
+
+.starting-point-group {
+  display: flex;
+  justify-content: space-between;
 }
 
 .landmark-list-buttons {
@@ -219,6 +231,17 @@ img {
 .search-button:hover {
   background-color: lightskyblue;
 }
+
+.edit-button {
+  display: inline-block;
+  width: 30px;
+  filter: opacity(.5);
+}
+
+.edit-button:hover {
+  width: 2.75em;
+}
+
 
 .trash-button {
   border: none;
@@ -814,6 +837,7 @@ img {
   right: 10vw;
   width: 50px;
   border: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .review-title {
@@ -826,6 +850,10 @@ img {
   font-size: 2rem;
   margin-top: 20px;
   color: #29323d;
+}
+
+.toHide {
+  visibility: hidden;
 }
 
  
@@ -880,12 +908,6 @@ img {
   }
 
   .itinerary-card{
-    margin: 1rem auto;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
     margin-left: 5vw;
     align-items: center;
   }
@@ -967,7 +989,6 @@ img {
   }
 
   .itinerary-card {
-    display: flex;
     width: 300px;
   }
 
@@ -1127,7 +1148,6 @@ img {
   
   .comment-review {
     font-size: 11px;
-    color: black;
   }
 
 }

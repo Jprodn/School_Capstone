@@ -19,7 +19,7 @@ export default function Itinerary(props) {
     const token = JSON.parse(localStorage.getItem("jwtToken"));
     const storageUserId = localStorage.getItem("jwtUserId");
     const currentItineraryInfo = JSON.parse(
-          localStorage.getItem("currentItinerary")
+        localStorage.getItem("currentItinerary")
     );
     console.log("%cstorageUserId", itineraryTheme, storageUserId);
     console.log("%cToken", itineraryTheme, token);
@@ -50,13 +50,13 @@ export default function Itinerary(props) {
         );
 
         let isMounted = true;
-        let startPoint = '';
-        
+        let startPoint = "";
+
         const itineraryStartingPoint = async () => {
             startPoint = await axios.get(
                 `${itineraryURL}/getStart/${currentItineraryInfo.itineraryId}`,
                 config
-            )
+            );
             console.log("%cStartPoint:", itineraryTheme, startPoint);
             if (isMounted) {
                 setUserInfo((prevInfo) => ({
@@ -198,71 +198,68 @@ export default function Itinerary(props) {
 
     return (
         <div className="itinerary-card">
-            <div className="itinerary-card">
-                <h1 className="itinerary-card-title">
-                    {currentItineraryInfo.itineraryName}
-                </h1>
-                <div className="itinerary-card-image">
-                    <img
-                        className="itinerary-image"
-                        alt=""
-                        src="mapping.jpg"
-                    />
-                </div>
-                <div className="itinerary-card-body">
-                    <ul className="landmark-list">
-                        <li className="landmark-list-items">
-                            <button
-                                className="startPoint-button"
-                                onDoubleClick={isBeingEdit}
-                            >
-                                {isEditing ? (
-                                    <input
-                                        name="startingPoint"
-                                        onChange={handleLocationChange}
-                                        value={userInfo.startingPoint || ""}
-                                        autoFocus
-                                        onKeyUp={removeLocationFocus}
-                                        onBlur={updateStartingLocation}
+            <h1 className="itinerary-card-title">
+                {currentItineraryInfo.itineraryName}
+            </h1>
+            <h6 className="itinerary-card-date">
+                {currentItineraryInfo.itineraryDate}
+            </h6>
+            <div className="itinerary-card-image">
+                <img className="itinerary-image" alt="" src="mapping.jpg" />
+            </div>
+            <div className="itinerary-card-body">
+                <ul className="landmark-list">
+                    <li className="landmark-list-items">
+                        <button
+                            className="startPoint-button"
+                            onDoubleClick={isBeingEdit}
+                        >
+                            {isEditing ? (
+                                <input
+                                    name="startingPoint"
+                                    onChange={handleLocationChange}
+                                    value={userInfo.startingPoint || ""}
+                                    autoFocus
+                                    onKeyUp={removeLocationFocus}
+                                    onBlur={updateStartingLocation}
+                                />
+                            ) : (
+                                <div className="starting-point-group">
+                                    <span className="starting-point-display">
+                                        {userInfo.startingPoint}
+                                    </span>{" "}
+                                    <img
+                                        src="btnEdit.png"
+                                        className="edit-button"
+                                        onClick={isBeingEdit}
                                     />
-                                ) : (
-                                    <>
-                                        <span>{userInfo.startingPoint}</span>
-                                    </>
-                                )}
-                            </button>
-                        </li>
-                        {displayLandmarks}
-                    </ul>
-                    <div className="landmark-action-buttons">
-                        <div className="save">
-                            {/* <button className="save-button" type="submit" onClick={handleSubmit}>Save</button> */}
-                        </div>
-                            <button
-                                className="delete-button"
-                                href="/map-route"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                // onClick={goToSearch}
-                            >
-                                Generate Travel Route
-                            </button>
-                        <div className="Delete Itinerary">
-                            <button
-                                className="delete-button"
-                                onClick={deleteItinerary}
-                            >
-                                Delete Itinerary
-                            </button>
-                        </div>
-                        <div className="Search Itinerary">
-                            <button
-                                className="search-button"
-                                onClick={goToSearch}
-                            >
-                                Search Landmarks
-                            </button>
-                        </div>
+                                </div>
+                            )}
+                        </button>
+                    </li>
+                    {displayLandmarks}
+                </ul>
+                <div className="landmark-action-buttons">
+                    <button
+                        className="delete-button"
+                        href="/map-route"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Generate Travel Route
+                    </button>
+                    <div className="Delete Itinerary">
+                        <button
+                            className="delete-button"
+                            onClick={deleteItinerary}
+                        >
+                            Delete Itinerary
+                        </button>
+                    </div>
+                    <div className="Search Itinerary">
+                        <button className="search-button" onClick={goToSearch}>
+                            Search Landmarks
+                        </button>
                     </div>
                 </div>
             </div>
