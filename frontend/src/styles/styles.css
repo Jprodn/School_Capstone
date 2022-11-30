@@ -1151,6 +1151,15 @@ img {
     font-size: 11px;
   }
 
+  .home-title {
+    font-size: large;
+    margin-right: 30px;
+  }
+
+  .itinerary-card-title {
+    font-size: large;
+  }
+
 }
 
 
