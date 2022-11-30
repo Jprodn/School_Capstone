@@ -85,6 +85,7 @@ export default function Home(props) {
     // JSX
     return (
         <div className="main-itinerary-div">
+            <div className="home-title">Your itinerary list</div>
             <div className="itinerary-card">
                 {/* title */}
                 <h1 className="itinerary-card-title"> </h1>
@@ -95,7 +96,6 @@ export default function Home(props) {
                 <div className="itinerary-card-body">
                     {/* location list */}
                     <ul className="landmark-list">
-                        Your itinerary list:
                       {displayItineraries}
                     </ul> 
                     {/* save / delete */}
