@@ -95,6 +95,7 @@ export default function Home(props) {
                 <div className="itinerary-card-body">
                     {/* location list */}
                     <ul className="landmark-list">
+                        Your itinerary list:
                       {displayItineraries}
                     </ul> 
                     {/* save / delete */}

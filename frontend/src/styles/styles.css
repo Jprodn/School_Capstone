@@ -101,19 +101,19 @@ img {
 .comment-title {
   display: flex;
   justify-content: flex-start;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 600;
 }
 
 .comment-name {
   display: flex;
   justify-content: flex-start;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .comment-review {
   font-size: 14px;
-  font-style: italic;
+  color: black;
 }
 
 .startPoint-button {
@@ -222,6 +222,7 @@ img {
   display: flex;
   flex-direction: column;
 }
+
 
 .create-input-form {
   margin: 10px 0;
@@ -518,7 +519,7 @@ img {
 .hours {
   border-radius: 10px;
   /* border: 4px double #06283D; */
-  color: #1b2430;
+  color: #808995;
   text-align: left;
   font-size: 15px;
   font-weight: 500;
@@ -784,6 +785,10 @@ img {
   right: 10vw;
   width: 50px;
   border: none;
+}
+
+.review-title {
+  font-weight: 400;
 }
 
  
@@ -1065,6 +1070,29 @@ img {
   .description, .description-link, .Add-itinerary-button, .info-group{
     font-size: small;
   }
+
+  .review-title {
+    font-size: medium;
+  }
+
+  .comment-title {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 11px;
+    font-weight: 400;
+  }
+  
+  .comment-name {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 11px;
+  }
+  
+  .comment-review {
+    font-size: 11px;
+    color: black;
+  }
+
 }
 
 
@@ -1093,3 +1121,4 @@ img {
   text-align: center;
   margin-bottom: 10px;
 }
+
