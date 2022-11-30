@@ -38,7 +38,7 @@ const Reviews = (props) => {
                 </div>
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="owl-carousel client-testimonial-carousel">
+                        <div className="owl-carousel client-testimonial-carousel landmark-review">
                             {showTestimonials}
                         </div>
                     </div>

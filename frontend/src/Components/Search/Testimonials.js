@@ -6,14 +6,14 @@ const Testimonials = (props) => {
     const comment = props.rev.review;
 
     return (
-        <div className="review">
-            <hr style={{height: "3px"}} />
-            <h4 className="comment-title">{title}</h4>
-            <h4 className="comment-name">{name}</h4>
-            <p className="comment-review">
-                {comment}
-            </p>
-        </div>
+        <>
+            <hr style={{ height: "3px" }} />
+            <div className="review">
+                <h4 className="comment-title">{title}</h4>
+                <h4 className="comment-name">{name}</h4>
+                <p className="comment-review">{comment}</p>
+            </div>
+        </>
     );
 };
 

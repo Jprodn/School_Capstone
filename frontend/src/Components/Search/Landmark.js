@@ -244,7 +244,7 @@ function Landmark(props) {
                 <div className="contact-card">
                     <img
                         src={
-                            require(`../../Images/${props.item.imgUrl}`).default
+                            require(`../../Images/${props.item.imgUrl}`)
                         }
                         alt="landmark-img"
                     />
