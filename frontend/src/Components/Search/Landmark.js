@@ -189,8 +189,8 @@ function Landmark(props) {
                 swal("Thank you!", "You review was submitted!", "success")
             )
         setTimeout(() => {
-                window.location.reload();     
-            }, 2000);
+            window.location.reload();     
+        }, 2000);
     }
 
     const [likes, setLikes] = useState({

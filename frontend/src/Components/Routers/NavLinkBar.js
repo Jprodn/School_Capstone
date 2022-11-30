@@ -65,11 +65,11 @@ export default function NavLinkBar(props) {
           <Link className="main-list" to="/itinerary/create">
             Create{" "}
           </Link>
-        {/* </li>
+        </li>
         <li className="nav__item">
         <Link className="main-list"  to="/itinerary">
-        itinerary{" "}
-        </Link> */}
+        Itinerary{" "}
+        </Link>
         </li>
         <li className="nav__item">
           <Link className="main-list" to="/landmark">
