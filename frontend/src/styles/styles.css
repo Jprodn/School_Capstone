@@ -245,7 +245,7 @@ img {
 }
 
 .create-form-action {
-  margin: 2px 30px;
+  margin: 2px 60px;
   padding: 1px;
   display: flex;
 }
@@ -777,7 +777,17 @@ img {
   right: 15px;
   list-style:none;
 }
+
+.toTop {
+  position: fixed;
+  top: 90vh;
+  right: 10vw;
+  width: 50px;
+  border: none;
+}
+
  
+/*IPAD*/
 @media screen and (max-width: 768px) {
   .nav__toggler {
     display: block;
@@ -794,7 +804,7 @@ img {
     transform: translateX(100%);
     transition: 0.5s ease-in;
   }
-  
+
   .chevron {
     width: 33px;
   }
@@ -805,7 +815,8 @@ img {
 
   .search-div {
     text-align: center;
-    margin: 10px auto;
+    width: 500px;
+    margin-right: 170px;
   }
 
   .contact-card {
@@ -814,7 +825,7 @@ img {
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 15px;
     margin-top: 5px;
-    width: 250px;
+    width: 400px;
     background: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.1),
@@ -833,7 +844,7 @@ img {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
-    margin-left: 0;
+    margin-left: 5vw;
     align-items: center;
   }
 
@@ -849,7 +860,6 @@ img {
     transition: all 0.5s;
     text-align: left;
   }
-
   
   .delete-button,
   .search-button {
@@ -890,22 +900,42 @@ img {
     border-radius: 10px;
     box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   }
+
+  .nav__active {
+    transform: translateX(0%);
+    width: 70px;
+    font-size: small;
+  }
   
   .rating {
     width: 100%;
   }
 }
 
-
+/*PHONE*/
 @media screen and (max-width: 418px) {
+  .toTop {
+    top: 95vh;
+    right: 17vw;
+    width: 31px;
+  }
+
+  .itinerary-image {
+    width: 180px;
+  }
+
+  .itinerary-card {
+    display: flex;
+    width: 300px;
+  }
 
   .contact-card {
+    font-size: small;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 15px;
-    margin-right: 100px;
-    width: 170px;
+    width: 220px;
     background: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.1),
@@ -917,9 +947,19 @@ img {
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
+  .create-card-title {
+    font-size: large;
+  }
+
   .search-div {
     text-align: center;
-    margin-right: 100px;
+    width: 200px;
+    margin-left: 70px;
+    font-size: small;
+  }
+
+  .create-input-form {
+    font-size: small;
   }
 
   .Add-itinerary-button {
@@ -939,26 +979,29 @@ img {
 
   .create-form-action {
     display: flex;
-    margin-left: -30px;
+    justify-content: center;
+    font-size: small;
   }
 
   .cancel-button {
     width: 100px;
+    font-size: small;
   }
 
   .ok-button {
     width: 100px;
+    font-size: small;
   }
 
   .landmark-list-buttons {
-    width: 100px;
+    width: 200px;
     font-weight: 500;
     background-color: #eef1f5;
     border-radius: 6px;
     color: #2d4b5a;
     border: 0;
     border-radius: 10px;
-    height: 50px;
+    height: 25px;
     transition: all 0.5s;
     text-align: left;
   }
@@ -967,13 +1010,14 @@ img {
   .search-button {
     width: 130px;
     font-weight: 500;
+    font-size: small;
     margin-bottom: 20px;
     background-color: #876df5;
     border-radius: 6px;
     color: white;
     border: 0;
     border-radius: 10px;
-    height: 50px;
+    height: 25px;
     transition: all 0.5s;
     text-align: center;
   }
@@ -1002,11 +1046,27 @@ img {
     border-radius: 10px;
     box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   }
+
+  .nav__active {
+    transform: translateX(0%);
+    width: 50px;
+    font-size: x-small;
+  }  
+
+  .landmark-list {
+    font-size: small;
+  }
+
+  .Add-itinerary-button {
+    width: 130px;
+    height: 30px;
+  }
+
+  .description, .description-link, .Add-itinerary-button, .info-group{
+    font-size: small;
+  }
 }
 
-.nav__active {
-  transform: translateX(0%);
-}
 
 .toggle .line1 {
   transform: rotate(-45deg) translate(-4px, 5px);
@@ -1018,13 +1078,6 @@ img {
 
 .toggle .line3 {
   transform: rotate(45deg) translate(-4px, -5px);
-}
-
-.toTop {
-  position: fixed;
-  top: 90vh;
-  left: 5vw;
-  width: 50px;
 }
 
 .chevron {
