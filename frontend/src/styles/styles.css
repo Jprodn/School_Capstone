@@ -952,6 +952,10 @@ img {
   .rating {
     width: 100%;
   }
+
+  .home-title {
+    margin-right: 80px;
+  }
 }
 
 /*PHONE*/
@@ -969,6 +973,7 @@ img {
   .itinerary-card {
     display: flex;
     width: 300px;
+    margin-right: 30px;
   }
 
   .contact-card {
@@ -1128,6 +1133,15 @@ img {
   .comment-review {
     font-size: 11px;
     color: black;
+  }
+
+  .home-title {
+    font-size: large;
+    margin-left: 50px;
+  }
+
+  .itinerary-card-title {
+    font-size: x-large;
   }
 
 }
