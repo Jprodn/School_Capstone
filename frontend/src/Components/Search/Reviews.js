@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Testimonials from "./Testimonials";
 import { baseUrl } from "../../Shared/baseUrl";
 import { config } from "../../Shared/config";
+import ControlledCarousel from "./ControlledCarousel";
 
 const Reviews = (props) => {
     const [testimonials, setTestimonials] = useState([]);
@@ -17,9 +18,9 @@ const Reviews = (props) => {
             .then((r) => setTestimonials(r.data));
     }, []);
 
-    const showTestimonials = testimonials.map((t, i) => {
-        return <Testimonials rev={t} key={i} />;
-    });
+    // const showTestimonials = testimonials.map((t, i) => {
+    //     return <Testimonials rev={t} key={i} />;
+    // });
 
     return (
         <div className="section-padding">
@@ -39,7 +40,7 @@ const Reviews = (props) => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="owl-carousel client-testimonial-carousel landmark-review">
-                            {showTestimonials}
+                            <ControlledCarousel review={testimonials} />
                         </div>
                     </div>
                 </div>
