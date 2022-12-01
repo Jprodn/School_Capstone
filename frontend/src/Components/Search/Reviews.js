@@ -8,6 +8,7 @@ import ControlledCarousel from "./ControlledCarousel";
 
 const Reviews = (props) => {
     const [testimonials, setTestimonials] = useState([]);
+    const [hasReviews, setHasReviews] = useState(false)
 
     useEffect(() => {
         axios
@@ -22,9 +23,19 @@ const Reviews = (props) => {
     //     return <Testimonials rev={t} key={i} />;
     // });
 
+    console.log("%ctestimonials","color:orange",testimonials);
+
+    const containsReviews = () => {
+        if (testimonials.length > 0) {
+            setHasReviews(true)
+        } else {
+            setHasReviews(false)
+        }
+    }
+
     return (
         <div className="section-padding">
-            <div className="container">
+            <div className={() => containsReviews && "container"}>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="section-title">

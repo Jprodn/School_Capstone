@@ -111,6 +111,10 @@ img {
   max-height: 200px;
 }
 
+.no-review-container {
+  visibility: hidden;
+}
+
 .review {
   text-align: left;
   width: 90%;
