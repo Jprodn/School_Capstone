@@ -13,7 +13,7 @@ const Ratings = (props) => {
             </div>
             <div className="dislike grow">
                 <i
-                    className="fa fa-thumbs-down fa-1x like"
+                    className="fa fa-thumbs-down fa-1x dislike"
                     aria-hidden="true"
                     onClick={props.handleDislikes}
                 ></i>
