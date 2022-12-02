@@ -989,7 +989,6 @@ img {
     flex-direction: column;
     width: 70%;
     max-width: 550px;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   }
@@ -1022,7 +1021,7 @@ img {
   }
 
   .itinerary-card {
-    width: 300px;
+    width: 293px;
   }
 
   .contact-card {
@@ -1031,7 +1030,7 @@ img {
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 15px;
-    width: 220px;
+    width: 280px;
     background: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.1),
@@ -1045,6 +1044,7 @@ img {
 
   .create-card-title {
     font-size: large;
+    color: gainsboro;
   }
 
   .search-div {
@@ -1059,33 +1059,38 @@ img {
   }
 
   .Add-itinerary-button {
-    /* width: 150px; */
-    font-size: large;
+    font-size: small;
+    color: gainsboro;
     font-weight: 500;
     margin-top: 20px;
     background-color: transparent;
     border-radius: 10px;
-    color: #000000;
     border: 1 lightblue;
     /* border:1px solid rgba(255, 255, 255, 0.18); */
-    height: 60px;
-    width: 100px;
+    height: 30px;
+    width: 150px;
     transition: all 0.5s;
+  }
+
+  .Add-itinerary-button:hover {
+    background-color: rgb(7, 255, 243);
+    color: #eef1f5;
   }
 
   .create-form-action {
     display: flex;
     justify-content: center;
     font-size: small;
+    margin: 0%;
   }
 
   .cancel-button {
-    width: 100px;
+    width: 130px;
     font-size: small;
   }
 
   .ok-button {
-    width: 100px;
+    width: 130px;
     font-size: small;
   }
 
@@ -1104,7 +1109,7 @@ img {
 
   .delete-button,
   .search-button {
-    width: 130px;
+    width: 167px;
     font-weight: 500;
     font-size: small;
     margin-bottom: 20px;
@@ -1138,7 +1143,6 @@ img {
     flex-direction: column;
     width: 60%;
     max-width: 550px;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   }
@@ -1153,12 +1157,7 @@ img {
     font-size: small;
   }
 
-  .Add-itinerary-button {
-    width: 130px;
-    height: 30px;
-  }
-
-  .description, .description-link, .Add-itinerary-button, .info-group{
+  .description, .description-link, .info-group{
     font-size: small;
   }
 
